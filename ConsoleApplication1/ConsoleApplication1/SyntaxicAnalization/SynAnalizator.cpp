@@ -76,9 +76,13 @@ bool SynAnalizator::MainCheck()
     }
 
     //space
+    // skipping spaces
     if(FinalLexConfig[currentPosition].lexID == 15)
     {
-        currentPosition++;
+        while (currentPosition < FinalLexConfig.size() && FinalLexConfig[currentPosition].lexID == 15)
+        {
+            currentPosition++;
+        }
     }
     else
     {
@@ -102,6 +106,10 @@ bool SynAnalizator::MainCheck()
         while (currentPosition + 1 < FinalLexConfig.size() && FinalLexConfig[currentPosition].lexID == 16)
         {
             currentPosition ++;
+            while (currentPosition < FinalLexConfig.size() && FinalLexConfig[currentPosition].lexID == 15)
+            {
+                currentPosition++;
+            }  
             if(currentPosition + 1 < FinalLexConfig.size() && FinalLexConfig[currentPosition+1].lexID == 16 &&
                 FinalLexConfig[currentPosition].lexID == SingleLexConfig.size()+MultiplyLexConfig.size()+VariableIdexator)    
             {
@@ -120,7 +128,6 @@ bool SynAnalizator::MainCheck()
                 CreateDeclarationError();
                 return false;
             }
-            
         }
     }
     else
