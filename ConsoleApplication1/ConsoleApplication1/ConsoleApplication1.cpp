@@ -4,8 +4,10 @@
 using namespace std;
 int main()
 {
-	LexAnalizator *analizator = new LexAnalizator();
-	SynAnalizator *syn_analizator = new SynAnalizator(analizator->readCode());
-	if(syn_analizator->MainCheck())
+	LexAnalizator analizator;
+	SynAnalizator *syn_analizator = new SynAnalizator(analizator.readCode());
+	//analizator.Print();
+	if(syn_analizator->MainCheck()&&syn_analizator->DataTypeChreck())
 	syn_analizator->Print();
+	
 }

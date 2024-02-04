@@ -47,21 +47,6 @@ vector<Lex> LexAnalizator::readCode()
         }
 
         fileForParth.close();
-        /*int tmpLenth = FinalLexConfig.size();
-        for (int i = 0; i < tmpLenth; i++)
-        {
-            if (VariablesTable.size() > i)
-            {
-                VariablesTable[i].lexID = FinalLexConfig.size() + 1;
-                FinalLexConfig.push_back(VariablesTable[i]);
-            }
-            if (ConstantsTable.size() > i)
-            {
-                ConstantsTable[i].lexID = FinalLexConfig.size() + 1;
-                FinalLexConfig.push_back(ConstantsTable[i]);
-            }
-        }*/
-       //Print();
         return FinalLexConfig;
     }
     return {};
@@ -76,6 +61,13 @@ void LexAnalizator::Print()
         cout << "ValueL: " << FinalLexConfig[i].value << endl;
         cout << "----------------------------------------------" << endl;
     }
+
+    // for (int i = 0; i < a.size(); i++)
+    // {
+    //     cout << "ID: " << i << endl;
+    //     cout << "ValueL: " << a[i] << endl;
+    //     cout << "----------------------------------------------" << endl;
+    // }
 }
 
 void LexAnalizator::processLexeme(const string& word, int line, const string& orLine)

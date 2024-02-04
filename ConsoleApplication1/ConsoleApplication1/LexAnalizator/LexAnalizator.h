@@ -13,11 +13,17 @@ public:
 
 	int VariableIdexator = 0;
 	vector<string> SingleLexConfig{ ";",":",".","(",")","{","}","<",">","+","-","*","/"
-								,"=","\""," " };
+								,"=","\""," ","," };
 
 	vector<string> MultiplyLexConfig{ "for","or","while","do","of","if","else","switch","case",
 										"default","break","function","return","write","read", "long", "int", "float", "double",
-										"string", "char", "let", ""};
+										"string", "char", "let", "main"};
+
+	vector<string> a {";",":",".","(",")","{","}","<",">","+","-","*","/"
+		,"=","\""," ",",","for","or","while","do","of","if","else","switch","case",
+			"default","break","function","return","write","read", "long", "int", "float", "double",
+			"string", "char", "let", "main"};
+	
 	vector<Lex> FinalLexConfig;
 	vector<Lex> VariablesTable;
 	vector<Lex> ConstantsTable;

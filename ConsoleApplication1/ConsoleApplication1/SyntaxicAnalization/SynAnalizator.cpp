@@ -1,13 +1,18 @@
 ﻿#include "SynAnalizator.h"
 
+SynAnalizator::SynAnalizator(vector<Lex> lexes)
+{
+    FinalLexConfig = lexes;
+}
+
 bool SynAnalizator::MainCheck()
 {
     //function
-    if(FinalLexConfig[currentPosition].lexID == 27)
+    if(FinalLexConfig[currentPosition].lexID == 28)
         currentPosition++;
     else
     {
-        CreateError();
+        CreateSyntaxError();
         return false;
     }
     //space
@@ -15,15 +20,15 @@ bool SynAnalizator::MainCheck()
         currentPosition++;
     else
     {
-        CreateError();
+        CreateSyntaxError();
         return false;
     }
     //main
-    if(FinalLexConfig[currentPosition].lexID == 40)
+    if(FinalLexConfig[currentPosition].lexID == 39)
         currentPosition++;
     else
     {
-        CreateError();
+        CreateSyntaxError();
         return false;
     }
     //(
@@ -31,7 +36,7 @@ bool SynAnalizator::MainCheck()
         currentPosition++;
     else
     {
-        CreateError();
+        CreateSyntaxError();
         return false;
     }
     //)
@@ -39,7 +44,7 @@ bool SynAnalizator::MainCheck()
         currentPosition++;
     else
     {
-        CreateError();
+        CreateSyntaxError();
         return false;
     }
     //{
@@ -51,23 +56,117 @@ bool SynAnalizator::MainCheck()
     return false;
 }
 
-SynAnalizator::SynAnalizator(vector<Lex> lexes)
+ bool SynAnalizator::DataTypeChreck()
 {
-    FinalLexConfig = lexes;
+    //data type
+    //32 - int
+    //33 - float
+    //34 - double
+    //35 - string
+    //36 - char
+    //37 - let
+    if (FinalLexConfig[currentPosition].lexID >= 32 && FinalLexConfig[currentPosition].lexID <= 37)
+    {
+        currentPosition++;
+    }
+    else
+    {
+        CreateSyntaxError();
+        return false;
+    }
+
+    //space
+    if(FinalLexConfig[currentPosition].lexID == 15)
+    {
+        currentPosition++;
+    }
+    else
+    {
+        CreateSyntaxError();
+        return false;
+    }
+
+    //var
+    if(FinalLexConfig[currentPosition].lexID == SingleLexConfig.size()+MultiplyLexConfig.size()+VariableIdexator)
+    {
+        currentPosition++;
+        VariableIdexator++;
+    }
+    if(FinalLexConfig[currentPosition].lexID == 0)
+    {
+        currentPosition++;
+        return true;
+    }
+    else if(FinalLexConfig[currentPosition].lexID==16)
+    {
+        while (currentPosition + 1 < FinalLexConfig.size() && FinalLexConfig[currentPosition].lexID == 16)
+        {
+            currentPosition ++;
+            if(currentPosition + 1 < FinalLexConfig.size() && FinalLexConfig[currentPosition+1].lexID == 16 &&
+                FinalLexConfig[currentPosition].lexID == SingleLexConfig.size()+MultiplyLexConfig.size()+VariableIdexator)    
+            {
+                currentPosition++;
+                VariableIdexator++;
+            }
+            else if(FinalLexConfig[currentPosition].lexID == SingleLexConfig.size()+MultiplyLexConfig.size()+VariableIdexator &&
+                    FinalLexConfig[currentPosition+1].lexID==0)
+            {
+                currentPosition++;
+                VariableIdexator++;
+                break;
+            }
+            else
+            {
+                CreateDeclarationError();
+                return false;
+            }
+            
+        }
+    }
+    else
+    {
+        CreateDeclarationError();
+        return false;
+    }
+    if(FinalLexConfig[currentPosition].lexID == 0)
+    {
+        currentPosition++;
+        return true;
+    }
+    return false;
 }
 
-void SynAnalizator::CreateError()
+
+void SynAnalizator::CreateSyntaxError()
 {
-    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    const HANDLE h_console = GetStdHandle(STD_OUTPUT_HANDLE);
 
-    SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_INTENSITY);
+    SetConsoleTextAttribute(h_console, FOREGROUND_RED | FOREGROUND_INTENSITY);
 
-    cout << "The term: '" << FinalLexConfig[currentPosition].value <<
-        "' is not recognized as the name of a statement, function, or other part of a program" << endl;
-    cout << "Check the spelling of the code and try again" << endl;
-    cout << "Line error: " << FinalLexConfig[currentPosition].lexLine << endl;
+    cout<<"Syntax error"<<'\n';
+    cout << "The reason: '" << FinalLexConfig[currentPosition].value <<
+        "' is not recognized as the name of a statement, function, or other part of a program" << '\n';
+    cout << "Check the spelling of the code and try again" << '\n';
+    cout << "Line error: " << FinalLexConfig[currentPosition].lexLine << '\n';
 
-    SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
+    SetConsoleTextAttribute(h_console, FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
+        
+    MessageBox(NULL, L"An error was detected in the code", L"Error", MB_OK | MB_ICONERROR);
+}
+
+void SynAnalizator::CreateDeclarationError()
+{
+    const HANDLE h_console = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    SetConsoleTextAttribute(h_console, FOREGROUND_RED | FOREGROUND_INTENSITY);
+
+    cout<<"Declaration Error"<<'\n';
+    cout << "The reason: '" << FinalLexConfig[currentPosition].value <<
+        "' an error was found when compiling the program in the variable declaration" << '\n';
+    cout << "Check the spelling of the code and try again" << '\n';
+    cout << "Line error: " << FinalLexConfig[currentPosition].lexLine << '\n';
+
+    SetConsoleTextAttribute(h_console, FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
         
     MessageBox(NULL, L"An error was detected in the code", L"Error", MB_OK | MB_ICONERROR);
 }
@@ -76,9 +175,9 @@ void SynAnalizator::Print()
 {
     for (int i = 0; i < FinalLexConfig.size(); i++)
     {
-        cout << "ID: " << FinalLexConfig[i].lexID << endl;
-        cout << "LineN: " << FinalLexConfig[i].lexLine << endl;
-        cout << "ValueL: " << FinalLexConfig[i].value << endl;
-        cout << "----------------------------------------------" << endl;
+        cout << "ID: " << FinalLexConfig[i].lexID << '\n';
+        cout << "LineN: " << FinalLexConfig[i].lexLine << '\n';
+        cout << "ValueL: " << FinalLexConfig[i].value << '\n';
+        cout << "----------------------------------------------" <<'\n';
     }
 }
