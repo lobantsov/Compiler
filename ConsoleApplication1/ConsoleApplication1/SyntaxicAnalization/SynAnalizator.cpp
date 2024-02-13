@@ -5,6 +5,56 @@ SynAnalizator::SynAnalizator(vector<Lex> lexes)
     FinalLexConfig = lexes;
 }
 
+bool SynAnalizator::OperatorCheck()
+{
+    //for
+    if(FinalLexConfig[currentPosition].lexID == 17)
+    {
+        currentPosition++;
+        if(ForCheck()) return true;
+        return false;
+    }
+
+    //while
+    if(FinalLexConfig[currentPosition].lexID==19)
+    {
+        currentPosition++;
+        //while
+    }
+
+    //do_while
+    if(FinalLexConfig[currentPosition].lexID==20)
+    {
+        currentPosition++;
+        //do_while
+    }
+
+    //if
+    if(FinalLexConfig[currentPosition].lexID==22)
+    {
+        currentPosition++;
+        //if
+    }
+
+    //switch
+    if(FinalLexConfig[currentPosition].lexID==24)
+    {
+        currentPosition++;
+        //switch
+    }
+
+    //=
+    if(FinalLexConfig[currentPosition].lexID==13)
+    {
+        currentPosition++;
+        //=
+    }
+    return false;
+    //
+}
+
+
+
 bool SynAnalizator::MainCheck()
 {
     //function
@@ -56,7 +106,7 @@ bool SynAnalizator::MainCheck()
     return false;
 }
 
- bool SynAnalizator::DataTypeChreck()
+bool SynAnalizator::DataTypeChreck()
 {
     //data type
     //32 - int
@@ -143,6 +193,81 @@ bool SynAnalizator::MainCheck()
     return false;
 }
 
+bool SynAnalizator::ForCheck()
+{
+    if(FinalLexConfig[currentPosition].lexID==3)
+    {
+        currentPosition++;
+    }
+    else
+    {
+        CreateSyntaxError();
+        return false;
+    }
+    if(FinalLexConfig[currentPosition].lexID==MultiplyLexConfig.size()+SingleLexConfig.size()+VariableIdexator)
+    {
+        currentPosition++;
+        VariableIdexator++;
+    }
+    else
+    {
+        CreateSyntaxError();
+        return false;
+    }
+
+    //branching
+    //foreach
+    if(FinalLexConfig[currentPosition].lexID==21)
+    {
+        //colection
+        currentPosition++;
+        if(FinalLexConfig[currentPosition].lexID==SingleLexConfig.size()+MultiplyLexConfig.size()+VariableIdexator)
+        {
+            currentPosition++;
+            VariableIdexator++;
+        }
+        else
+        {
+            CreateSyntaxError();
+            return false;
+        }
+        //)
+        if(FinalLexConfig[currentPosition].lexID==4)
+        {
+            currentPosition++;
+        }
+        else
+        {
+            CreateSyntaxError();
+            return false;
+        }
+        if(FinalLexConfig[currentPosition].lexID==5)
+        {
+            currentPosition++;
+        }
+        else
+        {
+            CreateSyntaxError();
+            return false;
+        }
+    }
+    //for
+    else if(FinalLexConfig[currentPosition].lexID==0)
+    {
+        currentPosition++;
+        //;
+        if(FinalLexConfig[currentPosition].lexID==0)
+        {
+            currentPosition++;
+        }
+        else
+        {
+            CreateSyntaxError();
+            return false;
+        }
+        //if(FinalLexConfig[currentPosition].lexID==)
+    }
+}
 
 void SynAnalizator::CreateSyntaxError()
 {

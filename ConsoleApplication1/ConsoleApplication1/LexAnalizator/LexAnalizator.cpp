@@ -17,7 +17,8 @@ vector<Lex> LexAnalizator::readCode()
         {
             index++;
 
-            for (int i = 0; i < line.length(); i++) {
+            for (int i = 0; i < line.length(); i++)
+            {
                 auto found = find(SingleLexConfig.begin(), SingleLexConfig.end(), string(1, line[i]));
 
                 if (found != SingleLexConfig.end())
@@ -28,10 +29,41 @@ vector<Lex> LexAnalizator::readCode()
                         currentWord.clear();
                     }
 
-                    lex.value = *found;
-                    lex.lexID = distance(SingleLexConfig.begin(), found);
-                    lex.lexLine = index;
-                    FinalLexConfig.push_back(lex);
+                    //++ -- += -= *= /=
+                    string possibleOperator = string(1, line[i]);
+                    if ((possibleOperator == "+" || possibleOperator == "-" || possibleOperator == "*" || possibleOperator == "/") &&
+                        i + 1 < line.length() && line[i + 1] == '=')
+                    {
+                        possibleOperator += "=";
+                        i++;
+                    }
+                    else if ((possibleOperator == "+" || possibleOperator == "-" || possibleOperator == "*") &&
+                             i + 1 < line.length() && line[i + 1] == possibleOperator[0])
+                    {
+                        possibleOperator += possibleOperator[0];
+                        i++;
+                    }
+                    else if (possibleOperator == "*" && i + 1 < line.length() && line[i + 1] == '*')
+                    {
+                        possibleOperator += "*";
+                        i++;
+                    }
+
+                    auto operatorFound = find(MultiplyLexConfig.begin(), MultiplyLexConfig.end(), possibleOperator);
+                    if (operatorFound != MultiplyLexConfig.end())
+                    {
+                        lex.value = *operatorFound;
+                        lex.lexID = distance(MultiplyLexConfig.begin(), operatorFound)+SingleLexConfig.size();
+                        lex.lexLine = index;
+                        FinalLexConfig.push_back(lex);
+                    }
+                    else
+                    {
+                        lex.value = *found;
+                        lex.lexID = distance(SingleLexConfig.begin(), found);
+                        lex.lexLine = index;
+                        FinalLexConfig.push_back(lex);
+                    }
                 }
                 else
                 {
@@ -93,7 +125,7 @@ void LexAnalizator::processLexeme(const string& word, int line, const string& or
             FinalLexConfig.push_back(lex);
         }
     }
-    // ???????? ?? ?????????
+    
     else if (isConstant(word, orLine))
     {
         if (!ThisContains(&ConstantsTable, word))
@@ -193,8 +225,6 @@ bool LexAnalizator::isQuotedString(const string& word, const string& orLine)
     }
     return false;
 }
-
-
 
 bool LexAnalizator::ThisContains(vector<Lex> *tmp,const string& word)
 {

@@ -8,7 +8,6 @@ using namespace std;
     class SynAnalizator
     {
     private:
-        int currentPosition=0;
         void CreateSyntaxError();
         void CreateDeclarationError();
         int VariableIdexator = 2;
@@ -16,6 +15,7 @@ using namespace std;
     public:
         
         SynAnalizator();
+        int currentPosition=0;
         vector<string> SingleLexConfig{ ";",":",".","(",")","{","}","<",">","+","-","*","/"
                                     ,"=","\""," " };
 
@@ -25,6 +25,8 @@ using namespace std;
         vector<Lex> FinalLexConfig;
         bool MainCheck();
         bool DataTypeChreck();
+        bool ForCheck();
         SynAnalizator(vector<Lex> lexes);
+        bool OperatorCheck();
         void Print();
     };
