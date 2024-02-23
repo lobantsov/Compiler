@@ -1,11 +1,13 @@
 #include "LexAnalizator.h"
 
+#include <algorithm>
+
 vector<Lex> LexAnalizator::readCode()
 {
     ifstream fileForParth("C:\\Users\\loban\\OneDrive\\Desktop\\13.txt");
     if (!fileForParth.is_open())
     {
-        cerr << "????????? ??????? ????" << endl;
+        cerr << "????????? ??????? ????" << '\n';
     }
     else {
         string line;
@@ -79,10 +81,104 @@ vector<Lex> LexAnalizator::readCode()
         }
 
         fileForParth.close();
+        auto it = FinalLexConfig.begin();
+        while (it != FinalLexConfig.end())
+        {
+            if (it->lexID == 15)
+            {
+                auto next = std::next(it);
+                while (next != FinalLexConfig.end() && next->lexID == 15)
+                {
+                    next = FinalLexConfig.erase(next);
+                }
+                // Переміщуємо ітератор на наступний за останнім lexID=15
+                it = std::next(next);
+            }
+            else
+            {
+                ++it;
+            }
+        }
+        //removeElementAfter15(0);
+        remove15BeforeAndAfterID(0);
+        remove15BeforeAndAfterID(3);
+        remove15BeforeAndAfterID(4);
+        remove15BeforeAndAfterID(7);
+        remove15BeforeAndAfterID(8);
+        remove15BeforeAndAfterID(9);
+        remove15BeforeAndAfterID(10);
+        remove15BeforeAndAfterID(11);
+        remove15BeforeAndAfterID(12);
+        remove15BeforeAndAfterID(13);
+        remove15BeforeAndAfterID(16);
+        remove15BeforeAndAfterID(16);
+        remove15BeforeAndAfterID(40);
+        remove15BeforeAndAfterID(41);
+        remove15BeforeAndAfterID(42);
+        remove15BeforeAndAfterID(43);
+        remove15BeforeAndAfterID(44);
+        remove15BeforeAndAfterID(45);
+        remove15BeforeAndAfterID(46);
+        remove15BeforeAndAfterID(47);
+        remove15BeforeAndAfterID(48);
+        remove15BeforeAndAfterID(49);
         return FinalLexConfig;
     }
     return {};
 }
+
+// void LexAnalizator::removeElementAfter15(int index)
+// {
+//     for (auto it = FinalLexConfig.begin(); it != FinalLexConfig.end(); ++it)
+//     {
+//         if (it->lexID == 15 && std::next(it) != FinalLexConfig.end() && std::next(it)->lexID == index)
+//         {
+//             it = FinalLexConfig.erase(it);
+//             --it;
+//         }
+//     }
+// }
+
+void LexAnalizator::remove15BeforeAndAfterID(int ID)
+{
+    int pos = -1;
+    for (int i = 0; i < FinalLexConfig.size(); i++)
+    {
+        if (FinalLexConfig[i].lexID == ID)
+        {
+            pos = i;
+            if (pos != -1)
+            {
+                for (int i = pos + 1; i < FinalLexConfig.size(); i++)
+                {
+                    if (FinalLexConfig[i].lexID == 15)
+                    {
+                        FinalLexConfig.erase(FinalLexConfig.begin() + i);
+                        i--;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                for (int i = pos - 1; i >= 0; i--)
+                {
+                    if (FinalLexConfig[i].lexID == 15)
+                    {
+                        FinalLexConfig.erase(FinalLexConfig.begin() + i);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+            pos = -1;
+        }
+    }
+}
+
 
 void LexAnalizator::Print()
 {
@@ -110,9 +206,8 @@ void LexAnalizator::processLexeme(const string& word, int line, const string& or
     {
         if (!ThisContains(&VariablesTable, word))
         {
-            VariableIdexator++;
             lex.value = word;
-            lex.lexID = VariableIdexator;
+            lex.lexID = 1;
             lex.lexLine = line;
             VariablesTable.push_back(lex);
             lex.lexID += SingleLexConfig.size() + MultiplyLexConfig.size();
@@ -128,23 +223,22 @@ void LexAnalizator::processLexeme(const string& word, int line, const string& or
     
     else if (isConstant(word, orLine))
     {
-        if (!ThisContains(&ConstantsTable, word))
-        {
+        // if (!ThisContains(&ConstantsTable, word))
+        // {
             //ConstIdexator+=2;
             lex.value = word;
-            VariableIdexator++;
-            lex.lexID = VariableIdexator;
+            lex.lexID = 2;
             lex.lexLine = line;
             ConstantsTable.push_back(lex);
             lex.lexID += SingleLexConfig.size() + MultiplyLexConfig.size();
             FinalLexConfig.push_back(lex);
-        }
-        else
-        {
-            auto lex = GetLex(&ConstantsTable, word);
-            lex.lexID += SingleLexConfig.size() + MultiplyLexConfig.size();
-            FinalLexConfig.push_back(lex);
-        }
+        // }
+        // else
+        // {
+        //     auto lex = GetLex(&ConstantsTable, word);
+        //     lex.lexID += SingleLexConfig.size() + MultiplyLexConfig.size();
+        //     FinalLexConfig.push_back(lex);
+        // }
     }
     else 
     {

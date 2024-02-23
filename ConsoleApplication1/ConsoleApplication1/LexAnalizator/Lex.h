@@ -7,4 +7,5 @@ using namespace std;
         string value;
         int lexID;
         int lexLine;
+        int dataTypeID=-1;
     };

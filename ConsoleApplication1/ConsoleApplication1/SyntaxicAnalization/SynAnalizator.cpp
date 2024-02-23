@@ -12,7 +12,6 @@ bool SynAnalizator::OperatorCheck()
     {
         currentPosition++;
         if(ForCheck()) return true;
-        return false;
     }
 
     //while
@@ -52,8 +51,6 @@ bool SynAnalizator::OperatorCheck()
     return false;
     //
 }
-
-
 
 bool SynAnalizator::MainCheck()
 {
@@ -106,17 +103,20 @@ bool SynAnalizator::MainCheck()
     return false;
 }
 
-bool SynAnalizator::DataTypeChreck()
+bool SynAnalizator::DataTypeCheck()
 {
     //data type
-    //32 - int
-    //33 - float
-    //34 - double
-    //35 - string
-    //36 - char
-    //37 - let
-    if (FinalLexConfig[currentPosition].lexID >= 32 && FinalLexConfig[currentPosition].lexID <= 37)
+    //33 - int
+    //34 - float
+    //35 - double
+    //36 - string
+    //37 - char
+    //38 - let
+    currentPosition++;
+    int TypeID;
+    if (FinalLexConfig[currentPosition].lexID >= 33 && FinalLexConfig[currentPosition].lexID <= 38)
     {
+        TypeID=FinalLexConfig[currentPosition].lexID;
         currentPosition++;
     }
     else
@@ -126,13 +126,9 @@ bool SynAnalizator::DataTypeChreck()
     }
 
     //space
-    // skipping spaces
     if(FinalLexConfig[currentPosition].lexID == 15)
     {
-        while (currentPosition < FinalLexConfig.size() && FinalLexConfig[currentPosition].lexID == 15)
-        {
-            currentPosition++;
-        }
+        currentPosition++;
     }
     else
     {
@@ -141,42 +137,53 @@ bool SynAnalizator::DataTypeChreck()
     }
 
     //var
-    if(FinalLexConfig[currentPosition].lexID == SingleLexConfig.size()+MultiplyLexConfig.size()+VariableIdexator)
+    if(FinalLexConfig[currentPosition].lexID == SingleLexConfig.size()+MultiplyLexConfig.size()+1)
     {
+        FinalLexConfig[currentPosition].dataTypeID=TypeID;
         currentPosition++;
-        VariableIdexator++;
     }
+    //;
     if(FinalLexConfig[currentPosition].lexID == 0)
     {
         currentPosition++;
         return true;
     }
-    else if(FinalLexConfig[currentPosition].lexID==16)
+    //доробити !!!
+    else if(FinalLexConfig[currentPosition].lexID==13)
     {
-        while (currentPosition + 1 < FinalLexConfig.size() && FinalLexConfig[currentPosition].lexID == 16)
+        currentPosition++;
+        if(FinalLexConfig[currentPosition].lexID==SingleLexConfig.size()+MultiplyLexConfig.size()+2)
         {
-            currentPosition ++;
-            while (currentPosition < FinalLexConfig.size() && FinalLexConfig[currentPosition].lexID == 15)
+            currentPosition++;
+        }
+        else
+        {
+            CreateSyntaxError();
+            return false;
+        }
+        if(FinalLexConfig[currentPosition].lexID==16)
+        {
+            //,
+            while (currentPosition + 1 < FinalLexConfig.size() && FinalLexConfig[currentPosition].lexID == 16)
             {
-                currentPosition++;
-            }  
-            if(currentPosition + 1 < FinalLexConfig.size() && FinalLexConfig[currentPosition+1].lexID == 16 &&
-                FinalLexConfig[currentPosition].lexID == SingleLexConfig.size()+MultiplyLexConfig.size()+VariableIdexator)    
-            {
-                currentPosition++;
-                VariableIdexator++;
-            }
-            else if(FinalLexConfig[currentPosition].lexID == SingleLexConfig.size()+MultiplyLexConfig.size()+VariableIdexator &&
-                    FinalLexConfig[currentPosition+1].lexID==0)
-            {
-                currentPosition++;
-                VariableIdexator++;
-                break;
-            }
-            else
-            {
-                CreateDeclarationError();
-                return false;
+                currentPosition ++;
+                //,
+                if(currentPosition + 1 < FinalLexConfig.size() && FinalLexConfig[currentPosition+1].lexID == 16 &&
+                    FinalLexConfig[currentPosition].lexID == SingleLexConfig.size()+MultiplyLexConfig.size()+1)//var    
+                {
+                    currentPosition++;
+                }
+                else if(FinalLexConfig[currentPosition].lexID == SingleLexConfig.size()+MultiplyLexConfig.size()+1 &&//var
+                        FinalLexConfig[currentPosition+1].lexID==0)//;
+                {
+                    currentPosition++;
+                    break;
+                }
+                else
+                {
+                    CreateDeclarationError();
+                    return false;
+                }
             }
         }
     }
@@ -204,10 +211,9 @@ bool SynAnalizator::ForCheck()
         CreateSyntaxError();
         return false;
     }
-    if(FinalLexConfig[currentPosition].lexID==MultiplyLexConfig.size()+SingleLexConfig.size()+VariableIdexator)
+    if(DataTypeCheck())
     {
         currentPosition++;
-        VariableIdexator++;
     }
     else
     {
@@ -221,10 +227,9 @@ bool SynAnalizator::ForCheck()
     {
         //colection
         currentPosition++;
-        if(FinalLexConfig[currentPosition].lexID==SingleLexConfig.size()+MultiplyLexConfig.size()+VariableIdexator)
+        if(FinalLexConfig[currentPosition].lexID==SingleLexConfig.size()+MultiplyLexConfig.size()+1)
         {
             currentPosition++;
-            VariableIdexator++;
         }
         else
         {
@@ -255,8 +260,7 @@ bool SynAnalizator::ForCheck()
     else if(FinalLexConfig[currentPosition].lexID==0)
     {
         currentPosition++;
-        //;
-        if(FinalLexConfig[currentPosition].lexID==0)
+        if(ConditionCheck())
         {
             currentPosition++;
         }
@@ -265,7 +269,134 @@ bool SynAnalizator::ForCheck()
             CreateSyntaxError();
             return false;
         }
-        //if(FinalLexConfig[currentPosition].lexID==)
+        if(DicremetnORIncrementCheck()||SelfMathAdiction())
+        {
+            currentPosition++;
+        }
+        else
+        {
+            CreateSyntaxError();
+            return false;
+        }
+        if(FinalLexConfig[currentPosition].lexID==4)
+        {
+            currentPosition++;
+        }
+        else
+        {
+            CreateSyntaxError();
+            return false;
+        }
+    }
+}
+
+bool SynAnalizator::ConditionCheck()
+{
+    //<,>,<=,>=,==
+    if(FinalLexConfig[currentPosition].lexID==SingleLexConfig.size()+MultiplyLexConfig.size()+1)
+    {
+        currentPosition++;
+    }
+    else
+    {
+        CreateSyntaxError();
+        return false;
+    }
+    if(FinalLexConfig[currentPosition].lexID==7||FinalLexConfig[currentPosition].lexID==8||
+        FinalLexConfig[currentPosition].lexID==47||FinalLexConfig[currentPosition].lexID==48||FinalLexConfig[currentPosition].lexID==49)
+    {
+        currentPosition++;
+    }
+    else
+    {
+        CreateSyntaxError();
+        return false;
+    }
+    if(FinalLexConfig[currentPosition].lexID==SingleLexConfig.size()+MultiplyLexConfig.size()+1||
+        FinalLexConfig[currentPosition].lexID==SingleLexConfig.size()+MultiplyLexConfig.size()+2)
+    {
+        currentPosition++;
+    }
+    else
+    {
+        CreateSyntaxError();
+        return false;
+    }
+    if(FinalLexConfig[currentPosition].lexID==0)
+    {
+        return true;
+    }
+    else
+    {
+        CreateSyntaxError();
+        return false;
+    }
+}
+
+bool SynAnalizator::DicremetnORIncrementCheck()
+{
+    //var
+    if(FinalLexConfig[currentPosition].lexID==SingleLexConfig.size()+MultiplyLexConfig.size()+1)
+    {
+        currentPosition++;
+    }
+    else
+    {
+        CreateSyntaxError();
+        return false;
+    }
+    //++,--,**
+    if(FinalLexConfig[currentPosition].lexID==40||FinalLexConfig[currentPosition].lexID==41||FinalLexConfig[currentPosition].lexID==42)
+    {
+        currentPosition++;
+    }
+    else
+    {
+        CreateSyntaxError();
+        return false;
+    }
+    if(FinalLexConfig[currentPosition].lexID==0)
+    {
+        return true;
+    }
+    else
+    {
+        CreateSyntaxError();
+        return false;
+    }
+}
+
+bool SynAnalizator::SelfMathAdiction()
+{
+    //var
+    if(FinalLexConfig[currentPosition].lexID==SingleLexConfig.size()+MultiplyLexConfig.size()+1)
+    {
+        currentPosition++;        
+    }
+    else
+    {
+        CreateSyntaxError();
+        return false;
+    }
+    //+=,-=,*=,/=
+    if(FinalLexConfig[currentPosition].lexID==43||FinalLexConfig[currentPosition].lexID==44||FinalLexConfig[currentPosition].lexID==45||
+        FinalLexConfig[currentPosition].lexID==46)
+    {
+        currentPosition++;
+    }
+    else
+    {
+        CreateSyntaxError();
+        return false;
+    }
+    if(FinalLexConfig[currentPosition].lexID==0)
+    {
+        return true;
+    }
+    else
+    {
+        CreateSyntaxError();
+        return false;
     }
 }
 
