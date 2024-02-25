@@ -1,4 +1,11 @@
 D:\VSJ\MyLanguage\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp;D:\VSJ\MyLanguage\ConsoleApplication1\ConsoleApplication1\x64\Debug\ConsoleApplication1.obj
 D:\VSJ\MyLanguage\ConsoleApplication1\ConsoleApplication1\LexAnalizator\Lex.cpp;D:\VSJ\MyLanguage\ConsoleApplication1\ConsoleApplication1\x64\Debug\Lex.obj
 D:\VSJ\MyLanguage\ConsoleApplication1\ConsoleApplication1\LexAnalizator\LexAnalizator.cpp;D:\VSJ\MyLanguage\ConsoleApplication1\ConsoleApplication1\x64\Debug\LexAnalizator.obj
+D:\VSJ\MyLanguage\ConsoleApplication1\ConsoleApplication1\Singletone\SingletoneCurrentposition.cpp;D:\VSJ\MyLanguage\ConsoleApplication1\ConsoleApplication1\x64\Debug\SingletoneCurrentposition.obj
+D:\VSJ\MyLanguage\ConsoleApplication1\ConsoleApplication1\SpawnErrors\ClassForCreateErorrs.cpp;D:\VSJ\MyLanguage\ConsoleApplication1\ConsoleApplication1\x64\Debug\ClassForCreateErorrs.obj
+D:\VSJ\MyLanguage\ConsoleApplication1\ConsoleApplication1\SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\AbstractHandler.cpp;D:\VSJ\MyLanguage\ConsoleApplication1\ConsoleApplication1\x64\Debug\AbstractHandler.obj
+D:\VSJ\MyLanguage\ConsoleApplication1\ConsoleApplication1\SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\ClientCode.cpp;D:\VSJ\MyLanguage\ConsoleApplication1\ConsoleApplication1\x64\Debug\ClientCode.obj
+D:\VSJ\MyLanguage\ConsoleApplication1\ConsoleApplication1\SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\EaqualHandler.cpp;D:\VSJ\MyLanguage\ConsoleApplication1\ConsoleApplication1\x64\Debug\EaqualHandler.obj
+D:\VSJ\MyLanguage\ConsoleApplication1\ConsoleApplication1\SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\EnumerationHandler.cpp;D:\VSJ\MyLanguage\ConsoleApplication1\ConsoleApplication1\x64\Debug\EnumerationHandler.obj
+D:\VSJ\MyLanguage\ConsoleApplication1\ConsoleApplication1\SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\VariableHandler.cpp;D:\VSJ\MyLanguage\ConsoleApplication1\ConsoleApplication1\x64\Debug\VariableHandler.obj
 D:\VSJ\MyLanguage\ConsoleApplication1\ConsoleApplication1\SyntaxicAnalization\SynAnalizator.cpp;D:\VSJ\MyLanguage\ConsoleApplication1\ConsoleApplication1\x64\Debug\SynAnalizator.obj

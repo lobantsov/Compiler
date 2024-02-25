@@ -6,10 +6,11 @@ int main()
 {
 	LexAnalizator analizator;
 	SynAnalizator *syn_analizator = new SynAnalizator(analizator.readCode());
-	analizator.Print();
+	//analizator.Print();
 	 if(syn_analizator->MainCheck())
-	 	syn_analizator->DataTypeCheck();
-	 	//syn_analizator->OperatorCheck();
+	 {
+		 syn_analizator->DataTypeCheck();
+	 }
 	// {
 	// 	while (syn_analizator->currentPosition!=syn_analizator->FinalLexConfig.size())
 	// 	{
@@ -18,5 +19,5 @@ int main()
 	// 			
 	// 		}while (syn_analizator->FinalLexConfig[syn_analizator->currentPosition-1].lexID == 0);	
 	// 	}
-	// }	
+	// }
 }

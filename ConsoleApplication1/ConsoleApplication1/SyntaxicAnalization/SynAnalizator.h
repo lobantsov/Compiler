@@ -3,18 +3,18 @@
 #include "vector"
 #include "../LexAnalizator/Lex.h"
 #include <windows.h>
+#include "../Singletone/SingletoneCurrentposition.h"
+#include "../SpawnErrors/ClassForCreateErorrs.h"
+#include "Chain_of_Responsibility_Data_Type_Init/ClientCode.h"
 using namespace std;
 
     class SynAnalizator
     {
-    private:
-        void CreateSyntaxError();
-        void CreateDeclarationError();
-
     public:
         
         SynAnalizator();
-        int currentPosition=0;
+        SingletoneCurrentposition *singletone_currentposition = SingletoneCurrentposition::GetInstance();
+        // int currentPosition=0;
         vector<string> SingleLexConfig{ ";",":",".","(",")","{","}","<",">","+","-","*","/"
                             ,"=","\""," ","," };
 
@@ -22,6 +22,8 @@ using namespace std;
                                             "default","break","function","return","write","read", "long", "int", "float", "double",
                                             "string", "char", "let", "main","++","--","**","+=","-=","*=","/=","<=",">=","=="};
         vector<Lex> FinalLexConfig;
+        ClassForCreateErorrs *create_erorrs = new ClassForCreateErorrs(FinalLexConfig);
+        ClientCode *client_code;
         bool MainCheck();
         bool DataTypeCheck();
         bool KomaCheck();

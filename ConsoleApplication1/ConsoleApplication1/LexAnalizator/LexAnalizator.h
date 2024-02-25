@@ -11,7 +11,6 @@ class LexAnalizator
 {
 public:
 
-	int VariableIdexator = 0;
 	vector<string> SingleLexConfig{ ";",":",".","(",")","{","}","<",">","+","-","*","/"
 							,"=","\""," ","," };
 
