@@ -1,8 +1,15 @@
 #include "LexAnalizator.h"
-
 #include <algorithm>
+#include <fstream>
+#include <iostream>
+std::vector<Lex> LexAnalizator::FinalLexConfig;
+std::vector<std::string> LexAnalizator::SingleLexConfig=
+    { ";",":",".","(",")","{","}","<",">","+","-","*","/" ,"=","\""," ","," };
+std::vector<std::string> LexAnalizator::MultiplyLexConfig= { "for","or","while","do","of","if","else","switch","case",
+                                        "default","break","function","return","write","read", "bool", "int", "float", "double",
+                                        "string", "char", "let", "main","++","--","**","+=","-=","*=","/=","<=",">=","=="};
 
-vector<Lex> LexAnalizator::readCode()
+vector<Lex>* LexAnalizator::readCode()
 {
     ifstream fileForParth("C:\\Users\\loban\\OneDrive\\Desktop\\13.txt");
     if (!fileForParth.is_open())
@@ -122,22 +129,10 @@ vector<Lex> LexAnalizator::readCode()
         remove15BeforeAndAfterID(47);
         remove15BeforeAndAfterID(48);
         remove15BeforeAndAfterID(49);
-        return FinalLexConfig;
+        return &FinalLexConfig;
     }
     return {};
 }
-
-// void LexAnalizator::removeElementAfter15(int index)
-// {
-//     for (auto it = FinalLexConfig.begin(); it != FinalLexConfig.end(); ++it)
-//     {
-//         if (it->lexID == 15 && std::next(it) != FinalLexConfig.end() && std::next(it)->lexID == index)
-//         {
-//             it = FinalLexConfig.erase(it);
-//             --it;
-//         }
-//     }
-// }
 
 void LexAnalizator::remove15BeforeAndAfterID(int ID)
 {
@@ -178,7 +173,6 @@ void LexAnalizator::remove15BeforeAndAfterID(int ID)
         }
     }
 }
-
 
 void LexAnalizator::Print()
 {
@@ -277,6 +271,9 @@ bool LexAnalizator::isVariable(const string& word, const string& orLine)
             return false; 
         }
     }
+    if (word == "true" || word == "false") {
+        return false;
+    }
     return true;  
 }
 
@@ -297,7 +294,11 @@ bool LexAnalizator::isConstant(const string& word, const string& orLine)
         else if (ch == '.' && !hasDot) {
             hasDot = true;
         }
-        else {
+        else
+            {
+            if (word == "true" || word == "false") {
+                return true;
+            }
             return false; 
         }
     }

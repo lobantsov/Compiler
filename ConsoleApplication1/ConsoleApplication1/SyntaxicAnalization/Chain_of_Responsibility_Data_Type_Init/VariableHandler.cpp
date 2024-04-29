@@ -1,15 +1,18 @@
 ﻿#include "VariableHandler.h"
+#include "../../LexAnalizator/LexAnalizator.h"
 
-VariableHandler::VariableHandler(vector<Lex> lexes):AbstractHandler(lexes)
+bool VariableHandler::Handle(int TypeID)
 {
-    FinalLexConfig=lexes;
-}
-
-bool VariableHandler::Handle()
-{
-    if(FinalLexConfig[singletone_currentposition->currentPosition].lexID==51)
-    {
-        singletone_currentposition->currentPosition++;
-    }
-        return AbstractHandler::Handle();
+    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].dataTypeID==-1)
+        if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID=LexAnalizator::SingleLexConfig.size()+LexAnalizator::MultiplyLexConfig.size()+1)
+        {
+            for (int i=0;i<LexAnalizator::FinalLexConfig.size();i++)
+            {
+                if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].value==
+                    LexAnalizator::FinalLexConfig[i].value)
+                    LexAnalizator::FinalLexConfig[i].dataTypeID = TypeID;
+            }
+            singletone_currentposition->currentPosition++;
+        }
+    return AbstractHandler::Handle(TypeID);
 }

@@ -7,6 +7,5 @@
 class EnumerationHandler:public AbstractHandler
 {
 public:
-    EnumerationHandler(vector<Lex> lexes);
-    bool Handle() override;
+    bool Handle(int TypeID) override;
 };

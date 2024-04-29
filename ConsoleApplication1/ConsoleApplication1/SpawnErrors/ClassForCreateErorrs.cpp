@@ -1,10 +1,8 @@
 ﻿#include "ClassForCreateErorrs.h"
+
+#include "../LexAnalizator/LexAnalizator.h"
 using namespace std;
 
-ClassForCreateErorrs::ClassForCreateErorrs(vector<Lex> lexes)
-{
-    FinalLexConfig=lexes;
-}
 
 void ClassForCreateErorrs::CreateSyntaxError()
 {
@@ -13,10 +11,10 @@ void ClassForCreateErorrs::CreateSyntaxError()
     SetConsoleTextAttribute(h_console, FOREGROUND_RED | FOREGROUND_INTENSITY);
 
     cout<<"Syntax error"<<'\n';
-    cout << "The reason: '" << FinalLexConfig[singletone_currentposition->currentPosition].value <<
+    cout << "The reason: '" << LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].value <<
         "' is not recognized as the name of a statement, function, or other part of a program" << '\n';
     cout << "Check the spelling of the code and try again" << '\n';
-    cout << "Line error: " << FinalLexConfig[singletone_currentposition->currentPosition].lexLine << '\n';
+    cout << "Line error: " << LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexLine << '\n';
 
     SetConsoleTextAttribute(h_console, FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
         
@@ -30,10 +28,10 @@ void ClassForCreateErorrs::CreateDeclarationError()
     SetConsoleTextAttribute(h_console, FOREGROUND_RED | FOREGROUND_INTENSITY);
 
     cout<<"Declaration Error"<<'\n';
-    cout << "The reason: '" << FinalLexConfig[singletone_currentposition->currentPosition].value <<
+    cout << "The reason: '" << LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].value <<
         "' an error was found when compiling the program in the variable declaration" << '\n';
     cout << "Check the spelling of the code and try again" << '\n';
-    cout << "Line error: " << FinalLexConfig[singletone_currentposition->currentPosition].lexLine << '\n';
+    cout << "Line error: " << LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexLine << '\n';
 
     SetConsoleTextAttribute(h_console, FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
         

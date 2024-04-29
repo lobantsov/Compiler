@@ -1,23 +1,29 @@
 ﻿#include <iostream>
+
+#include "ICommand/ExitCommand.h"
+#include "ICommand/Invoker.h"
+#include "ICommand/PrintCommand.h"
 #include "SyntaxicAnalization/SynAnalizator.h"
-#include "LexAnalizator/LexAnalizator.h"
 using namespace std;
 int main()
 {
-	LexAnalizator analizator;
-	SynAnalizator *syn_analizator = new SynAnalizator(analizator.readCode());
-	//analizator.Print();
-	 if(syn_analizator->MainCheck())
-	 {
-		 syn_analizator->DataTypeCheck();
-	 }
-	// {
-	// 	while (syn_analizator->currentPosition!=syn_analizator->FinalLexConfig.size())
-	// 	{
-	// 		do
-	// 		{
-	// 			
-	// 		}while (syn_analizator->FinalLexConfig[syn_analizator->currentPosition-1].lexID == 0);	
-	// 	}
-	// }
+	string command;
+	Invoker invoker;
+	PrintCommand print_command;
+	ExitCommand exit_command;
+	invoker.AddCommand(make_unique<PrintCommand>(print_command));
+	invoker.AddCommand(make_unique<ExitCommand>(exit_command));
+	
+	LexAnalizator *analizator=new LexAnalizator();
+	analizator->readCode();
+	SynAnalizator *syn_analizator = new SynAnalizator();
+	
+	if(syn_analizator->MainCheck())
+	{
+		while (SingletoneCurrentposition::currentPosition<LexAnalizator::FinalLexConfig.size())
+		{
+			if(syn_analizator->OperatorCheck())
+				analizator->Print();
+		}
+	}
 }

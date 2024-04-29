@@ -6,6 +6,5 @@
 class VariableHandler:public AbstractHandler
 {
 public:
-    VariableHandler(vector<Lex> lexes);
-    bool Handle() override;
+    bool Handle(int type_id)override;
 };

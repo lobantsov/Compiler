@@ -6,5 +6,5 @@ class IHandler
 {
 public:
     virtual IHandler *SetNext(IHandler *handler) = 0;
-    virtual bool Handle() = 0;
+    virtual bool Handle(int TypeID) = 0;
 };

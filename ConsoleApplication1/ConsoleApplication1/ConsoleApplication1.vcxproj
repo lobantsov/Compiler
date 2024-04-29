@@ -128,6 +128,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleApplication1.cpp" />
+    <ClCompile Include="ICommand\ExitCommand.cpp" />
+    <ClCompile Include="ICommand\Invoker.cpp" />
+    <ClCompile Include="ICommand\PrintCommand.cpp" />
     <ClCompile Include="LexAnalizator\Lex.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -357,8 +360,13 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="SyntaxicAnalization\SyntaxicAnalizator_MathAndlogicOperator\SyntaxicAnalizator_MathAndlogicOperator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ICommand\ExitCommand.h" />
+    <ClInclude Include="ICommand\Invoker.h" />
+    <ClInclude Include="ICommand\PrintCommand.h" />
+    <ClInclude Include="ICommand\ICommand.h" />
     <ClInclude Include="LexAnalizator\Lex.h" />
     <ClInclude Include="LexAnalizator\LexAnalizator.h" />
     <ClInclude Include="Singletone\SingletoneCurrentposition.h" />
@@ -370,6 +378,7 @@
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\IHandler.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\VariableHandler.h" />
     <ClInclude Include="SyntaxicAnalization\SynAnalizator.h" />
+    <ClInclude Include="SyntaxicAnalization\SyntaxicAnalizator_MathAndlogicOperator\SyntaxicAnalizator_MathAndlogicOperator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

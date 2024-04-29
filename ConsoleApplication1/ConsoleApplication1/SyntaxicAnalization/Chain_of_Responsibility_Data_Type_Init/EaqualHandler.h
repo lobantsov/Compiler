@@ -5,6 +5,5 @@
 class EaqualHandler:public AbstractHandler
 {
 public:
-    EaqualHandler(vector<Lex> lexes);
-    bool Handle() override;
+    bool Handle(int TypeID) override;
 };

@@ -1,32 +1,24 @@
-#include <iostream>
 #include <vector>
-#include <fstream>
 #include <string>
-#include <cctype> 
-#include <sstream>
 #include "Lex.h"
 using namespace std;
 
 class LexAnalizator
 {
 public:
+	static vector<string> SingleLexConfig; 
 
-	vector<string> SingleLexConfig{ ";",":",".","(",")","{","}","<",">","+","-","*","/"
-							,"=","\""," ","," };
+	static vector<string> MultiplyLexConfig; 
 
-	vector<string> MultiplyLexConfig{ "for","or","while","do","of","if","else","switch","case",
-										"default","break","function","return","write","read", "long", "int", "float", "double",
-										"string", "char", "let", "main","++","--","**","+=","-=","*=","/=","<=",">=","=="};
-
-	vector<string> a = {";",":",".","(",")","{","}","<",">","+","-","*","/"
-		,"=","\""," ","," ,"for","or","while","do","of","if","else","switch","case",
-				"default","break","function","return","write","read", "long", "int", "float", "double",
-				"string", "char", "let", "main","++","--","**","+=","-=","*=","/=","<=",">=","=="};
+	// vector<string> a = {";",":",".","(",")","{","}","<",">","+","-","*","/"
+	// 	,"=","\""," ","," ,"for","or","while","do","of","if","else","switch","case",
+	// 			"default","break","function","return","write","read", "long", "int", "float", "double",
+	// 			"string", "char", "let", "main","++","--","**","+=","-=","*=","/=","<=",">=","=="};
 	
-	vector<Lex> FinalLexConfig;
+	static vector<Lex> FinalLexConfig;
 	vector<Lex> VariablesTable;
 	vector<Lex> ConstantsTable;
-	vector<Lex> readCode();
+	vector<Lex>* readCode();
 	void removeElementAfter15(int index);
 	void remove15BeforeAndAfterID(int ID);
 	void Print();

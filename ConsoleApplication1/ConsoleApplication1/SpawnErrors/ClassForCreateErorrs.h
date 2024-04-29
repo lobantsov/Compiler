@@ -6,10 +6,8 @@
 #include "../LexAnalizator/Lex.h"
 class ClassForCreateErorrs
 {
-    SingletoneCurrentposition *singletone_currentposition = SingletoneCurrentposition::GetInstance();
 public:
+    SingletoneCurrentposition *singletone_currentposition = SingletoneCurrentposition::GetInstance();
     void CreateSyntaxError();
     void CreateDeclarationError();
-    vector<Lex> FinalLexConfig;
-    ClassForCreateErorrs(vector<Lex> lexes);
 };

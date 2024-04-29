@@ -1,19 +1,16 @@
 ﻿#include "EnumerationHandler.h"
 #include "VariableHandler.h"
+#include "../../LexAnalizator/LexAnalizator.h"
 
-EnumerationHandler::EnumerationHandler(vector<Lex> lexes):AbstractHandler(lexes)
+bool EnumerationHandler::Handle(int TypeID)
 {
-    FinalLexConfig=lexes;
-}
-
-bool EnumerationHandler::Handle()
-{
-    if(FinalLexConfig[singletone_currentposition->currentPosition].lexID==16)
+    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==16||
+        LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==0)
     {
         return true;
     }
     else
     {
-        return AbstractHandler::Handle();
+        return AbstractHandler::Handle(TypeID);
     }
 }

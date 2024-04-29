@@ -1,16 +1,16 @@
 ﻿#include "ClientCode.h"
 
-ClientCode::ClientCode(vector<Lex> lexes)
+ClientCode::ClientCode()
 {
-    variable_handler=new VariableHandler(lexes);
-    eaqual_handler=new EaqualHandler(lexes);
-    enumeration_handler=new EnumerationHandler(lexes);
+    variable_handler=new VariableHandler();
+    eaqual_handler=new EaqualHandler();
+    enumeration_handler=new EnumerationHandler();
     variable_handler->SetNext(eaqual_handler)->SetNext(enumeration_handler);
 }
 
-bool ClientCode::CheckDataType()
+bool ClientCode::CheckDataType(int TypeID)
 {
-    if(variable_handler->Handle())
+    if(variable_handler->Handle(TypeID))
         return true;
     return false;
 }

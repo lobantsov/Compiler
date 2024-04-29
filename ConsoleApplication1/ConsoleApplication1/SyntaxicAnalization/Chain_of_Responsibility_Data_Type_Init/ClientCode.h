@@ -6,8 +6,8 @@
 class ClientCode
 {
 public:
-    ClientCode(vector<Lex> lexes);
-    bool CheckDataType();
+    ClientCode();
+    bool CheckDataType(int TypeID);
     VariableHandler *variable_handler;
     EnumerationHandler *enumeration_handler;
     EaqualHandler *eaqual_handler;
