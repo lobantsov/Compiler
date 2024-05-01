@@ -14,17 +14,18 @@ using namespace std;
         ClassForCreateErorrs *create_erorrs = new ClassForCreateErorrs();
         ClientCode *client_code;
         SyntaxicAnalizator_MathAndlogicOperator *_syntaxicAnalizator_MathAndlogicOperator = new SyntaxicAnalizator_MathAndlogicOperator();
-        
     public:
         
         SynAnalizator();
-      
+        static vector<Lex> CreatedLexemus;
         bool MainCheck();
         bool DataTypeCheck();
-        bool KomaCheck();
+        bool CollectionInitialization(int TypeID, int currentLex, int currentLexPosition);
+        void FindCollection();
+        bool CollectionDeclaration();
+        bool Assignment();
+        bool VarCheckConteining();
         bool ForCheck();
-        //bool SelfMathAdiction();
         bool OperatorCheck();
-        //bool MathOperatorCheck();
         void Print();
     };

@@ -4,10 +4,10 @@
 #include <iostream>
 std::vector<Lex> LexAnalizator::FinalLexConfig;
 std::vector<std::string> LexAnalizator::SingleLexConfig=
-    { ";",":",".","(",")","{","}","<",">","+","-","*","/" ,"=","\""," ","," };
+    { ";",":",".","(",")","{","}","<",">","+","-","*","/" ,"=","\""," ",",","[","]" };
 std::vector<std::string> LexAnalizator::MultiplyLexConfig= { "for","or","while","do","of","if","else","switch","case",
                                         "default","break","function","return","write","read", "bool", "int", "float", "double",
-                                        "string", "char", "let", "main","++","--","**","+=","-=","*=","/=","<=",">=","=="};
+                                        "string", "char", "let", "main","++","--","**","+=","-=","*=","/=","<=",">=","==","new"};
 
 vector<Lex>* LexAnalizator::readCode()
 {
@@ -118,9 +118,8 @@ vector<Lex>* LexAnalizator::readCode()
         remove15BeforeAndAfterID(12);
         remove15BeforeAndAfterID(13);
         remove15BeforeAndAfterID(16);
-        remove15BeforeAndAfterID(16);
-        remove15BeforeAndAfterID(40);
-        remove15BeforeAndAfterID(41);
+        remove15BeforeAndAfterID(17);
+        remove15BeforeAndAfterID(18);
         remove15BeforeAndAfterID(42);
         remove15BeforeAndAfterID(43);
         remove15BeforeAndAfterID(44);
@@ -129,6 +128,8 @@ vector<Lex>* LexAnalizator::readCode()
         remove15BeforeAndAfterID(47);
         remove15BeforeAndAfterID(48);
         remove15BeforeAndAfterID(49);
+        remove15BeforeAndAfterID(50);
+        remove15BeforeAndAfterID(51);
         return &FinalLexConfig;
     }
     return {};
@@ -176,13 +177,13 @@ void LexAnalizator::remove15BeforeAndAfterID(int ID)
 
 void LexAnalizator::Print()
 {
-    for (int i = 0; i < FinalLexConfig.size(); i++)
-    {
-        cout << "ID: " << FinalLexConfig[i].lexID << endl;
-        cout << "LineN: " << FinalLexConfig[i].lexLine << endl;
-        cout << "ValueL: " << FinalLexConfig[i].value << endl;
-        cout << "----------------------------------------------" << endl;
-    }
+    // for (int i = 0; i < FinalLexConfig.size(); i++)
+    // {
+    //     cout << "ID: " << FinalLexConfig[i].lexID << endl;
+    //     cout << "LineN: " << FinalLexConfig[i].lexLine << endl;
+    //     cout << "ValueL: " << FinalLexConfig[i].value << endl;
+    //     cout << "----------------------------------------------" << endl;
+    // }
 
     // for (int i = 0; i < a.size(); i++)
     // {

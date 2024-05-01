@@ -89,10 +89,11 @@ bool SyntaxicAnalizator_MathAndlogicOperator::SelfMathAdiction()
 bool SyntaxicAnalizator_MathAndlogicOperator::ConditionCheck()
 {
     //<,>,<=,>=,==
-    // if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==LexAnalizator::SingleLexConfig.size()+LexAnalizator::MultiplyLexConfig.size()+1)
-    // {
-    //     singletone_currentposition->currentPosition++;
-    // }
+    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==LexAnalizator::SingleLexConfig.size()+LexAnalizator::MultiplyLexConfig.size()+1||
+       LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==LexAnalizator::SingleLexConfig.size()+LexAnalizator::MultiplyLexConfig.size()+2)
+    {
+        singletone_currentposition->currentPosition++;
+    }
     
     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==7||LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==8||
         LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==47||LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==48||
@@ -133,8 +134,8 @@ bool SyntaxicAnalizator_MathAndlogicOperator::IncrementAndDicremental()
     {
         singletone_currentposition->currentPosition++;
     }
-    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==40||LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==41||
-        LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==42)
+    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==42||LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==43||
+        LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==44)
     {
         singletone_currentposition->currentPosition++;
     }

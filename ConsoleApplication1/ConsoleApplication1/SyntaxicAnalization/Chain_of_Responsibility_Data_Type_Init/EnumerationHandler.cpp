@@ -5,7 +5,7 @@
 bool EnumerationHandler::Handle(int TypeID)
 {
     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==16||
-        LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==0)
+        LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==0 )
     {
         return true;
     }

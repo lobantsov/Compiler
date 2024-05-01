@@ -2,7 +2,6 @@ D:\VSJ\MyLanguage\MyLanguage\ConsoleApplication1\ConsoleApplication1\ConsoleAppl
 D:\VSJ\MyLanguage\MyLanguage\ConsoleApplication1\ConsoleApplication1\ICommand\ExitCommand.cpp;D:\VSJ\MyLanguage\MyLanguage\ConsoleApplication1\ConsoleApplication1\x64\Debug\ExitCommand.obj
 D:\VSJ\MyLanguage\MyLanguage\ConsoleApplication1\ConsoleApplication1\ICommand\Invoker.cpp;D:\VSJ\MyLanguage\MyLanguage\ConsoleApplication1\ConsoleApplication1\x64\Debug\Invoker.obj
 D:\VSJ\MyLanguage\MyLanguage\ConsoleApplication1\ConsoleApplication1\ICommand\PrintCommand.cpp;D:\VSJ\MyLanguage\MyLanguage\ConsoleApplication1\ConsoleApplication1\x64\Debug\PrintCommand.obj
-D:\VSJ\MyLanguage\MyLanguage\ConsoleApplication1\ConsoleApplication1\LexAnalizator\Lex.cpp;D:\VSJ\MyLanguage\MyLanguage\ConsoleApplication1\ConsoleApplication1\x64\Debug\Lex.obj
 D:\VSJ\MyLanguage\MyLanguage\ConsoleApplication1\ConsoleApplication1\LexAnalizator\LexAnalizator.cpp;D:\VSJ\MyLanguage\MyLanguage\ConsoleApplication1\ConsoleApplication1\x64\Debug\LexAnalizator.obj
 D:\VSJ\MyLanguage\MyLanguage\ConsoleApplication1\ConsoleApplication1\Singletone\SingletoneCurrentposition.cpp;D:\VSJ\MyLanguage\MyLanguage\ConsoleApplication1\ConsoleApplication1\x64\Debug\SingletoneCurrentposition.obj
 D:\VSJ\MyLanguage\MyLanguage\ConsoleApplication1\ConsoleApplication1\SpawnErrors\ClassForCreateErorrs.cpp;D:\VSJ\MyLanguage\MyLanguage\ConsoleApplication1\ConsoleApplication1\x64\Debug\ClassForCreateErorrs.obj
