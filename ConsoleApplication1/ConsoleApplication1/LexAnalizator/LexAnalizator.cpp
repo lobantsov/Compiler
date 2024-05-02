@@ -177,13 +177,13 @@ void LexAnalizator::remove15BeforeAndAfterID(int ID)
 
 void LexAnalizator::Print()
 {
-    // for (int i = 0; i < FinalLexConfig.size(); i++)
-    // {
-    //     cout << "ID: " << FinalLexConfig[i].lexID << endl;
-    //     cout << "LineN: " << FinalLexConfig[i].lexLine << endl;
-    //     cout << "ValueL: " << FinalLexConfig[i].value << endl;
-    //     cout << "----------------------------------------------" << endl;
-    // }
+    for (int i = 0; i < FinalLexConfig.size(); i++)
+    {
+        cout << "ID: " << FinalLexConfig[i].lexID << endl;
+        cout << "LineN: " << FinalLexConfig[i].lexLine << endl;
+        cout << "ValueL: " << FinalLexConfig[i].value << endl;
+        cout << "----------------------------------------------" << endl;
+    }
 
     // for (int i = 0; i < a.size(); i++)
     // {

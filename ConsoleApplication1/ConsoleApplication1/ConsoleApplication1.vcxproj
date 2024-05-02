@@ -208,10 +208,12 @@
     <ClCompile Include="Singletone\SingletoneCurrentposition.cpp" />
     <ClCompile Include="SpawnErrors\ClassForCreateErorrs.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\AbstractHandler.cpp" />
-    <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\ClientCode.cpp" />
+    <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\ClientCode_Declaration.cpp" />
+    <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\ClientCode_Init.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\EaqualHandler.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\EnumerationHandler.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\VariableHandler.cpp" />
+    <ClCompile Include="SyntaxicAnalization\SingletoneDeclaretedVariables\DeclareredVariables.cpp" />
     <ClCompile Include="SyntaxicAnalization\SynAnalizator.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -298,11 +300,13 @@
     <ClInclude Include="Singletone\SingletoneCurrentposition.h" />
     <ClInclude Include="SpawnErrors\ClassForCreateErorrs.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\AbstractHandler.h" />
-    <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\ClientCode.h" />
+    <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\ClientCode_Declaration.h" />
+    <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\ClientCode_Init.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\EaqualHandler.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\EnumerationHandler.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\IHandler.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\VariableHandler.h" />
+    <ClInclude Include="SyntaxicAnalization\SingletoneDeclaretedVariables\DeclareredVariables.h" />
     <ClInclude Include="SyntaxicAnalization\SynAnalizator.h" />
     <ClInclude Include="SyntaxicAnalization\SyntaxicAnalizator_MathAndlogicOperator\SyntaxicAnalizator_MathAndlogicOperator.h" />
   </ItemGroup>

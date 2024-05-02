@@ -11,6 +11,8 @@ int main()
 	Invoker invoker;
 	PrintCommand print_command;
 	ExitCommand exit_command;
+	ClassForCreateErorrs *create_erorrs = ClassForCreateErorrs::GetInstance();
+	
 	invoker.AddCommand(make_unique<PrintCommand>(print_command));
 	invoker.AddCommand(make_unique<ExitCommand>(exit_command));
 	
@@ -23,7 +25,11 @@ int main()
 		while (SingletoneCurrentposition::currentPosition<LexAnalizator::FinalLexConfig.size())
 		{
 			if(syn_analizator->OperatorCheck())
+			{
 				analizator->Print();
+			}
+			if(create_erorrs->error_status)
+				break;
 		}
 	}
 }

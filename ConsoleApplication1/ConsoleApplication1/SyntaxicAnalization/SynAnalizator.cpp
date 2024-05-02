@@ -1,10 +1,11 @@
 ﻿#include "SynAnalizator.h"
 
- std::vector<Lex> SynAnalizator::CreatedLexemus;
+#include "SingletoneDeclaretedVariables/DeclareredVariables.h"
 
 SynAnalizator::SynAnalizator()
 {
-    client_code =new ClientCode();
+    client_code_declaration =new ClientCode_Declaration();
+    client_code_init = new ClientCode_Init();
 }
 
 bool SynAnalizator::OperatorCheck()
@@ -52,11 +53,6 @@ bool SynAnalizator::OperatorCheck()
     {
         singletone_currentposition->currentPosition++;
     }
-    
-    if(CollectionDeclaration())
-    {
-        singletone_currentposition->currentPosition++;
-    }
 
     if(Assignment())
     {
@@ -86,7 +82,7 @@ bool SynAnalizator::OperatorCheck()
     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==6)
     {
         singletone_currentposition->currentPosition++;
-        if(LexAnalizator::FinalLexConfig.size()>singletone_currentposition->currentPosition)
+        if(LexAnalizator::FinalLexConfig.size()-1>singletone_currentposition->currentPosition)
         {
             singletone_currentposition->currentPosition++;
         }
@@ -256,14 +252,17 @@ bool SynAnalizator::ForCheck()
         if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==5)
         {
             singletone_currentposition->currentPosition++;
-            if(OperatorCheck())
+            while(true)
             {
-                return true;
-            }
-            else
-            {
-                create_erorrs->CreateSyntaxError();
-                return false;
+                if(OperatorCheck())
+                {
+                    return true;
+                }
+                // else
+                // {
+                //     create_erorrs->CreateSyntaxError();
+                //     return false;
+                // }
             }
         }
         else
@@ -320,7 +319,7 @@ bool SynAnalizator::DataTypeCheck()
      }
      while (LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID!=0)
      {
-         if(client_code->CheckDataType(TypeID))
+         if(client_code_declaration->CheckDataType(TypeID))
          {
              if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID!=0)
                  singletone_currentposition->currentPosition++;
@@ -349,259 +348,24 @@ bool SynAnalizator::DataTypeCheck()
      }
      else
      {
+         if(!create_erorrs->error_status)
          singletone_currentposition->currentPosition=currentLex;
          return false;
      }
  }
 
-bool SynAnalizator::CollectionInitialization(int TypeID, int currentLex, int currentLexPosition)
-{
-    //=
-    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==13)
-    {
-        singletone_currentposition->currentPosition++;
-        //new
-        if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==52)
-        {
-            singletone_currentposition->currentPosition++;
-        }
-        else
-        {
-            singletone_currentposition->currentPosition=currentLexPosition;
-            return false;
-        }
-        //space
-        if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==15)
-        {
-            singletone_currentposition->currentPosition++;
-        }
-        else
-        {
-            singletone_currentposition->currentPosition=currentLexPosition;
-            return false;
-        }
-        //type
-        if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==TypeID)
-        {
-            singletone_currentposition->currentPosition++;
-        }
-        else
-        {
-            singletone_currentposition->currentPosition=currentLexPosition;
-            return false;
-        }
-        //[
-        if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==17)
-        {
-            singletone_currentposition->currentPosition++;
-        }
-        else
-        {
-            singletone_currentposition->currentPosition=currentLexPosition;
-            return false;
-        }
-        //]
-        if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==18)
-        {
-           // LexAnalizator::FinalLexConfig[currentLex].array=1;
-            singletone_currentposition->currentPosition++;
-        }
-        else
-        {
-            singletone_currentposition->currentPosition=currentLexPosition;
-            return false;
-        }
-    }
-}
-
-//for array check? delete!
-void SynAnalizator::FindCollection()
-{
-    for (int i=0;i<LexAnalizator::FinalLexConfig.size();i++)
-    {
-        if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].value == LexAnalizator::FinalLexConfig[i].value)
-        {
-           if(LexAnalizator::FinalLexConfig[i].array>-1)
-           {
-               LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].dataTypeID=LexAnalizator::FinalLexConfig[i].dataTypeID;
-               LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].array=LexAnalizator::FinalLexConfig[i].array;
-               break;
-           }
-        }
-    }
-}
-
-//for array? modernizate
-bool SynAnalizator::CollectionDeclaration()
-{
-    //data type
-    //32 - bool
-    //33 - int
-    //34 - float
-    //35 - double
-    //36 - string
-    //37 - char
-    //38 - let
-    int TypeID;
-    int currentLex=-1;
-    int currentLexPosition=singletone_currentposition->currentPosition;
-    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==15)
-    {
-        singletone_currentposition->currentPosition++;
-    }
-    FindCollection();
-    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].array>-1)
-    {
-        singletone_currentposition->currentPosition++;
-        if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==13)
-        {
-            singletone_currentposition->currentPosition++;
-        }
-        else
-        {
-            singletone_currentposition->currentPosition=currentLexPosition;
-            return false;
-        }
-        //new
-        if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==52)
-        {
-            singletone_currentposition->currentPosition++;
-        }
-        else
-        {
-            singletone_currentposition->currentPosition=currentLexPosition;
-            return false;
-        }
-        //space
-        if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==15)
-        {
-            singletone_currentposition->currentPosition++;
-        }
-        else
-        {
-            singletone_currentposition->currentPosition=currentLexPosition;
-            return false;
-        }
-        //type
-        if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition-4].dataTypeID)
-        {
-            singletone_currentposition->currentPosition++;
-        }
-        else
-        {
-            singletone_currentposition->currentPosition=currentLexPosition;
-            return false;
-        }
-        //[
-        if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==17)
-        {
-            singletone_currentposition->currentPosition++;
-        }
-        else
-        {
-            singletone_currentposition->currentPosition=currentLexPosition;
-            return false;
-        }
-        //]
-        if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==18)
-        {
-           // LexAnalizator::FinalLexConfig[currentLex].array=1;
-            singletone_currentposition->currentPosition++;
-        }
-        else
-        {
-            singletone_currentposition->currentPosition=currentLexPosition;
-            return false;
-        }
-        if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    
-    if (LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID >= 34 && LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID <= 40)
-    {
-        TypeID=LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID;
-        LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition+2].dataTypeID=LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID;
-        singletone_currentposition->currentPosition++;
-    }
-    else
-    {
-        //create_erorrs->CreateSyntaxError();
-        singletone_currentposition->currentPosition=currentLexPosition;
-        return false;
-    }
- 
-    //space
-    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID == 15)
-    {
-        singletone_currentposition->currentPosition++;
-    }
-    else
-    {
-        singletone_currentposition->currentPosition=currentLexPosition;
-        create_erorrs->CreateSyntaxError();
-        return false;
-    }
-
-    //var
-    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID ==
-        LexAnalizator::SingleLexConfig.size()+LexAnalizator::MultiplyLexConfig.size()+1)
-    {
-        currentLex=singletone_currentposition->currentPosition;
-        singletone_currentposition->currentPosition++;
-    }
-    else
-    {
-        singletone_currentposition->currentPosition=currentLexPosition;
-        return false;
-    }
-    //[
-    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==17)
-    {
-        singletone_currentposition->currentPosition++;
-    }
-    else
-    {
-        singletone_currentposition->currentPosition=currentLexPosition;
-        return false;
-    }
-    //]
-    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==18)
-    {
-        LexAnalizator::FinalLexConfig[currentLex].array=0;
-        singletone_currentposition->currentPosition++;
-        CollectionInitialization(TypeID,currentLex, currentLexPosition);
-    }
-    else
-    {
-        singletone_currentposition->currentPosition=currentLex;
-        return false;
-    }
-    //;
-    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==0)
-    {
-        return true;
-    }
-    else
-    {
-        singletone_currentposition->currentPosition=currentLex;
-        return false;
-    } 
-    
-}
-
 bool SynAnalizator::Assignment()
 {
     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID == LexAnalizator::SingleLexConfig.size()+LexAnalizator::MultiplyLexConfig.size()+1)
     {
-        if(VarCheckConteining())
+        if(declarered_variables_->ContainingLex(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition]))
         {
+            Lex tmp = declarered_variables_->ContainingLexGetLex(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition]);
             singletone_currentposition->currentPosition++;
+             if(client_code_init->CheckDataType(tmp.dataTypeID))
+             {
+                 return true;
+             }
         }
         else
         {
@@ -612,56 +376,7 @@ bool SynAnalizator::Assignment()
     {
         return false;
     }
-
-    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==13)
-    {
-        singletone_currentposition->currentPosition++;
-    }
-    else
-    {
-        return false;
-    }
     
-    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==LexAnalizator::SingleLexConfig.size()+LexAnalizator::MultiplyLexConfig.size()+1||
-        LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==LexAnalizator::SingleLexConfig.size()+LexAnalizator::MultiplyLexConfig.size()+2)
-    {
-        singletone_currentposition->currentPosition++;
-    }
-    else
-    {
-        return false;
-    }
-    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==0)
-    {
-        return true;
-    }
-    else
-    {
-        create_erorrs->CreateSyntaxError();
-        return false;
-    }
-}
-
-bool SynAnalizator::VarCheckConteining()
-{
-    Lex foundLex;
-    for (const auto& lex : CreatedLexemus)
-    {
-        if (lex.lexID == LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID &&
-            lex.value == LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].value)
-        {
-            foundLex = lex;
-            break;
-        }
-    }
-    if(foundLex.dataTypeID!=-1)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
 }
 
 void SynAnalizator::Print()

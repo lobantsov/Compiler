@@ -3,9 +3,19 @@
 #include "../LexAnalizator/LexAnalizator.h"
 using namespace std;
 
+ClassForCreateErorrs* ClassForCreateErorrs::create_erorrs_= nullptr;;
+
+ClassForCreateErorrs *ClassForCreateErorrs::GetInstance()
+{
+    if(create_erorrs_==nullptr){
+        create_erorrs_ = new ClassForCreateErorrs();
+    }
+    return create_erorrs_;
+}
 
 void ClassForCreateErorrs::CreateSyntaxError()
 {
+    error_status=true;
     const HANDLE h_console = GetStdHandle(STD_OUTPUT_HANDLE);
 
     SetConsoleTextAttribute(h_console, FOREGROUND_RED | FOREGROUND_INTENSITY);
@@ -23,6 +33,7 @@ void ClassForCreateErorrs::CreateSyntaxError()
 
 void ClassForCreateErorrs::CreateDeclarationError()
 {
+    error_status=true;
     const HANDLE h_console = GetStdHandle(STD_OUTPUT_HANDLE);
 
     SetConsoleTextAttribute(h_console, FOREGROUND_RED | FOREGROUND_INTENSITY);

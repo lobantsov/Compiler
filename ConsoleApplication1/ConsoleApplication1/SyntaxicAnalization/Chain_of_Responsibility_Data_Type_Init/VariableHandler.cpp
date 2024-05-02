@@ -1,10 +1,11 @@
 ﻿#include "VariableHandler.h"
 #include "../SynAnalizator.h"
+#include "../SingletoneDeclaretedVariables/DeclareredVariables.h"
 
 bool VariableHandler::Handle(int TypeID)
 {
     Lex foundLex;
-    for (const auto& lex : SynAnalizator::CreatedLexemus)
+    for (const auto& lex : declarered_variables_->CreatedLexemus)
     {
         if (lex.lexID == LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID &&
             lex.value == LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].value) {
@@ -23,7 +24,7 @@ bool VariableHandler::Handle(int TypeID)
                     if (LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].value == LexAnalizator::FinalLexConfig[i].value)
                     {
                         LexAnalizator::FinalLexConfig[i].dataTypeID = TypeID;
-                        SynAnalizator::CreatedLexemus.push_back(LexAnalizator::FinalLexConfig[i]);
+                        declarered_variables_->CreatedLexemus.push_back(LexAnalizator::FinalLexConfig[i]);
                         break;
                     }
                 }
@@ -32,7 +33,8 @@ bool VariableHandler::Handle(int TypeID)
     }
     else
     {
-        //error
+        create_erorrs->CreateSyntaxError();
+        return false;
     }
     return AbstractHandler::Handle(TypeID);
 }
