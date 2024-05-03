@@ -14,5 +14,4 @@ public:
     void operator=(const SingletoneCurrentposition &) = delete;
     static SingletoneCurrentposition *GetInstance();
     static int currentPosition;
-    
 };

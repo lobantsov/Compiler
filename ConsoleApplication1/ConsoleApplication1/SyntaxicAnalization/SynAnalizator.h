@@ -26,5 +26,6 @@ using namespace std;
         bool Assignment();
         bool ForCheck();
         bool OperatorCheck();
+        bool WhileCheck();
         void Print();
     };
