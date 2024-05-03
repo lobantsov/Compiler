@@ -105,12 +105,27 @@ bool SyntaxicAnalizator_MathAndlogicOperator::ConditionCheck(bool isloop)
     {
         singletone_currentposition->currentPosition++;
     }
-    
-    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==7||LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==8||
-        LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==47||LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==48||
-        LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==49)
+    //<   >     >=    <=
+    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==7||LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==8)
     {
         singletone_currentposition->currentPosition++;
+        if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==13)
+        {
+            singletone_currentposition->currentPosition++;
+        }
+    }
+    //==
+    else if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==13)
+    {
+        singletone_currentposition->currentPosition++;
+        if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==13)
+        {
+            singletone_currentposition->currentPosition++;
+        }
+        else
+        {
+            return false;
+        }
     }
     else
     {

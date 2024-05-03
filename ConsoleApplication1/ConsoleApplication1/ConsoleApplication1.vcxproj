@@ -213,6 +213,10 @@
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\EaqualHandler.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\EnumerationHandler.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\VariableHandler.cpp" />
+    <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_IF_ELSE_IFELSE\AbstractHandler_if.cpp" />
+    <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_IF_ELSE_IFELSE\Client_If_Declaratoin.cpp" />
+    <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_IF_ELSE_IFELSE\ElseHandler.cpp" />
+    <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_IF_ELSE_IFELSE\Ifhandler.cpp" />
     <ClCompile Include="SyntaxicAnalization\SingletoneDeclaretedVariables\DeclareredVariables.cpp" />
     <ClCompile Include="SyntaxicAnalization\SynAnalizator.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -306,6 +310,11 @@
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\EnumerationHandler.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\IHandler.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\VariableHandler.h" />
+    <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_IF_ELSE_IFELSE\AbstractHandler_if.h" />
+    <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_IF_ELSE_IFELSE\Client_If_Declaratoin.h" />
+    <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_IF_ELSE_IFELSE\ElseHandler.h" />
+    <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_IF_ELSE_IFELSE\Ifhandler.h" />
+    <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_IF_ELSE_IFELSE\IHandler_if.h" />
     <ClInclude Include="SyntaxicAnalization\SingletoneDeclaretedVariables\DeclareredVariables.h" />
     <ClInclude Include="SyntaxicAnalization\SynAnalizator.h" />
     <ClInclude Include="SyntaxicAnalization\SyntaxicAnalizator_MathAndlogicOperator\SyntaxicAnalizator_MathAndlogicOperator.h" />
