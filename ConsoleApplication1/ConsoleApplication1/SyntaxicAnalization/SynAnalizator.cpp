@@ -42,6 +42,22 @@ bool SynAnalizator::OperatorCheck()
         if(client_if_declaratoin_->Check_if())
         {
             singletone_currentposition->currentPosition++;
+            if(!OperatorCheck())
+            {
+                create_erorrs->CreateSyntaxError();
+            }
+        }
+    }
+    //else
+    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==25)
+    {
+        if(client_if_declaratoin_->Check_if())
+        {
+            singletone_currentposition->currentPosition++;
+            if(!OperatorCheck())
+            {
+                create_erorrs->CreateSyntaxError();
+            }
         }
     }
 
@@ -468,7 +484,7 @@ bool SynAnalizator::Assignment()
         {
             Lex tmp = declarered_variables_->ContainingLexGetLex(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition]);
             singletone_currentposition->currentPosition++;
-             if(client_code_init->CheckDataType(tmp.dataTypeID))
+             if(client_code_init->CheckDataAssignment(tmp.dataTypeID))
              {
                  return true;
              }

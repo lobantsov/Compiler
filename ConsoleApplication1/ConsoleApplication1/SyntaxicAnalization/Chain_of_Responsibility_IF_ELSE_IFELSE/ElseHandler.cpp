@@ -7,48 +7,50 @@ bool ElseHandler::Handle()
         if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==25)
         {
             singletone_currentposition->currentPosition++;
-            if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==24)
+            if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==15)
             {
                 singletone_currentposition->currentPosition++;
-                if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==3)
+                if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==24)
                 {
                     singletone_currentposition->currentPosition++;
-                }
-                else
-                {
-                    create_erorrs->CreateSyntaxError();
-                    return false;
-                }
-
-                if(_syntaxicAnalizator_MathAndlogicOperator->ConditionCheck(true))
-                {
-                    singletone_currentposition->currentPosition++;
-                }
-                else
-                {
-                    create_erorrs->CreateSyntaxError();
-                    return false;
-                }
-
-                if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==5)
-                {
-                   // if(OperatorCheck())
+                    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==3)
                     {
-                        singletone_currentposition->currentPosition;
-                        return true;
+                        singletone_currentposition->currentPosition++;
                     }
-                    //else
+                    else
                     {
                         create_erorrs->CreateSyntaxError();
                         return false;
                     }
+
+                    if(_syntaxicAnalizator_MathAndlogicOperator->ConditionCheck(true))
+                    {
+                        singletone_currentposition->currentPosition++;
+                    }
+                    else
+                    {
+                        create_erorrs->CreateSyntaxError();
+                        return false;
+                    }
+
+                    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==5)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
             }
-
-            
-            if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==5)
+            else if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==5)
             {
                 return true;
+            }
+            else
+            {
+                create_erorrs->CreateSyntaxError();
+                return false;
             }
         }
     }

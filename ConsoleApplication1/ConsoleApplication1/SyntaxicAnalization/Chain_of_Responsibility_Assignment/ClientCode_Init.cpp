@@ -6,7 +6,7 @@ ClientCode_Init::ClientCode_Init()
     eaqual_handler->SetNext(enumeration_handler);
 }
 
-bool ClientCode_Init::CheckDataType(int TypeID)
+bool ClientCode_Init::CheckDataAssignment(int TypeID)
 {
     if(eaqual_handler->Handle(TypeID))
         return true;

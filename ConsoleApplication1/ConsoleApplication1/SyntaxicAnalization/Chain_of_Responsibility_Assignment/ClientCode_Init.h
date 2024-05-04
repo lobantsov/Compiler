@@ -7,7 +7,7 @@ class ClientCode_Init
 {
 public:
     ClientCode_Init();
-    bool CheckDataType(int TypeID);
+    bool CheckDataAssignment(int TypeID);
     EnumerationHandler *enumeration_handler;
     EaqualHandler *eaqual_handler;
     SingletoneCurrentposition* singletone_currentposition=SingletoneCurrentposition::GetInstance();
