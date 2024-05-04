@@ -11,6 +11,7 @@ bool LogicOperators_Handler::Handle(int TypeID)
         if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==13)
         {
             singletone_currentposition->currentPosition++;
+            return AbstractHandler_Assigment::Handle(TypeID);
         }
     }
     else if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==13)
@@ -19,11 +20,12 @@ bool LogicOperators_Handler::Handle(int TypeID)
         if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==13)
         {
             singletone_currentposition->currentPosition++;
+            return AbstractHandler_Assigment::Handle(TypeID);
         }
         else
         {
             return false;
         }
     }
-    return AbstractHandler_Assigment::Handle(TypeID);
+    return false;
 }

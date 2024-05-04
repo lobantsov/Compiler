@@ -9,3 +9,4 @@ SingletoneCurrentposition *SingletoneCurrentposition::GetInstance()
     return singleton_;
 }
 int SingletoneCurrentposition::currentPosition = 0;
+int SingletoneCurrentposition::currentPosition_backup = 0;

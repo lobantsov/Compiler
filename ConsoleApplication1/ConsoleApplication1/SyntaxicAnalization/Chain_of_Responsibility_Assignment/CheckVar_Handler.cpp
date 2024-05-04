@@ -14,4 +14,5 @@ bool CheckVar_Handler::Handle(int TypeID)
         //error not created var
         return false;
     }
+    return false;
 }

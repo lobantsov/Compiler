@@ -9,7 +9,8 @@ bool IncrementaOperators_Handler::Handle(int TypeID)
     LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==44)
     {
         singletone_currentposition->currentPosition++;
+        return AbstractHandler_Assigment::Handle(TypeID);
     }
-    return AbstractHandler_Assigment::Handle(TypeID);
+    return false;
 }
 

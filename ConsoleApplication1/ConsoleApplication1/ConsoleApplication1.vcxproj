@@ -283,95 +283,22 @@
     </ClCompile>
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\CheckConst_Handler.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\CheckVar_Handler.cpp" />
-    <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\ClientCode_Init.cpp">
-      <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
-      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <Optimization>Disabled</Optimization>
-      <SupportJustMyCode>true</SupportJustMyCode>
-      <AssemblerOutput>NoListing</AssemblerOutput>
-      <AssemblerListingLocation>x64\Debug\</AssemblerListingLocation>
-      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
-      <BrowseInformation>false</BrowseInformation>
-      <BrowseInformationFile>x64\Debug\</BrowseInformationFile>
-      <CompileAs>Default</CompileAs>
-      <ConformanceMode>true</ConformanceMode>
-      <DiagnosticsFormat>Column</DiagnosticsFormat>
-      <DisableLanguageExtensions>false</DisableLanguageExtensions>
-      <ErrorReporting>Prompt</ErrorReporting>
-      <ExpandAttributedSource>false</ExpandAttributedSource>
-      <ExceptionHandling>Sync</ExceptionHandling>
-      <EnableASAN>false</EnableASAN>
-      <EnableFuzzer>false</EnableFuzzer>
-      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
-      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
-      <FloatingPointModel>Precise</FloatingPointModel>
-      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
-      <GenerateModuleDependencies>false</GenerateModuleDependencies>
-      <GenerateSourceDependencies>false</GenerateSourceDependencies>
-      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
-      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <IntrinsicFunctions>false</IntrinsicFunctions>
-      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
-      <LanguageStandard>Default</LanguageStandard>
-      <LanguageStandard_C>Default</LanguageStandard_C>
-      <MinimalRebuild>false</MinimalRebuild>
-      <ModuleDependenciesFile>x64\Debug\</ModuleDependenciesFile>
-      <ModuleOutputFile>x64\Debug\</ModuleOutputFile>
-      <OmitDefaultLibName>false</OmitDefaultLibName>
-      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
-      <WholeProgramOptimization>false</WholeProgramOptimization>
-      <ObjectFileName>x64\Debug\</ObjectFileName>
-      <CallingConvention>Cdecl</CallingConvention>
-      <ProgramDataBaseFileName>x64\Debug\vc143.pdb</ProgramDataBaseFileName>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile>x64\Debug\ConsoleApplication1.pch</PrecompiledHeaderOutputFile>
-      <PreprocessToFile>false</PreprocessToFile>
-      <PreprocessKeepComments>false</PreprocessKeepComments>
-      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
-      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
-      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
-      <ShowIncludes>false</ShowIncludes>
-      <SourceDependenciesFile>x64\Debug\</SourceDependenciesFile>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <BufferSecurityCheck>true</BufferSecurityCheck>
-      <SmallerTypeCheck>false</SmallerTypeCheck>
-      <SpectreMitigation>false</SpectreMitigation>
-      <StructMemberAlignment>Default</StructMemberAlignment>
-      <TrackerLogDirectory>x64\Debug\ConsoleA.3fae1ef3.tlog\</TrackerLogDirectory>
-      <TranslateIncludes>false</TranslateIncludes>
-      <MinimalRebuildFromTracking>true</MinimalRebuildFromTracking>
-      <TreatWarningAsError>false</TreatWarningAsError>
-      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
-      <UseFullPaths>true</UseFullPaths>
-      <WarningLevel>Level3</WarningLevel>
-      <XMLDocumentationFileName>x64\Debug\</XMLDocumentationFileName>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <IntelJCCErratum>false</IntelJCCErratum>
-      <BuildStlModules>false</BuildStlModules>
-      <TreatAngleIncludeAsExternal>false</TreatAngleIncludeAsExternal>
-      <ExternalWarningLevel>InheritWarningLevel</ExternalWarningLevel>
-      <TreatExternalTemplatesAsInternal>true</TreatExternalTemplatesAsInternal>
-      <DisableAnalyzeExternal>false</DisableAnalyzeExternal>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
-      <SDLCheck>true</SDLCheck>
-      <LinkCompiled>true</LinkCompiled>
-    </ClCompile>
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\Client_Handler\Incrementa_Client.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\Client_Handler\Logic_Client.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\Client_Handler\Math_Client.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\End_Handler.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\Equal_Handler.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\IncrementaOperators_Handler.cpp" />
+    <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\Initialization_Handler.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\LogicOperators_Handler.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\MainClientAssigment\MainClientAssigment.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\MathOperators_Handler.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\VarExist_Handler.cpp" />
-    <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\AbstractHandler.cpp" />
-    <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\ClientCode_Declaration.cpp" />
-    <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\EaqualHandler.cpp" />
-    <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\EnumerationHandler.cpp" />
-    <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\VariableHandler.cpp" />
+    <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Declaration\AbstractHandler.cpp" />
+    <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Declaration\ClientCode_Declaration.cpp" />
+    <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Declaration\EaqualHandler.cpp" />
+    <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Declaration\EnumerationHandler.cpp" />
+    <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Declaration\VariableHandler.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_IF_ELSE_IFELSE\AbstractHandler_if.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_IF_ELSE_IFELSE\Client_If_Declaratoin.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_IF_ELSE_IFELSE\ElseHandler.cpp" />
@@ -466,7 +393,6 @@
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\AbstractHandler_Assigment.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\CheckConst_Handler.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\CheckVar_Handler.h" />
-    <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\ClientCode_Init.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\Client_Handler\Incrementa_Client.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\Client_Handler\Logic_Client.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\Client_Handler\Math_Client.h" />
@@ -474,16 +400,17 @@
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\Equal_Handler.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\IHandler_assigment.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\IncrementaOperators_Handler.h" />
+    <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\Initialization_Handler.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\LogicOperators_Handler.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\MainClientAssigment\MainClientAssigment.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\MathOperators_Handler.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\VarExist_Handler.h" />
-    <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\AbstractHandler.h" />
-    <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\ClientCode_Declaration.h" />
-    <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\EaqualHandler.h" />
-    <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\EnumerationHandler.h" />
-    <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\IHandler.h" />
-    <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\VariableHandler.h" />
+    <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Declaration\AbstractHandler.h" />
+    <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Declaration\ClientCode_Declaration.h" />
+    <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Declaration\EaqualHandler.h" />
+    <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Declaration\EnumerationHandler.h" />
+    <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Declaration\IHandler.h" />
+    <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Declaration\VariableHandler.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_IF_ELSE_IFELSE\AbstractHandler_if.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_IF_ELSE_IFELSE\Client_If_Declaratoin.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_IF_ELSE_IFELSE\ElseHandler.h" />
