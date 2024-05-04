@@ -1,3 +1,4 @@
+#pragma once
 #include "LexAnalizator.h"
 #include <algorithm>
 #include <fstream>

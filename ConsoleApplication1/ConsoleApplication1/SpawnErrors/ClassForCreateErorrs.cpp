@@ -1,5 +1,5 @@
-﻿#include "ClassForCreateErorrs.h"
-
+﻿#pragma once
+#include "ClassForCreateErorrs.h"
 #include "../LexAnalizator/LexAnalizator.h"
 using namespace std;
 

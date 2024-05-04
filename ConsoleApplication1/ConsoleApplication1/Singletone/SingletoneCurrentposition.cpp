@@ -1,4 +1,5 @@
-﻿#include "SingletoneCurrentposition.h"
+﻿#pragma once
+#include "SingletoneCurrentposition.h"
 SingletoneCurrentposition* SingletoneCurrentposition::singleton_= nullptr;;
 
 SingletoneCurrentposition *SingletoneCurrentposition::GetInstance()
