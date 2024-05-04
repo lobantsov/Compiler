@@ -9,12 +9,9 @@ bool CheckVar_Handler::Handle(int TypeID)
         if(declarered_variables_->ContainingLex(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition]))
         {
             singletone_currentposition->currentPosition++;
+            return AbstractHandler_Assigment::Handle(TypeID);
         }
-        else
-        {
-            //error not created var
-            return false;
-        }
+        //error not created var
+        return false;
     }
-    return AbstractHandler_Assigment::Handle(TypeID);
 }

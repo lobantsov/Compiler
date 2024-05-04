@@ -14,7 +14,10 @@ bool CheckConst_Handler::Handle(int TypeID)
             singletone_currentposition->currentPosition++;
         }
         if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==14)
+        {
             singletone_currentposition->currentPosition++;
+            return AbstractHandler_Assigment::Handle(TypeID);
+        }
         else
         {
             return false;
@@ -28,7 +31,9 @@ bool CheckConst_Handler::Handle(int TypeID)
        LexAnalizator::SingleLexConfig.size()+LexAnalizator::MultiplyLexConfig.size()+2)
         {
             if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].value.size()==1)
-            singletone_currentposition->currentPosition++;
+            {
+                singletone_currentposition->currentPosition++;
+            }
             else
             {
                 //must be one symbol
@@ -37,7 +42,10 @@ bool CheckConst_Handler::Handle(int TypeID)
             }
         }
         if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==2)
+        {
             singletone_currentposition->currentPosition++;
+            return AbstractHandler_Assigment::Handle(TypeID);
+        }
         else
         {
             return false;
@@ -48,7 +56,8 @@ bool CheckConst_Handler::Handle(int TypeID)
         LexAnalizator::SingleLexConfig.size()+LexAnalizator::MultiplyLexConfig.size()+2)
     {
         singletone_currentposition->currentPosition++;
+        return AbstractHandler_Assigment::Handle(TypeID);
     }
     
-    return AbstractHandler_Assigment::Handle(TypeID);
+    return false;
 }
