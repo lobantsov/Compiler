@@ -1,4 +1,7 @@
 ﻿#include "Math_Client.h"
+
+#include "../../../LexAnalizator/LexAnalizator.h"
+
 Math_Client::Math_Client()
 {
     check_const_handler = new CheckConst_Handler();
@@ -13,10 +16,13 @@ bool Math_Client::Handle(Lex Type)
 {
     if(eaqual_handler->Handle(Type))
     {
-        if(check_var_handler->Handle(Type))
+        while(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID!=0)
         {
-            singletone_currentposition->currentPosition++;
-            return true;
+            if(check_var_handler->Handle(Type))
+            {
+                //singletone_currentposition->currentPosition++;
+                return true;
+            }
         }
     }
     return AbstractHandler_Assigment::Handle(Type);

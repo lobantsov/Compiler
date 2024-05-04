@@ -15,7 +15,6 @@ bool CheckConst_Handler::Handle(Lex Type)
         }
         if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==14)
         {
-            singletone_currentposition->currentPosition++;
             return true;
         }
         else
@@ -43,7 +42,6 @@ bool CheckConst_Handler::Handle(Lex Type)
         }
         if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==2)
         {
-            singletone_currentposition->currentPosition++;
             return true;
         }
         else
@@ -55,7 +53,6 @@ bool CheckConst_Handler::Handle(Lex Type)
     else if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID ==
         LexAnalizator::SingleLexConfig.size()+LexAnalizator::MultiplyLexConfig.size()+2)
     {
-        singletone_currentposition->currentPosition++;
         return true;
     }
     

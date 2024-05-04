@@ -17,6 +17,7 @@ bool MainClientAssigment::CheckAssigment(Lex Type)
     singletone_currentposition->currentPosition_backup=singletone_currentposition->currentPosition;
     if(math_client->Handle(Type))
     {
+        singletone_currentposition->currentPosition++;
         if(end_handler->Handle(Type))
         return true;
         else

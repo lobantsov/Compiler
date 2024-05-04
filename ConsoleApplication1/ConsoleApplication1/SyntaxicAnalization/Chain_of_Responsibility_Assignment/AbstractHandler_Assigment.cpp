@@ -11,5 +11,5 @@ bool AbstractHandler_Assigment::Handle(Lex Type)
     {
         return this->next_handler_->Handle(Type);
     }
-    return {};
+    return false;
 }

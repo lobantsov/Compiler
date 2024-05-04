@@ -8,7 +8,6 @@ bool CheckVar_Handler::Handle(Lex Type)
     {
         if(declarered_variables_->ContainingLex(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition]))
         {
-            singletone_currentposition->currentPosition++;
             return true;
         }
         //error not created var

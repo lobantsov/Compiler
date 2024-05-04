@@ -8,6 +8,5 @@ class Incrementa_Client:public AbstractHandler_Assigment
 public:
     Incrementa_Client();
     IncrementaOperators_Handler *incrementa_operators_handler;
-    End_Handler *end_handler;
     bool Handle(Lex Type) override;
 };
