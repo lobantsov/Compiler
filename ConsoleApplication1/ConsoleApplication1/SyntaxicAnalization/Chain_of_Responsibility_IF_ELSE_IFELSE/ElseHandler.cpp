@@ -48,14 +48,7 @@ bool ElseHandler::Handle()
             
             if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==5)
             {
-                // if(OperatorCheck())
-                {
-                    singletone_currentposition->currentPosition++;
-                }
-                // else
-                {
-                    return false;
-                }
+                return true;
             }
         }
     }

@@ -12,7 +12,7 @@ protected:
 public:
     virtual IHandler_if *SetNext(IHandler_if *handler) = 0;
     virtual bool Handle() = 0;
-    bool if_status=false;;
+    static bool if_status;
     ClassForCreateErorrs *create_erorrs = ClassForCreateErorrs::GetInstance();
     DeclareredVariables *declarered_variables_ = DeclareredVariables::GetInstance();
 };

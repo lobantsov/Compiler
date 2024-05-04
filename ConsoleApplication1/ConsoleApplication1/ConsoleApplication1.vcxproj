@@ -217,6 +217,7 @@
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_IF_ELSE_IFELSE\Client_If_Declaratoin.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_IF_ELSE_IFELSE\ElseHandler.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_IF_ELSE_IFELSE\Ifhandler.cpp" />
+    <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_IF_ELSE_IFELSE\IHandler_if.cpp" />
     <ClCompile Include="SyntaxicAnalization\SingletoneDeclaretedVariables\DeclareredVariables.cpp" />
     <ClCompile Include="SyntaxicAnalization\SynAnalizator.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>

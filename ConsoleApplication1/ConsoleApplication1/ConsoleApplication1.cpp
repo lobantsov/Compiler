@@ -27,6 +27,7 @@ int main()
 			if(syn_analizator->OperatorCheck())
 			{
 				analizator->Print();
+				break;
 			}
 			if(create_erorrs->error_status)
 				break;

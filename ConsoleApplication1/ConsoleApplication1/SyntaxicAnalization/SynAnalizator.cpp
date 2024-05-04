@@ -40,7 +40,9 @@ bool SynAnalizator::OperatorCheck()
     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==24)
     {
         if(client_if_declaratoin_->Check_if())
+        {
             singletone_currentposition->currentPosition++;
+        }
     }
 
     //switch
@@ -84,7 +86,7 @@ bool SynAnalizator::OperatorCheck()
     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==6)
     {
         singletone_currentposition->currentPosition++;
-        if(LexAnalizator::FinalLexConfig.size()-1>=singletone_currentposition->currentPosition)
+        if(LexAnalizator::FinalLexConfig.size()<=singletone_currentposition->currentPosition)
         {
             singletone_currentposition->currentPosition--;
         }

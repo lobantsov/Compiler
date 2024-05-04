@@ -13,7 +13,7 @@ bool Ifhandler::Handle()
         else
         {
             create_erorrs->CreateSyntaxError();
-            // IHandler_if::if_status=false;
+            if_status=false;
             return false;
 
         }
@@ -25,26 +25,18 @@ bool Ifhandler::Handle()
         else
         {
             create_erorrs->CreateSyntaxError();
-            //if_status=false;
+            if_status=false;
             return false;
         }
         if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==5)
         {
-            singletone_currentposition->currentPosition++;
-           // if(OperatorCheck())
-            {
-                if_status=true;
-                singletone_currentposition->currentPosition++;
-            }
-            // else
-            {
-                return false;
-            }
+            if_status=true;
+          return true;
         }
         else
         {
             create_erorrs->CreateSyntaxError();
-            // IHandler_if::if_status=false;
+            if_status=false;
             return false;
         }
     }
