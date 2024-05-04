@@ -6,10 +6,10 @@ Incrementa_Client::Incrementa_Client()
     incrementa_operators_handler->SetNext(end_handler);
 }
 
-bool Incrementa_Client::Handle(int TypeID)
+bool Incrementa_Client::Handle(Lex Type)
 {
-    if(incrementa_operators_handler->Handle(TypeID))
-        singletone_currentposition->currentPosition++;
-    return AbstractHandler_Assigment::Handle(TypeID);
+    if(incrementa_operators_handler->Handle(Type))
+        return true;
+    return AbstractHandler_Assigment::Handle(Type);
 }
 

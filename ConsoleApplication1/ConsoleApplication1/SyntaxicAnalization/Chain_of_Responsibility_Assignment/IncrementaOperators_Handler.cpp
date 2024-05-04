@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "..//..//LexAnalizator/LexAnalizator.h"
 #include "IncrementaOperators_Handler.h"
-bool IncrementaOperators_Handler::Handle(int TypeID)
+bool IncrementaOperators_Handler::Handle(Lex Type)
 {
     //++ -- **
     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==42||
@@ -9,7 +9,7 @@ bool IncrementaOperators_Handler::Handle(int TypeID)
     LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==44)
     {
         singletone_currentposition->currentPosition++;
-        return AbstractHandler_Assigment::Handle(TypeID);
+        return AbstractHandler_Assigment::Handle(Type);
     }
     return false;
 }

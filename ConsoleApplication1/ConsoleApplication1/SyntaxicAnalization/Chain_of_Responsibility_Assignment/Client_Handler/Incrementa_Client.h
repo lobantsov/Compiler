@@ -9,5 +9,5 @@ public:
     Incrementa_Client();
     IncrementaOperators_Handler *incrementa_operators_handler;
     End_Handler *end_handler;
-    bool Handle(int TypeID) override;
+    bool Handle(Lex Type) override;
 };

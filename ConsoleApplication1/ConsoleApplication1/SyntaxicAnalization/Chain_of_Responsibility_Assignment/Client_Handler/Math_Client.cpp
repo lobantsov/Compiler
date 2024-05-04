@@ -9,15 +9,15 @@ Math_Client::Math_Client()
     check_var_handler->SetNext(check_const_handler)->SetNext(math_operators_handler)->SetNext(end_handler);
 }
 
-bool Math_Client::Handle(int TypeID)
+bool Math_Client::Handle(Lex Type)
 {
-    if(eaqual_handler->Handle(TypeID))
+    if(eaqual_handler->Handle(Type))
     {
-        if(check_var_handler->Handle(TypeID))
+        if(check_var_handler->Handle(Type))
         {
             singletone_currentposition->currentPosition++;
             return true;
         }
     }
-    return AbstractHandler_Assigment::Handle(TypeID);
+    return AbstractHandler_Assigment::Handle(Type);
 }

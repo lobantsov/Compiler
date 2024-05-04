@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "..//..//LexAnalizator/LexAnalizator.h"
 #include "CheckVar_Handler.h"
-bool CheckVar_Handler::Handle(int TypeID)
+bool CheckVar_Handler::Handle(Lex Type)
 {
     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==
         LexAnalizator::SingleLexConfig.size()+LexAnalizator::MultiplyLexConfig.size()+1)
@@ -9,10 +9,10 @@ bool CheckVar_Handler::Handle(int TypeID)
         if(declarered_variables_->ContainingLex(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition]))
         {
             singletone_currentposition->currentPosition++;
-            return AbstractHandler_Assigment::Handle(TypeID);
+            return true;
         }
         //error not created var
         return false;
     }
-    return false;
+    return AbstractHandler_Assigment::Handle(Type);
 }

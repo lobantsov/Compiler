@@ -13,5 +13,5 @@ public:
     CheckVar_Handler *check_var_handler;
     CheckConst_Handler *check_const_handler;
     End_Handler *end_handler;
-    bool Handle(int TypeID) override;
+    bool Handle(Lex Type) override;
 };

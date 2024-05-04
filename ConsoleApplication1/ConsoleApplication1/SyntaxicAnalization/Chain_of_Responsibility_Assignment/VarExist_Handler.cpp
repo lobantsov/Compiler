@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "..//..//LexAnalizator/LexAnalizator.h"
 #include "VarExist_Handler.h"
-bool VarExist_Handler::Handle(int TypeID)
+bool VarExist_Handler::Handle(Lex Type)
 {
     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID == LexAnalizator::SingleLexConfig.size()+LexAnalizator::MultiplyLexConfig.size()+1)
     {
@@ -14,5 +14,5 @@ bool VarExist_Handler::Handle(int TypeID)
             return false;
         }
     }
-     return AbstractHandler_Assigment::Handle(TypeID);
+     return AbstractHandler_Assigment::Handle(Type);
 }

@@ -9,6 +9,6 @@ class AbstractHandler_Assigment:public IHandler_assigment
 protected:
 public:
     IHandler_assigment *SetNext(IHandler_assigment *handler) override;
-    bool Handle(int TypeID) override;
+    bool Handle(Lex Type) override;
     SingletoneCurrentposition *singletone_currentposition = SingletoneCurrentposition::GetInstance();
 };

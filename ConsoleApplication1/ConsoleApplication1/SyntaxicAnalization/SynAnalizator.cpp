@@ -482,8 +482,9 @@ bool SynAnalizator::Assignment()
         if(declarered_variables_->ContainingLex(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition]))
         {
             Lex tmp = declarered_variables_->ContainingLexGetLex(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition]);
+            
             singletone_currentposition->currentPosition++;
-             if(client_assigment_->CheckAssigment(tmp.dataTypeID))
+             if(client_assigment_->CheckAssigment(tmp))
              {
                  return true;
              }

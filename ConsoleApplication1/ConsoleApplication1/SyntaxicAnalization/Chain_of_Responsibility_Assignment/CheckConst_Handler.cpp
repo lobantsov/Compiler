@@ -2,7 +2,7 @@
 #include "..//..//LexAnalizator/LexAnalizator.h"
 #include "CheckConst_Handler.h"
 
-bool CheckConst_Handler::Handle(int TypeID)
+bool CheckConst_Handler::Handle(Lex Type)
 {
     //string vat
     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==14)
@@ -16,7 +16,7 @@ bool CheckConst_Handler::Handle(int TypeID)
         if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==14)
         {
             singletone_currentposition->currentPosition++;
-            return AbstractHandler_Assigment::Handle(TypeID);
+            return true;
         }
         else
         {
@@ -44,7 +44,7 @@ bool CheckConst_Handler::Handle(int TypeID)
         if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==2)
         {
             singletone_currentposition->currentPosition++;
-            return AbstractHandler_Assigment::Handle(TypeID);
+            return true;
         }
         else
         {
@@ -56,8 +56,8 @@ bool CheckConst_Handler::Handle(int TypeID)
         LexAnalizator::SingleLexConfig.size()+LexAnalizator::MultiplyLexConfig.size()+2)
     {
         singletone_currentposition->currentPosition++;
-        return AbstractHandler_Assigment::Handle(TypeID);
+        return true;
     }
     
-    return false;
+    return AbstractHandler_Assigment::Handle(Type);
 }

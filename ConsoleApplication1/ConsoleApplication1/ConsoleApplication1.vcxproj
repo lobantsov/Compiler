@@ -288,6 +288,7 @@
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\Client_Handler\Math_Client.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\End_Handler.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\Equal_Handler.cpp" />
+    <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\IHandler_assigment.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\IncrementaOperators_Handler.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\Initialization_Handler.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\LogicOperators_Handler.cpp" />

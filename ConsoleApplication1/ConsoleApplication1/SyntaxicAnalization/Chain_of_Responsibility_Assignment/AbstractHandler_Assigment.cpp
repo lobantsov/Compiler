@@ -5,11 +5,11 @@ IHandler_assigment* AbstractHandler_Assigment::SetNext(IHandler_assigment* handl
     return handler;
 }
 
-bool AbstractHandler_Assigment::Handle(int TypeID)
+bool AbstractHandler_Assigment::Handle(Lex Type)
 {
     if (this->next_handler_)
     {
-        return this->next_handler_->Handle(TypeID);
+        return this->next_handler_->Handle(Type);
     }
     return {};
 }

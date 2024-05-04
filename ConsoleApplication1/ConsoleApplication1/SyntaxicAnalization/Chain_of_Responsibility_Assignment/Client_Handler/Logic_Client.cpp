@@ -8,10 +8,10 @@ Logic_Client::Logic_Client()
     logic_operators_handler->SetNext(check_const_handler)->SetNext(check_var_handler)->SetNext(end_handler);
 }
 
-bool Logic_Client::Handle(int TypeID)
+bool Logic_Client::Handle(Lex Type)
 {
-    if(logic_operators_handler->Handle(TypeID))
-        singletone_currentposition->currentPosition++;
-    return AbstractHandler_Assigment::Handle(TypeID);
+    if(logic_operators_handler->Handle(Type))
+        return true;
+    return AbstractHandler_Assigment::Handle(Type);
 }
 

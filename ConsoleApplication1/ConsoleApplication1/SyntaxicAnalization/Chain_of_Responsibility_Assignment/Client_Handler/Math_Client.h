@@ -9,7 +9,7 @@ class Math_Client:public AbstractHandler_Assigment
 {
 public:
     Math_Client();
-    bool Handle(int TypeID) override;
+    bool Handle(Lex Type) override;
     Equal_Handler *eaqual_handler;
     CheckVar_Handler *check_var_handler;
     CheckConst_Handler *check_const_handler;
