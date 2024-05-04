@@ -1,5 +1,5 @@
-﻿#include "SynAnalizator.h"
-
+﻿#pragma once
+#include "SynAnalizator.h"
 #include "SingletoneDeclaretedVariables/DeclareredVariables.h"
 
 SynAnalizator::SynAnalizator()
@@ -7,6 +7,7 @@ SynAnalizator::SynAnalizator()
     client_code_declaration =new ClientCode_Declaration();
     client_code_init = new ClientCode_Init();
     client_if_declaratoin_=new Client_If_Declaratoin();
+    client_assigment_ = new MainClientAssigment();
 }
 
 bool SynAnalizator::OperatorCheck()
@@ -484,7 +485,7 @@ bool SynAnalizator::Assignment()
         {
             Lex tmp = declarered_variables_->ContainingLexGetLex(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition]);
             singletone_currentposition->currentPosition++;
-             if(client_code_init->CheckDataAssignment(tmp.dataTypeID))
+             if(client_assigment_->CheckAssigment(tmp.dataTypeID))
              {
                  return true;
              }

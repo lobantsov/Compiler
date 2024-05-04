@@ -1,5 +1,5 @@
 ﻿#include "AbstractHandler_Assigment.h"
-IHandler* AbstractHandler_Assigment::SetNext(IHandler* handler)
+IHandler_assigment* AbstractHandler_Assigment::SetNext(IHandler_assigment* handler)
 {
     this->next_handler_ = handler;
     return handler;

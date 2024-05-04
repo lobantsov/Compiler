@@ -1,4 +1,6 @@
-﻿#include "CheckVar_Handler.h"
+﻿#pragma once
+#include "..//..//LexAnalizator/LexAnalizator.h"
+#include "CheckVar_Handler.h"
 bool CheckVar_Handler::Handle(int TypeID)
 {
     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==

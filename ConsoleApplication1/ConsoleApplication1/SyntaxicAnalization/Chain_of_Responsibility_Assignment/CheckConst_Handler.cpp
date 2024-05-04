@@ -1,4 +1,6 @@
-﻿#include "CheckConst_Handler.h"
+﻿#pragma once
+#include "..//..//LexAnalizator/LexAnalizator.h"
+#include "CheckConst_Handler.h"
 
 bool CheckConst_Handler::Handle(int TypeID)
 {

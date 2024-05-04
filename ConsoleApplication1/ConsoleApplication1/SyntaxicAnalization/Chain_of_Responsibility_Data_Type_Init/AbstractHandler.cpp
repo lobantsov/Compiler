@@ -1,4 +1,5 @@
-﻿#include "AbstractHandler.h"
+﻿#pragma once
+#include "AbstractHandler.h"
 IHandler* AbstractHandler::SetNext(IHandler* handler)
 {
     this->next_handler_ = handler;

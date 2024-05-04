@@ -1,4 +1,6 @@
-﻿#include "Equal_Handler.h"
+﻿#pragma once
+#include "..//..//LexAnalizator/LexAnalizator.h"
+#include "Equal_Handler.h"
 bool Equal_Handler::Handle(int TypeID)
 {
     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==13)
@@ -12,6 +14,7 @@ bool Equal_Handler::Handle(int TypeID)
         {
             singletone_currentposition->currentPosition++;
         }
+        return true;
     }
     return AbstractHandler_Assigment::Handle(TypeID);
 }

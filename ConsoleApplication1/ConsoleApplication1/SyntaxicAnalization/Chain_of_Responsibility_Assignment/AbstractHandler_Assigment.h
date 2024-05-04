@@ -3,12 +3,12 @@
 #include "IHandler_assigment.h"
 #include "../../LexAnalizator/Lex.h"
 using namespace std;
-class AbstractHandler_Assigment:public IHandler
+class AbstractHandler_Assigment:public IHandler_assigment
 {
-    IHandler *next_handler_;
+    IHandler_assigment *next_handler_;
 protected:
 public:
-    IHandler *SetNext(IHandler *handler) override;
+    IHandler_assigment *SetNext(IHandler_assigment *handler) override;
     bool Handle(int TypeID) override;
     SingletoneCurrentposition *singletone_currentposition = SingletoneCurrentposition::GetInstance();
 };

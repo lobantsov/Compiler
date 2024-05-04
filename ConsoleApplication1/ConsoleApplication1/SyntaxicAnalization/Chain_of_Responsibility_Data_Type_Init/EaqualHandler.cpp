@@ -1,5 +1,5 @@
-﻿#include "EaqualHandler.h"
-
+﻿#pragma once
+#include "EaqualHandler.h"
 #include "../../LexAnalizator/LexAnalizator.h"
 bool EaqualHandler::Handle(int TypeID)
 {

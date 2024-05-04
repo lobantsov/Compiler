@@ -1,4 +1,5 @@
-﻿#include "EnumerationHandler.h"
+﻿#pragma once
+#include "EnumerationHandler.h"
 #include "VariableHandler.h"
 #include "../../LexAnalizator/LexAnalizator.h"
 

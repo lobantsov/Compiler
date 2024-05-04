@@ -1,7 +1,6 @@
 ﻿#pragma once
 #include <vector>
 #include "IHandler.h"
-#include "../../LexAnalizator/Lex.h"
 using namespace std;
 class AbstractHandler:public IHandler
 {

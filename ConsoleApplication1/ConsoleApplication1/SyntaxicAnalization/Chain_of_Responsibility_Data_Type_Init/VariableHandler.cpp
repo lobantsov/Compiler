@@ -1,4 +1,5 @@
-﻿#include "VariableHandler.h"
+﻿#pragma once
+#include "VariableHandler.h"
 #include "../SynAnalizator.h"
 #include "../SingletoneDeclaretedVariables/DeclareredVariables.h"
 

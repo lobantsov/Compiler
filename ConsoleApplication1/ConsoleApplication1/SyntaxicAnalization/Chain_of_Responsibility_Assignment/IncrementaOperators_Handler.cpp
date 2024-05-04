@@ -1,4 +1,6 @@
-﻿#include "IncrementaOperators_Handler.h"
+﻿#pragma once
+#include "..//..//LexAnalizator/LexAnalizator.h"
+#include "IncrementaOperators_Handler.h"
 bool IncrementaOperators_Handler::Handle(int TypeID)
 {
     //++ -- **

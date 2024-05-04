@@ -1,4 +1,5 @@
-﻿#include "ClientCode_Declaration.h"
+﻿#pragma once
+#include "ClientCode_Declaration.h"
 
 ClientCode_Declaration::ClientCode_Declaration()
 {

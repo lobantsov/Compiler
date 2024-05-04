@@ -1,4 +1,6 @@
-﻿#include "VarExist_Handler.h"
+﻿#pragma once
+#include "..//..//LexAnalizator/LexAnalizator.h"
+#include "VarExist_Handler.h"
 bool VarExist_Handler::Handle(int TypeID)
 {
     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID == LexAnalizator::SingleLexConfig.size()+LexAnalizator::MultiplyLexConfig.size()+1)

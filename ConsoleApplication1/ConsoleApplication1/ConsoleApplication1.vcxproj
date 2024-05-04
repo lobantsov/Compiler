@@ -493,9 +493,6 @@
     <ClInclude Include="SyntaxicAnalization\SynAnalizator.h" />
     <ClInclude Include="SyntaxicAnalization\SyntaxicAnalizator_MathAndlogicOperator\SyntaxicAnalizator_MathAndlogicOperator.h" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SyntaxicAnalization\Chaine_of_Responsibility_Math_Operators\" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

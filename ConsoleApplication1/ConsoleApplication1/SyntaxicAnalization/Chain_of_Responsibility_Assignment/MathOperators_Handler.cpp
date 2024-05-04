@@ -1,4 +1,6 @@
-﻿#include "MathOperators_Handler.h"
+﻿#pragma once
+#include "..//..//LexAnalizator/LexAnalizator.h"
+#include "MathOperators_Handler.h"
 bool MathOperators_Handler::Handle(int TypeID)
 {
     //+-*/

@@ -9,7 +9,7 @@ Incrementa_Client::Incrementa_Client()
 bool Incrementa_Client::Handle(int TypeID)
 {
     if(incrementa_operators_handler->Handle(TypeID))
-        singletone_currentposition++;
+        singletone_currentposition->currentPosition++;
     return AbstractHandler_Assigment::Handle(TypeID);
 }
 

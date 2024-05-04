@@ -1,4 +1,6 @@
-﻿#include "End_Handler.h"
+﻿#pragma once
+#include "..//..//LexAnalizator/LexAnalizator.h"
+#include "End_Handler.h"
 bool End_Handler::Handle(int TypeID)
 {
     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==0)

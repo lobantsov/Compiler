@@ -1,4 +1,6 @@
-﻿#include "LogicOperators_Handler.h"
+﻿#pragma once
+#include "..//..//LexAnalizator/LexAnalizator.h"
+#include "LogicOperators_Handler.h"
 bool LogicOperators_Handler::Handle(int TypeID)
 {
     //<  >
