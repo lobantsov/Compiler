@@ -4,9 +4,9 @@
 #include <windows.h>
 #include "../Singletone/SingletoneCurrentposition.h"
 #include "../SpawnErrors/ClassForCreateErorrs.h"
+#include "Chain_of_Responsibility_Assignment/ClientCode_Init.h"
 #include "SingletoneDeclaretedVariables/DeclareredVariables.h"
 #include "Chain_of_Responsibility_Data_Type_Init/ClientCode_Declaration.h"
-#include "Chain_of_Responsibility_Data_Type_Init/ClientCode_Init.h"
 #include "Chain_of_Responsibility_IF_ELSE_IFELSE/Client_If_Declaratoin.h"
 #include "SyntaxicAnalizator_MathAndlogicOperator/SyntaxicAnalizator_MathAndlogicOperator.h"
 using namespace std;
