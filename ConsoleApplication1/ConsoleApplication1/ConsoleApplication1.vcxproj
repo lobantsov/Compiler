@@ -282,6 +282,7 @@
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\CheckConst_Handler.cpp" />
+    <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\CheckVar_Handler.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\ClientCode_Init.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -356,10 +357,14 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\Client_Handler\Incrementa_Client.cpp" />
+    <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\Client_Handler\Logic_Client.cpp" />
+    <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\Client_Handler\Math_Client.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\End_Handler.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\Equal_Handler.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\IncrementaOperators_Handler.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\LogicOperators_Handler.cpp" />
+    <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\MainClientAssigment\MainClientAssigment.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\MathOperators_Handler.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\VarExist_Handler.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\AbstractHandler.cpp" />
@@ -460,12 +465,17 @@
     <ClInclude Include="SpawnErrors\ClassForCreateErorrs.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\AbstractHandler_Assigment.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\CheckConst_Handler.h" />
+    <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\CheckVar_Handler.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\ClientCode_Init.h" />
+    <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\Client_Handler\Incrementa_Client.h" />
+    <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\Client_Handler\Logic_Client.h" />
+    <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\Client_Handler\Math_Client.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\End_Handler.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\Equal_Handler.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\IHandler_assigment.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\IncrementaOperators_Handler.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\LogicOperators_Handler.h" />
+    <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\MainClientAssigment\MainClientAssigment.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\MathOperators_Handler.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\VarExist_Handler.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Data_Type_Init\AbstractHandler.h" />
