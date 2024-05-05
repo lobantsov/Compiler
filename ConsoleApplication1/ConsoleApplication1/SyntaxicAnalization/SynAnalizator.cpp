@@ -78,26 +78,6 @@ bool SynAnalizator::OperatorCheck()
         singletone_currentposition->currentPosition++;
     }
     
-    // if(_syntaxicAnalizator_MathAndlogicOperator->MathOperatorCheck())
-    // {
-    //     singletone_currentposition->currentPosition++;
-    // }
-    // else if(_syntaxicAnalizator_MathAndlogicOperator->SelfMathAdiction())
-    // {
-    //     singletone_currentposition->currentPosition++;
-    // }
-    // else if(_syntaxicAnalizator_MathAndlogicOperator->ConditionCheck(false))
-    // {
-    //     singletone_currentposition->currentPosition++;
-    // }
-    // else if(_syntaxicAnalizator_MathAndlogicOperator->IncrementAndDicremental())
-    // {
-    //     singletone_currentposition->currentPosition++;
-    // }
-    // else
-    // {
-    //     // create_erorrs->CreateSyntaxError();
-    // }
     //error out of range
     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==6)
     {

@@ -294,6 +294,7 @@
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\LogicOperators_Handler.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\MainClientAssigment\MainClientAssigment.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\MathOperators_Handler.cpp" />
+    <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\RoundBrackets_Handler.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\VarExist_Handler.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Declaration\AbstractHandler.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Declaration\ClientCode_Declaration.cpp" />
@@ -405,6 +406,7 @@
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\LogicOperators_Handler.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\MainClientAssigment\MainClientAssigment.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\MathOperators_Handler.h" />
+    <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\RoundBrackets_Handler.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\VarExist_Handler.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Declaration\AbstractHandler.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Declaration\ClientCode_Declaration.h" />

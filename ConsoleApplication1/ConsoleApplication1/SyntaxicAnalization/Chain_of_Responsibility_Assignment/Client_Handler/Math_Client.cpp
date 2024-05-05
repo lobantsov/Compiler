@@ -9,6 +9,7 @@ Math_Client::Math_Client()
     eaqual_handler = new Equal_Handler();
     math_operators_handler = new MathOperators_Handler();
     end_handler = new End_Handler();
+    round_brackets_handler = new RoundBrackets_Handler();
     check_var_handler->SetNext(check_const_handler)->SetNext(math_operators_handler)->SetNext(end_handler);
 }
 
@@ -20,8 +21,12 @@ bool Math_Client::Handle(Lex Type)
         {
             if(check_var_handler->Handle(Type))
             {
-                //singletone_currentposition->currentPosition++;
-                return true;
+                singletone_currentposition->currentPosition++;
+                if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==0)
+                {
+                    singletone_currentposition->currentPosition--;
+                    return true;
+                }
             }
         }
     }
