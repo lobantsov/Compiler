@@ -22,7 +22,6 @@ using namespace std;
         ClassForCreateErorrs *create_erorrs = ClassForCreateErorrs::GetInstance();
         ClientCode_Declaration *client_code_declaration;
         Client_If_Declaratoin *client_if_declaratoin_;
-        //SyntaxicAnalizator_MathAndlogicOperator *_syntaxicAnalizator_MathAndlogicOperator = new SyntaxicAnalizator_MathAndlogicOperator();
         DeclareredVariables *declarered_variables_ = DeclareredVariables::GetInstance();
         MainClientAssigment *client_assigment_;
     public:
@@ -30,7 +29,7 @@ using namespace std;
         SynAnalizator();
         bool MainCheck();
         bool DataTypeCheck();
-        bool Assignment();
+        bool Assignment(bool endSigntStatus);
         bool ForCheck();
         bool OperatorCheck();
         bool WhileCheck();

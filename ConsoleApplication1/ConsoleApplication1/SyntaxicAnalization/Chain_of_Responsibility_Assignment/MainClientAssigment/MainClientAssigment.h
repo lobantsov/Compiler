@@ -9,7 +9,7 @@ class MainClientAssigment
 {
 public:
     MainClientAssigment();
-    bool CheckAssigment(Lex Type);
+    bool CheckAssigment(Lex Type, bool endSigntStatus);
     Math_Client *math_client;
     Logic_Client *logic_client;
     Incrementa_Client *incrementa_client;

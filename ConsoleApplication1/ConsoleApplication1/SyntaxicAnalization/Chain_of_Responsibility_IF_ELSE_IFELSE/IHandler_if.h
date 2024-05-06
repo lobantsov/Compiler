@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "../../SpawnErrors/ClassForCreateErorrs.h"
+#include "../Chain_of_Responsibility_Assignment/Client_Handler/CheckVarConst_Client.h"
 #include "../SingletoneDeclaretedVariables/DeclareredVariables.h"
-#include "../SyntaxicAnalizator_MathAndlogicOperator/SyntaxicAnalizator_MathAndlogicOperator.h"
 using namespace std;
 
 class IHandler_if
@@ -15,4 +15,5 @@ public:
     static bool if_status;
     ClassForCreateErorrs *create_erorrs = ClassForCreateErorrs::GetInstance();
     DeclareredVariables *declarered_variables_ = DeclareredVariables::GetInstance();
+    CheckVarConst_Client*check_var_const_client=new CheckVarConst_Client();
 };

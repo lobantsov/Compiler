@@ -17,8 +17,38 @@ bool Ifhandler::Handle()
             return false;
 
         }
+        //var
+        if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==LexAnalizator::SingleLexConfig.size()+
+                LexAnalizator::MultiplyLexConfig.size()+1)
+        {
+            Lex tmpLex = declarered_variables_->ContainingLexGetLex(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition]);
+            if(declarered_variables_->ContainingLex(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition]))
+            {
+                if(check_var_const_client->Check_var_const(tmpLex))
+                    singletone_currentposition->currentPosition++;
+            }
+            else
+            {
+                create_erorrs->CreateSyntaxError();
+                return false;
+            }
+        }
+        //const
+        else if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==LexAnalizator::SingleLexConfig.size()+
+                LexAnalizator::MultiplyLexConfig.size()+2)
+        {
+            if(check_var_const_client->Check_var_const(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition]))
+                singletone_currentposition->currentPosition++;
+        }
+            
+        else
+        {
+            create_erorrs->CreateSyntaxError();
+            if_status=false;
+            return false;
+        }
         //condition check
-        if(_syntaxicAnalizator_MathAndlogicOperator->ConditionCheck(true))
+        if(client_assigment->CheckAssigment(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition], false))
         {
             singletone_currentposition->currentPosition++;
         }

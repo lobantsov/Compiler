@@ -12,18 +12,25 @@ MainClientAssigment::MainClientAssigment()
     math_client->SetNext(incrementa_client)->SetNext(logic_client)->SetNext(initialization_handler);
 }
 
-bool MainClientAssigment::CheckAssigment(Lex Type)
+bool MainClientAssigment::CheckAssigment(Lex Type, bool endSigntStatus)
 {
     singletone_currentposition->currentPosition_backup=singletone_currentposition->currentPosition;
     if(math_client->Handle(Type))
     {
         singletone_currentposition->currentPosition++;
-        if(end_handler->Handle(Type))
-        return true;
+        if(endSigntStatus)
+        {
+            if(end_handler->Handle(Type))
+                return true;
+            else
+            {
+                //missing ;
+                return false;
+            }
+        }
         else
         {
-            //missing ;
-            return false;
+            return true;
         }
     }
     else

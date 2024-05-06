@@ -283,6 +283,7 @@
     </ClCompile>
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\CheckConst_Handler.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\CheckVar_Handler.cpp" />
+    <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\Client_Handler\CheckVarConst_Client.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\Client_Handler\Incrementa_Client.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\Client_Handler\Logic_Client.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\Client_Handler\Math_Client.cpp" />
@@ -395,6 +396,7 @@
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\AbstractHandler_Assigment.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\CheckConst_Handler.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\CheckVar_Handler.h" />
+    <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\Client_Handler\CheckVarConst_Client.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\Client_Handler\Incrementa_Client.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\Client_Handler\Logic_Client.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\Client_Handler\Math_Client.h" />

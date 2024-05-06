@@ -15,6 +15,5 @@ public:
     CheckVar_Handler *check_var_handler;
     CheckConst_Handler *check_const_handler;
     MathOperators_Handler *math_operators_handler;
-    RoundBrackets_Handler *round_brackets_handler;
     End_Handler *end_handler;
 };

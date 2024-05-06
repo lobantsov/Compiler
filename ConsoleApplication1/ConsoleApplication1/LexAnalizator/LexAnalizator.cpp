@@ -112,6 +112,7 @@ vector<Lex>* LexAnalizator::readCode()
         remove15BeforeAndAfterID(0);
         remove15BeforeAndAfterID(3);
         remove15BeforeAndAfterID(4);
+        remove15BeforeAndAfterID(6);
         remove15BeforeAndAfterID(7);
         remove15BeforeAndAfterID(8);
         remove15BeforeAndAfterID(9);
