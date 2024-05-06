@@ -9,7 +9,7 @@ ClientCode_Declaration::ClientCode_Declaration()
     variable_handler->SetNext(eaqual_handler)->SetNext(enumeration_handler);
 }
 
-bool ClientCode_Declaration::CheckDataType(int TypeID)
+bool ClientCode_Declaration::CheckDataType(Lex TypeID)
 {
     if(variable_handler->Handle(TypeID))
         return true;

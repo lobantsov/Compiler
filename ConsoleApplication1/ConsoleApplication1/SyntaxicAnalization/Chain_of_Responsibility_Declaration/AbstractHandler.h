@@ -8,6 +8,6 @@ class AbstractHandler:public IHandler
 protected:
 public:
     IHandler *SetNext(IHandler *handler) override;
-    bool Handle(int TypeID) override;
+    bool Handle(Lex TypeID) override;
     SingletoneCurrentposition *singletone_currentposition = SingletoneCurrentposition::GetInstance();
 };

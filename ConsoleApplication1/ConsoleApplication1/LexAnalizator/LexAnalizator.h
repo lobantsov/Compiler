@@ -27,4 +27,6 @@ public:
 	bool isQuotedString(const string& word, const string& orLine);
 	bool ThisContains(vector<Lex>* tmp, const string& word);
 	Lex GetLex(vector<Lex>* tmp, const string& word);
+	void CheckConst();
+	int checkNumberType(const std::string& s);
 };

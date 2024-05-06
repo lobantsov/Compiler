@@ -6,7 +6,7 @@ IHandler* AbstractHandler::SetNext(IHandler* handler)
     return handler;
 }
 
-bool AbstractHandler::Handle(int TypeID)
+bool AbstractHandler::Handle(Lex TypeID)
 {
     if (this->next_handler_)
     {

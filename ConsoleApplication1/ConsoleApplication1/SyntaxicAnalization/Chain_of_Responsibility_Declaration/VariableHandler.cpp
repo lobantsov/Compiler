@@ -3,7 +3,7 @@
 #include "../SynAnalizator.h"
 #include "../SingletoneDeclaretedVariables/DeclareredVariables.h"
 
-bool VariableHandler::Handle(int TypeID)
+bool VariableHandler::Handle(Lex TypeID)
 {
     Lex foundLex;
     for (const auto& lex : declarered_variables_->CreatedLexemus)
@@ -24,7 +24,7 @@ bool VariableHandler::Handle(int TypeID)
                 {
                     if (LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].value == LexAnalizator::FinalLexConfig[i].value)
                     {
-                        LexAnalizator::FinalLexConfig[i].dataTypeID = TypeID;
+                        LexAnalizator::FinalLexConfig[i].dataTypeID = TypeID.dataTypeID;
                         declarered_variables_->CreatedLexemus.push_back(LexAnalizator::FinalLexConfig[i]);
                         break;
                     }

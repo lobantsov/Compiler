@@ -19,13 +19,33 @@ bool Ifhandler::Handle()
         }
         //var
         if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==LexAnalizator::SingleLexConfig.size()+
-                LexAnalizator::MultiplyLexConfig.size()+1)
+                LexAnalizator::MultiplyLexConfig.size()+1||
+                LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==LexAnalizator::SingleLexConfig.size()+
+                LexAnalizator::MultiplyLexConfig.size()+2)
         {
-            Lex tmpLex = declarered_variables_->ContainingLexGetLex(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition]);
             if(declarered_variables_->ContainingLex(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition]))
             {
+                Lex tmpLex = declarered_variables_->ContainingLexGetLex(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition]);
                 if(check_var_const_client->Check_var_const(tmpLex))
+                {
                     singletone_currentposition->currentPosition++;
+                    //condition check
+                    if(client_assigment->CheckAssigment(tmpLex, false))
+                    {
+                        singletone_currentposition->currentPosition++;
+                    }
+                    else
+                    {
+                        create_erorrs->CreateSyntaxError();
+                        if_status=false;
+                        return false;
+                    }
+                }
+                else
+                {
+                    create_erorrs->CreateSyntaxError();
+                    return false;
+                }
             }
             else
             {
@@ -33,31 +53,13 @@ bool Ifhandler::Handle()
                 return false;
             }
         }
-        //const
-        else if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==LexAnalizator::SingleLexConfig.size()+
-                LexAnalizator::MultiplyLexConfig.size()+2)
-        {
-            if(check_var_const_client->Check_var_const(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition]))
-                singletone_currentposition->currentPosition++;
-        }
-            
         else
         {
             create_erorrs->CreateSyntaxError();
             if_status=false;
             return false;
         }
-        //condition check
-        if(client_assigment->CheckAssigment(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition], false))
-        {
-            singletone_currentposition->currentPosition++;
-        }
-        else
-        {
-            create_erorrs->CreateSyntaxError();
-            if_status=false;
-            return false;
-        }
+        
         if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==5)
         {
             if_status=true;

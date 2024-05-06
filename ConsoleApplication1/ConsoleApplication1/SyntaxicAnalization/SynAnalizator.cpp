@@ -409,7 +409,7 @@ bool SynAnalizator::DataTypeCheck()
      //36 - string
      //37 - char
      //38 - let
-     int TypeID;
+     Lex TypeID;
      singletone_currentposition->currentPosition_backup=singletone_currentposition->currentPosition;
      if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==15)
      {
@@ -417,7 +417,7 @@ bool SynAnalizator::DataTypeCheck()
      }
      if (LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID >= 34 && LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID <= 40)
      {
-         TypeID=LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID;
+         TypeID=LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition];
          singletone_currentposition->currentPosition_backup=singletone_currentposition->currentPosition;
          singletone_currentposition->currentPosition++;
      }
@@ -454,13 +454,16 @@ bool SynAnalizator::DataTypeCheck()
      }
 
     //foreach check variable
-    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition+2].lexID==23)
+    if(singletone_currentposition->currentPosition+2<LexAnalizator::FinalLexConfig.size())
     {
-        singletone_currentposition->currentPosition++;
-        if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==15)
+        if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition+2].lexID==23)
         {
             singletone_currentposition->currentPosition++;
-            return true;
+            if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==15)
+            {
+                singletone_currentposition->currentPosition++;
+                return true;
+            }
         }
     }
     
@@ -496,6 +499,7 @@ bool SynAnalizator::Assignment(bool endSigntStatus)
         }
         else
         {
+            create_erorrs->CreateSyntaxError();
             return false;
         }
     }

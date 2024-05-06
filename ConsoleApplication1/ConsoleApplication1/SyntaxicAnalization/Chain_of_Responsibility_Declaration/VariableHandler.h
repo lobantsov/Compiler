@@ -6,5 +6,5 @@
 class VariableHandler:public AbstractHandler
 {
 public:
-    bool Handle(int type_id)override;
+    bool Handle(Lex type_id)override;
 };

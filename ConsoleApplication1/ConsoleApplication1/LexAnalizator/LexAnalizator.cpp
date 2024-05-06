@@ -133,6 +133,7 @@ vector<Lex>* LexAnalizator::readCode()
         remove15BeforeAndAfterID(49);
         remove15BeforeAndAfterID(50);
         remove15BeforeAndAfterID(51);
+        CheckConst();
         return &FinalLexConfig;
     }
     return {};
@@ -350,4 +351,37 @@ Lex LexAnalizator::GetLex(vector<Lex> *tmp ,const string&word)
             return newLex;
         }
     }
+}
+
+void LexAnalizator::CheckConst()
+{
+    for(int i =0; i<FinalLexConfig.size(); i++)
+    {
+       FinalLexConfig[i].dataTypeID=checkNumberType(FinalLexConfig[i].value);
+            if(FinalLexConfig[i].value=="\"")
+            {
+                i++;
+                FinalLexConfig[i].dataTypeID=381;
+                i++;
+            }
+        if(FinalLexConfig[i].value=="'")
+        {
+            i++;
+            FinalLexConfig[i].dataTypeID=391;
+            i++;
+        }
+        if(FinalLexConfig[i].value == "true" || FinalLexConfig[i].value == "false")
+        {
+            FinalLexConfig[i].dataTypeID=341;
+        }
+    }
+}
+
+int LexAnalizator::checkNumberType(const std::string &s) {
+    if (s.empty() || ((!isdigit(s[0])) && (s[0] != '-') && (s[0] != '+'))) return -1;
+
+    char *p;
+    strtol(s.c_str(), &p, 10);
+
+    return (*p == 0) ? 351 : 361;
 }

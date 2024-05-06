@@ -5,5 +5,5 @@
 class EaqualHandler:public AbstractHandler
 {
 public:
-    bool Handle(int TypeID) override;
+    bool Handle(Lex TypeID) override;
 };

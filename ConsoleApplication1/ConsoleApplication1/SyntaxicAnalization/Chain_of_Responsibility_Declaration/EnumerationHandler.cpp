@@ -3,7 +3,7 @@
 #include "VariableHandler.h"
 #include "../../LexAnalizator/LexAnalizator.h"
 
-bool EnumerationHandler::Handle(int TypeID)
+bool EnumerationHandler::Handle(Lex TypeID)
 {
     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==16||
         LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==0 )

@@ -7,7 +7,7 @@ class ClientCode_Declaration
 {
 public:
     ClientCode_Declaration();
-    bool CheckDataType(int TypeID);
+    bool CheckDataType(Lex TypeID);
     VariableHandler *variable_handler;
     EnumerationHandler *enumeration_handler;
     EaqualHandler *eaqual_handler;
