@@ -19,9 +19,7 @@ bool Ifhandler::Handle()
         }
         //var
         if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==LexAnalizator::SingleLexConfig.size()+
-                LexAnalizator::MultiplyLexConfig.size()+1||
-                LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==LexAnalizator::SingleLexConfig.size()+
-                LexAnalizator::MultiplyLexConfig.size()+2)
+                LexAnalizator::MultiplyLexConfig.size()+1)
         {
             if(declarered_variables_->ContainingLex(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition]))
             {
@@ -30,6 +28,7 @@ bool Ifhandler::Handle()
                 {
                     singletone_currentposition->currentPosition++;
                     //condition check
+                    //error hear 
                     if(client_assigment->CheckAssigment(tmpLex, false))
                     {
                         singletone_currentposition->currentPosition++;
@@ -52,6 +51,12 @@ bool Ifhandler::Handle()
                 create_erorrs->CreateSyntaxError();
                 return false;
             }
+        }
+        //const
+        else if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==LexAnalizator::SingleLexConfig.size()+
+                LexAnalizator::MultiplyLexConfig.size()+2)
+        {
+            
         }
         else
         {

@@ -24,7 +24,7 @@ int main()
 	{
 		while (SingletoneCurrentposition::currentPosition<LexAnalizator::FinalLexConfig.size())
 		{
-			if(syn_analizator->OperatorCheck())
+			if(syn_analizator->OperatorCheck(false))
 			{
 				analizator->Print();
 				break;

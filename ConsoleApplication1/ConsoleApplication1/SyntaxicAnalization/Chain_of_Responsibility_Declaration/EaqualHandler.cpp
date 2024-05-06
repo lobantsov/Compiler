@@ -188,14 +188,18 @@ bool EaqualHandler::Handle(Lex TypeID)
         else if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID == LexAnalizator::SingleLexConfig.size()+
             LexAnalizator::MultiplyLexConfig.size()+1)
         {
-            if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].dataTypeID == TypeID.lexID)
+            if(declarered_variables_->ContainingLex(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition]))
             {
-                singletone_currentposition->currentPosition++;
-            }
-            else
-            {
-                create_erorrs->CreateSyntaxError();
-                return false;
+                Lex tmpLex = declarered_variables_->ContainingLexGetLex(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition]);
+                if(tmpLex.dataTypeID == TypeID.lexID)
+                {
+                    singletone_currentposition->currentPosition++;
+                }
+                else
+                {
+                    create_erorrs->CreateSyntaxError();
+                    return false;
+                }
             }
         }
     }

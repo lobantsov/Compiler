@@ -5,7 +5,7 @@ Logic_Client::Logic_Client()
     check_const_handler = new CheckConst_Handler();
     check_var_handler = new CheckVar_Handler();
     end_handler = new End_Handler();
-    logic_operators_handler->SetNext(check_const_handler)->SetNext(check_var_handler)->SetNext(end_handler);
+    logic_operators_handler->SetNext(check_const_handler)->SetNext(check_var_handler);
 }
 
 bool Logic_Client::Handle(Lex Type)

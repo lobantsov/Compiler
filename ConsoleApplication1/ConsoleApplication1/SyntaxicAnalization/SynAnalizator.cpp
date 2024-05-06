@@ -9,7 +9,7 @@ SynAnalizator::SynAnalizator()
     client_assigment_ = new MainClientAssigment();
 }
 
-bool SynAnalizator::OperatorCheck()
+bool SynAnalizator::OperatorCheck(bool innerCheckStatus)
 {
     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID == 15)
     {
@@ -50,7 +50,7 @@ bool SynAnalizator::OperatorCheck()
             singletone_currentposition->currentPosition++;
             while (true)
             {
-                if(OperatorCheck())
+                if(OperatorCheck(true))
                 {
                     break;
                 }
@@ -67,7 +67,7 @@ bool SynAnalizator::OperatorCheck()
             singletone_currentposition->currentPosition++;
             while (true)
             {
-                if(OperatorCheck())
+                if(OperatorCheck(true))
                 {
                     break;
                 }
@@ -97,11 +97,13 @@ bool SynAnalizator::OperatorCheck()
     //error out of range
     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==6)
     {
-        
-        singletone_currentposition->currentPosition++;
-        if(LexAnalizator::FinalLexConfig.size()-1<=singletone_currentposition->currentPosition)
+        if(!innerCheckStatus)
         {
-            singletone_currentposition->currentPosition--;
+            singletone_currentposition->currentPosition++;
+            if(LexAnalizator::FinalLexConfig.size()-1<=singletone_currentposition->currentPosition)
+            {
+                singletone_currentposition->currentPosition--;
+            }
         }
         return true;
     }
@@ -187,7 +189,7 @@ bool SynAnalizator::WhileCheck()
         singletone_currentposition->currentPosition++;
         while (true)
         {
-            if(OperatorCheck())
+            if(OperatorCheck(true))
             {
                 break;
             }
@@ -206,7 +208,7 @@ bool SynAnalizator::Do_whileCheck()
     }
     while (true)
     {
-        if(OperatorCheck())
+        if(OperatorCheck(true))
         {
             if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==21)
             {
@@ -326,7 +328,7 @@ bool SynAnalizator::ForCheck()
             singletone_currentposition->currentPosition++;
             while (true)
             {
-                if(OperatorCheck())
+                if(OperatorCheck(true))
                 {
                     break;
                 }
@@ -379,7 +381,7 @@ bool SynAnalizator::ForCheck()
             singletone_currentposition->currentPosition++;
             while (true)
             {
-                if(OperatorCheck())
+                if(OperatorCheck(true))
                 {
                     break;
                 }

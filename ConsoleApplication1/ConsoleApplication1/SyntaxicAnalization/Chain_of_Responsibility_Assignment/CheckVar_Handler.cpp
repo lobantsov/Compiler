@@ -6,13 +6,19 @@ bool CheckVar_Handler::Handle(Lex Type)
     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==
         LexAnalizator::SingleLexConfig.size()+LexAnalizator::MultiplyLexConfig.size()+1)
     {
-        Lex tmpLex = declarered_variables_->ContainingLexGetLex(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition]);
-        if(tmpLex.dataTypeID==Type.dataTypeID)
+        if(declarered_variables_->ContainingLex(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition]))
         {
-            return true;
+            Lex tmpLex = declarered_variables_->ContainingLexGetLex(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition]);
+            if(tmpLex.dataTypeID==Type.dataTypeID)
+            {
+                return true;
+            }
         }
-        //error not created var
-        return false;
+        else
+        {
+            create_erorrs->error_status=true;
+            return false;
+        }
     }
     return AbstractHandler_Assigment::Handle(Type);
 }

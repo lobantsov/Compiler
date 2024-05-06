@@ -31,7 +31,7 @@ using namespace std;
         bool DataTypeCheck();
         bool Assignment(bool endSigntStatus);
         bool ForCheck();
-        bool OperatorCheck();
+        bool OperatorCheck(bool innerCheckStatus);
         bool WhileCheck();
         bool Do_whileCheck();
         void Print();

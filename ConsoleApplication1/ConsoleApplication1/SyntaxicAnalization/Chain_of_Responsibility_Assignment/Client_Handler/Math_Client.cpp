@@ -27,6 +27,8 @@ bool Math_Client::Handle(Lex Type)
                     return true;
                 }
             }
+           if(create_erorrs->error_status)
+                    return false;
         }
     }
     return AbstractHandler_Assigment::Handle(Type);
