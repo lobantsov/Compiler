@@ -24,8 +24,7 @@ bool Ifhandler::Handle()
             if(declarered_variables_->ContainingLex(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition]))
             {
                 Lex tmpLex = declarered_variables_->ContainingLexGetLex(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition]);
-                if(check_var_const_client->Check_var_const(tmpLex))
-                {
+                
                     singletone_currentposition->currentPosition++;
                     //condition check
                     //error hear 
@@ -39,12 +38,6 @@ bool Ifhandler::Handle()
                         if_status=false;
                         return false;
                     }
-                }
-                else
-                {
-                    create_erorrs->CreateSyntaxError();
-                    return false;
-                }
             }
             else
             {

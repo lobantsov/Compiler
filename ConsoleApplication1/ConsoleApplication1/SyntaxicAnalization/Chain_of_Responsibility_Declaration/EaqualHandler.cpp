@@ -3,6 +3,20 @@
 #include "../../LexAnalizator/LexAnalizator.h"
 bool EaqualHandler::Handle(Lex TypeID)
 {
+    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==17)
+    {
+        singletone_currentposition->currentPosition++;
+        if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==18)
+        {
+            singletone_currentposition->currentPosition++;
+        }
+        else
+        {
+            create_erorrs->CreateDeclarationError();
+            return false;
+        }
+    }
+    
     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==13)
     {
         singletone_currentposition->currentPosition++;

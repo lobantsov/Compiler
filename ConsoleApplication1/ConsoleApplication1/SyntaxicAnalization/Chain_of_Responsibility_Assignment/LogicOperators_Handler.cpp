@@ -4,30 +4,41 @@
 bool LogicOperators_Handler::Handle(Lex Type)
 {
     //<  >
-    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==7||
-    LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==8)
+    if(Type.dataTypeID>=35&&Type.dataTypeID<=37)
     {
-        singletone_currentposition->currentPosition++;
+        if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==7||
+        LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==8)
+        {
+            singletone_currentposition->currentPosition++;
+            if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==13)
+            {
+                singletone_currentposition->currentPosition++;
+                return AbstractHandler_Assigment::Handle(Type);
+            }
+            return AbstractHandler_Assigment::Handle(Type);
+        }
+    }
+    //==
+    if(Type.dataTypeID>=34&&Type.dataTypeID<=39)
+    {
+        //
         if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==13)
         {
             singletone_currentposition->currentPosition++;
-            return AbstractHandler_Assigment::Handle(Type);
+            if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==13)
+            {
+                singletone_currentposition->currentPosition++;
+                return AbstractHandler_Assigment::Handle(Type);
+            }
+            else
+            {
+                return false;
+            }
         }
-        return AbstractHandler_Assigment::Handle(Type);
+        return false;
     }
-    //
-    else if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==13)
+    else
     {
-        singletone_currentposition->currentPosition++;
-        if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==13)
-        {
-            singletone_currentposition->currentPosition++;
-            return AbstractHandler_Assigment::Handle(Type);
-        }
-        else
-        {
-            return false;
-        }
+        return false;
     }
-    return false;
 }

@@ -321,7 +321,8 @@ bool LexAnalizator::isQuotedString(const string& word, const string& orLine)
     size_t position = orLine.find(word);
     if (position > 0) 
     {
-        if (orLine[position - 1] == '"' && orLine[position + word.length()] == '"') return true;
+        if (orLine[position - 1] == '"' && orLine[position + word.length()] == '"'||
+            orLine[position - 1] == '\'' && orLine[position + word.length()] == '\'') return true;
     }
     return false;
 }

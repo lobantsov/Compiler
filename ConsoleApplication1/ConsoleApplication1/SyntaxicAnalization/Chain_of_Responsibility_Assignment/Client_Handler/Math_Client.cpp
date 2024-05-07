@@ -20,10 +20,8 @@ bool Math_Client::Handle(Lex Type)
         {
             if(check_var_handler->Handle(Type))
             {
-                singletone_currentposition->currentPosition++;
                 if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==0)
                 {
-                    singletone_currentposition->currentPosition--;
                     return true;
                 }
             }

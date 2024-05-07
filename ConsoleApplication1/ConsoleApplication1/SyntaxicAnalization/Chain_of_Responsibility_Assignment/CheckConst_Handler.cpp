@@ -120,6 +120,10 @@ bool CheckConst_Handler::Handle(Lex Type)
     //         }
     //     }
 
+    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID ==15)
+    {
+        singletone_currentposition->currentPosition++;
+    }
         if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID == LexAnalizator::SingleLexConfig.size()+
             LexAnalizator::MultiplyLexConfig.size()+2 || LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==14||
             LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==2)
@@ -130,6 +134,7 @@ bool CheckConst_Handler::Handle(Lex Type)
             case 35:
                 if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].dataTypeID == 351)
                 {
+                    singletone_currentposition->currentPosition++;
                     return true;
                 }
                 else
@@ -143,6 +148,7 @@ bool CheckConst_Handler::Handle(Lex Type)
                 if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].dataTypeID == 351||
                 LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].dataTypeID == 361)
                 {
+                    singletone_currentposition->currentPosition++;
                     return true;
                 }
                 else
@@ -156,6 +162,7 @@ bool CheckConst_Handler::Handle(Lex Type)
                 if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].dataTypeID == 351||
                 LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].dataTypeID == 361)
                 {
+                    singletone_currentposition->currentPosition++;
                     return true;
                 }
                 else
@@ -177,6 +184,7 @@ bool CheckConst_Handler::Handle(Lex Type)
                             singletone_currentposition->currentPosition++;
                             if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID == 14)
                             {
+                                singletone_currentposition->currentPosition++;
                                 return true;
                             }
                             else
@@ -211,6 +219,7 @@ bool CheckConst_Handler::Handle(Lex Type)
                             singletone_currentposition->currentPosition++;
                             if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID == 2)
                             {
+                                singletone_currentposition->currentPosition++;
                                 return true;
                             }
                             else
@@ -241,6 +250,7 @@ bool CheckConst_Handler::Handle(Lex Type)
             case 34:
                 if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].dataTypeID == 341)
                 {
+                    singletone_currentposition->currentPosition++;
                     return true;
                 }
                 else
@@ -259,6 +269,7 @@ bool CheckConst_Handler::Handle(Lex Type)
             Lex tmpLex = declarered_variables_->ContainingLexGetLex(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition]);
             if(tmpLex.dataTypeID == Type.lexID)
             {
+                singletone_currentposition->currentPosition++;
                 return true;
             }
             else

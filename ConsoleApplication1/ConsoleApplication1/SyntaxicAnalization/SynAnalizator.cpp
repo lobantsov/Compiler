@@ -77,13 +77,6 @@ bool SynAnalizator::OperatorCheck(bool innerCheckStatus)
         }
     }
 
-    // //switch
-    // if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==26)
-    // {
-    //     singletone_currentposition->currentPosition++;
-    //     //switch
-    // }
-
     if(DataTypeCheck())
     {
         singletone_currentposition->currentPosition++;
