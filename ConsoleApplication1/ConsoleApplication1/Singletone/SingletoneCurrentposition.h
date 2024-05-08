@@ -15,4 +15,5 @@ public:
     static SingletoneCurrentposition *GetInstance();
     static int currentPosition;
     static int currentPosition_backup;
+    static bool isLogicOperator;
 };

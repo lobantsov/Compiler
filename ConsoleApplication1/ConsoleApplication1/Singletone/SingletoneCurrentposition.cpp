@@ -11,3 +11,4 @@ SingletoneCurrentposition *SingletoneCurrentposition::GetInstance()
 }
 int SingletoneCurrentposition::currentPosition = 0;
 int SingletoneCurrentposition::currentPosition_backup = 0;
+bool SingletoneCurrentposition::isLogicOperator = false;

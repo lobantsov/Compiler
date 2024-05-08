@@ -15,8 +15,7 @@ Math_Client::Math_Client()
 
 bool Math_Client::Handle(Lex Type)
 {
-    bool tmpBool =false;
-    if(eaqual_handler->Handle(Type)&&)
+    if(eaqual_handler->Handle(Type) && !singletone_currentposition->isLogicOperator)
     {
         while(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID!=0)
         {

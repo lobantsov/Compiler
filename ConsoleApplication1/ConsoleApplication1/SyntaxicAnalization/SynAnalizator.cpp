@@ -50,8 +50,10 @@ bool SynAnalizator::OperatorCheck(bool innerCheckStatus)
             singletone_currentposition->currentPosition++;
             while (true)
             {
-                if(OperatorCheck(true))
+                if(OperatorCheck(false))
                 {
+                    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID!=25)
+                        IHandler_if::if_status=false;
                     break;
                 }
                 if(create_erorrs->error_status)
@@ -67,13 +69,20 @@ bool SynAnalizator::OperatorCheck(bool innerCheckStatus)
             singletone_currentposition->currentPosition++;
             while (true)
             {
-                if(OperatorCheck(true))
+                if(OperatorCheck(false))
                 {
+                    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID!=25)
+                        IHandler_if::if_status=false;
                     break;
                 }
                 if(create_erorrs->error_status)
                     return false;
             }
+        }
+        else
+        {
+            create_erorrs->CreateSyntaxError();
+            return false;
         }
     }
 
@@ -82,7 +91,7 @@ bool SynAnalizator::OperatorCheck(bool innerCheckStatus)
         singletone_currentposition->currentPosition++;
     }
 
-    if(Assignment(true, false))
+    if(Assignment(true))
     {
         singletone_currentposition->currentPosition++;
     }
@@ -93,10 +102,10 @@ bool SynAnalizator::OperatorCheck(bool innerCheckStatus)
         if(!innerCheckStatus)
         {
             singletone_currentposition->currentPosition++;
-            if(LexAnalizator::FinalLexConfig.size()-1<=singletone_currentposition->currentPosition)
-            {
-                singletone_currentposition->currentPosition--;
-            }
+            // if(LexAnalizator::FinalLexConfig.size()-1<=singletone_currentposition->currentPosition)
+            // {
+            //     singletone_currentposition->currentPosition--;
+            // }
         }
         return true;
     }
@@ -168,7 +177,7 @@ bool SynAnalizator::WhileCheck()
         create_erorrs->CreateSyntaxError();
         return false;
     }
-    if(Assignment(false, false))
+    if(Assignment(false))
     {
         singletone_currentposition->currentPosition++;
     }
@@ -222,7 +231,7 @@ bool SynAnalizator::Do_whileCheck()
                 create_erorrs->CreateSyntaxError();
                 return false;
             }
-            if(Assignment(false, false))
+            if(Assignment(false))
             {
                 singletone_currentposition->currentPosition++;
             }
@@ -278,6 +287,7 @@ bool SynAnalizator::ForCheck()
         }
         else
         {
+            create_erorrs->CreateSyntaxError();
             return false;
         }
         
@@ -343,17 +353,20 @@ bool SynAnalizator::ForCheck()
         singletone_currentposition->currentPosition++;
         // singletone_currentposition->currentPosition++;
         //cond check
-        if(Assignment(true, true))
+        singletone_currentposition->isLogicOperator=true;
+        if(Assignment(true))
         {
             singletone_currentposition->currentPosition++;
+            singletone_currentposition->isLogicOperator=false;
         }
         else
         {
+            singletone_currentposition->isLogicOperator=false;
             create_erorrs->CreateSyntaxError();
             return false;
         }
         //incrementa
-        if(Assignment(true, false))
+        if(Assignment(true))
         {
             singletone_currentposition->currentPosition++;
         }
@@ -476,7 +489,7 @@ bool SynAnalizator::DataTypeCheck()
      }
  }
 
-bool SynAnalizator::Assignment(bool endSigntStatus, bool isCondiotion)
+bool SynAnalizator::Assignment(bool endSigntStatus)
 {
     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID == LexAnalizator::SingleLexConfig.size()+LexAnalizator::MultiplyLexConfig.size()+1)
     {
