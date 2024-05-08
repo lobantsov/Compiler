@@ -29,7 +29,9 @@ int main()
 	"C:\\Users\\loban\\OneDrive\\Desktop\\if.txt",
 	"C:\\Users\\loban\\OneDrive\\Desktop\\IfElse.txt",
 	"C:\\Users\\loban\\OneDrive\\Desktop\\IfElseIf.txt",
-	"C:\\Users\\loban\\OneDrive\\Desktop\\WhileOperator.txt"
+	"C:\\Users\\loban\\OneDrive\\Desktop\\WhileOperator.txt",
+	"C:\\Users\\loban\\OneDrive\\Desktop\\write.txt",
+	"C:\\Users\\loban\\OneDrive\\Desktop\\read.txt"
 	};
 	
 	for(const string &a : path)

@@ -30,6 +30,8 @@ using namespace std;
         bool MainCheck();
         bool DataTypeCheck();
         bool Assignment(bool endSigntStatus);
+        bool Write();
+        bool Read();
         bool ForCheck();
         bool OperatorCheck(bool innerCheckStatus);
         bool WhileCheck();
