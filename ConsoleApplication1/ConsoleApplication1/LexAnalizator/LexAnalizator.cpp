@@ -11,9 +11,9 @@ std::vector<std::string> LexAnalizator::MultiplyLexConfig= { "for","or","while",
                                         "string", "char", "let", "main","++","--","**","+=","-=","*=","/=","<=",">=","==","new",
                                                 /*"&&","||"*/};
 
-vector<Lex>* LexAnalizator::readCode()
+vector<Lex>* LexAnalizator::readCode(string path)
 {
-    ifstream fileForParth("C:\\Users\\loban\\OneDrive\\Desktop\\13.txt");
+    ifstream fileForParth(path);
     if (!fileForParth.is_open())
     {
         cerr << "????????? ??????? ????" << '\n';

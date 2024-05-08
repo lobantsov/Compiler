@@ -281,6 +281,7 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\ArrayCheck_Handler.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\CheckConst_Handler.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\CheckVar_Handler.cpp" />
     <ClCompile Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\Client_Handler\CheckVarConst_Client.cpp" />
@@ -394,6 +395,7 @@
     <ClInclude Include="Singletone\SingletoneCurrentposition.h" />
     <ClInclude Include="SpawnErrors\ClassForCreateErorrs.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\AbstractHandler_Assigment.h" />
+    <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\ArrayCheck_Handler.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\CheckConst_Handler.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\CheckVar_Handler.h" />
     <ClInclude Include="SyntaxicAnalization\Chain_of_Responsibility_Assignment\Client_Handler\CheckVarConst_Client.h" />

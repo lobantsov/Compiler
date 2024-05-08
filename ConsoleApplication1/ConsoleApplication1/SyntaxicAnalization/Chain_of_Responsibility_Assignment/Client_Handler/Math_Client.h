@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "../ArrayCheck_Handler.h"
 #include "../CheckConst_Handler.h"
 #include "../CheckVar_Handler.h"
 #include "../End_Handler.h"
@@ -15,5 +16,6 @@ public:
     CheckVar_Handler *check_var_handler;
     CheckConst_Handler *check_const_handler;
     MathOperators_Handler *math_operators_handler;
+    ArrayCheck_Handler *array_check_handler;
     End_Handler *end_handler;
 };

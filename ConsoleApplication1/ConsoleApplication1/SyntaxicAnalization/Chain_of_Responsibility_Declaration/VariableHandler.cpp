@@ -25,6 +25,11 @@ bool VariableHandler::Handle(Lex TypeID)
                     if (LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].value == LexAnalizator::FinalLexConfig[i].value)
                     {
                         LexAnalizator::FinalLexConfig[i].dataTypeID = TypeID.lexID;
+                        if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition+1].lexID == 17
+                            &&LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition+2].lexID==18)
+                        {
+                            LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].array = 1;
+                        }
                         declarered_variables_->CreatedLexemus.push_back(LexAnalizator::FinalLexConfig[i]);
                         break;
                     }

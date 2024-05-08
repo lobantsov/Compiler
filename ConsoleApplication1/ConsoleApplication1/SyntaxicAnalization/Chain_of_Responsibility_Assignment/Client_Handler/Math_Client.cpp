@@ -9,12 +9,14 @@ Math_Client::Math_Client()
     eaqual_handler = new Equal_Handler();
     math_operators_handler = new MathOperators_Handler();
     end_handler = new End_Handler();
-    check_var_handler->SetNext(check_const_handler)->SetNext(math_operators_handler)->SetNext(end_handler);
+    array_check_handler = new ArrayCheck_Handler();
+    check_var_handler->SetNext(check_const_handler)->SetNext(array_check_handler)->SetNext(math_operators_handler)->SetNext(end_handler);
 }
 
 bool Math_Client::Handle(Lex Type)
 {
-    if(eaqual_handler->Handle(Type))
+    bool tmpBool =false;
+    if(eaqual_handler->Handle(Type)&&)
     {
         while(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID!=0)
         {

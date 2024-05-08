@@ -17,7 +17,7 @@ public:
 	static vector<Lex> FinalLexConfig;
 	vector<Lex> VariablesTable;
 	vector<Lex> ConstantsTable;
-	vector<Lex>* readCode();
+	vector<Lex>* readCode(string path);
 	void removeElementAfter15(int index);
 	void remove15BeforeAndAfterID(int ID);
 	void Print();

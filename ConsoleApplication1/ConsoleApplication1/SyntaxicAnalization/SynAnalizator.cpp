@@ -82,7 +82,7 @@ bool SynAnalizator::OperatorCheck(bool innerCheckStatus)
         singletone_currentposition->currentPosition++;
     }
 
-    if(Assignment(true))
+    if(Assignment(true, false))
     {
         singletone_currentposition->currentPosition++;
     }
@@ -168,7 +168,7 @@ bool SynAnalizator::WhileCheck()
         create_erorrs->CreateSyntaxError();
         return false;
     }
-    if(Assignment(false))
+    if(Assignment(false, false))
     {
         singletone_currentposition->currentPosition++;
     }
@@ -203,6 +203,7 @@ bool SynAnalizator::Do_whileCheck()
     {
         if(OperatorCheck(true))
         {
+            singletone_currentposition->currentPosition++;
             if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==21)
             {
                 singletone_currentposition->currentPosition++;
@@ -221,7 +222,7 @@ bool SynAnalizator::Do_whileCheck()
                 create_erorrs->CreateSyntaxError();
                 return false;
             }
-            if(Assignment(false))
+            if(Assignment(false, false))
             {
                 singletone_currentposition->currentPosition++;
             }
@@ -341,7 +342,8 @@ bool SynAnalizator::ForCheck()
     {
         singletone_currentposition->currentPosition++;
         // singletone_currentposition->currentPosition++;
-        if(Assignment(true))
+        //cond check
+        if(Assignment(true, true))
         {
             singletone_currentposition->currentPosition++;
         }
@@ -350,8 +352,8 @@ bool SynAnalizator::ForCheck()
             create_erorrs->CreateSyntaxError();
             return false;
         }
-        
-        if(Assignment(true))
+        //incrementa
+        if(Assignment(true, false))
         {
             singletone_currentposition->currentPosition++;
         }
@@ -474,7 +476,7 @@ bool SynAnalizator::DataTypeCheck()
      }
  }
 
-bool SynAnalizator::Assignment(bool endSigntStatus)
+bool SynAnalizator::Assignment(bool endSigntStatus, bool isCondiotion)
 {
     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID == LexAnalizator::SingleLexConfig.size()+LexAnalizator::MultiplyLexConfig.size()+1)
     {

@@ -21,53 +21,56 @@ bool EaqualHandler::Handle(Lex TypeID)
     {
         singletone_currentposition->currentPosition++;
         //array
-        if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==52)
+        if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition-4].array==1)
         {
-            singletone_currentposition->currentPosition++;
-            if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==15)
+            if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==52)
             {
                 singletone_currentposition->currentPosition++;
-            }
-            else
-            {
-                create_erorrs->CreateDeclarationError();
-                return false;
-            }
-            if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID == TypeID.lexID)
-            {
-                singletone_currentposition->currentPosition++;
-            }
-            else
-            {
-                create_erorrs->CreateDeclarationError();
-                return false;
-            }
-            if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==17)
-            {
-                singletone_currentposition->currentPosition++;
-            }
-            else
-            {
-                create_erorrs->CreateDeclarationError();
-                return false;
-            }
-            if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].dataTypeID == 351)
-            {
-                singletone_currentposition->currentPosition++;
-            }
-            else
-            {
-                create_erorrs->CreateDeclarationError();
-                return false;
-            }
-            if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==18)
-            {
-                singletone_currentposition->currentPosition++;
-            }
-            else
-            {
-                create_erorrs->CreateDeclarationError();
-                return false;
+                if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==15)
+                {
+                    singletone_currentposition->currentPosition++;
+                }
+                else
+                {
+                    create_erorrs->CreateDeclarationError();
+                    return false;
+                }
+                if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID == TypeID.lexID)
+                {
+                    singletone_currentposition->currentPosition++;
+                }
+                else
+                {
+                    create_erorrs->CreateDeclarationError();
+                    return false;
+                }
+                if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==17)
+                {
+                    singletone_currentposition->currentPosition++;
+                }
+                else
+                {
+                    create_erorrs->CreateDeclarationError();
+                    return false;
+                }
+                if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].dataTypeID == 351)
+                {
+                    singletone_currentposition->currentPosition++;
+                }
+                else
+                {
+                    create_erorrs->CreateDeclarationError();
+                    return false;
+                }
+                if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==18)
+                {
+                    singletone_currentposition->currentPosition++;
+                }
+                else
+                {
+                    create_erorrs->CreateDeclarationError();
+                    return false;
+                }
             }
         }
 
