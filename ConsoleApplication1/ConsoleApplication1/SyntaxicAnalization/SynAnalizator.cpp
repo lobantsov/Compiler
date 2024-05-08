@@ -52,6 +52,10 @@ bool SynAnalizator::OperatorCheck(bool innerCheckStatus)
             {
                 if(OperatorCheck(false))
                 {
+                    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==15)
+                    {
+                        singletone_currentposition->currentPosition++;
+                    }
                     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID!=25)
                         IHandler_if::if_status=false;
                     break;
@@ -71,6 +75,10 @@ bool SynAnalizator::OperatorCheck(bool innerCheckStatus)
             {
                 if(OperatorCheck(false))
                 {
+                    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==15)
+                    {
+                        singletone_currentposition->currentPosition++;
+                    }
                     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID!=25)
                         IHandler_if::if_status=false;
                     break;
@@ -219,6 +227,7 @@ bool SynAnalizator::WhileCheck()
     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==5)
     {
         singletone_currentposition->currentPosition++;
+        
         while (true)
         {
             if(OperatorCheck(true))
@@ -234,6 +243,10 @@ bool SynAnalizator::WhileCheck()
 bool SynAnalizator::Do_whileCheck()
 {
     singletone_currentposition->currentPosition++;
+    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==15)
+    {
+        singletone_currentposition->currentPosition++;
+    }
     if((LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==5))
     {
         singletone_currentposition->currentPosition++;
