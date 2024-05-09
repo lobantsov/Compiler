@@ -21,18 +21,18 @@ int main()
 	
 	LexAnalizator *analizator=new LexAnalizator();
 	string path[]={
-	// "C:\\Users\\loban\\OneDrive\\Desktop\\declaratoion.txt",
-	// "C:\\Users\\loban\\OneDrive\\Desktop\\DoWhileOperator.txt",
-	// "C:\\Users\\loban\\OneDrive\\Desktop\\ForOperator.txt",
-	// "C:\\Users\\loban\\OneDrive\\Desktop\\Foreach.txt",
-	// "C:\\Users\\loban\\OneDrive\\Desktop\\Assigment.txt",
-	// "C:\\Users\\loban\\OneDrive\\Desktop\\if.txt",
-	// "C:\\Users\\loban\\OneDrive\\Desktop\\IfElse.txt",
-	// "C:\\Users\\loban\\OneDrive\\Desktop\\IfElseIf.txt",
-	// "C:\\Users\\loban\\OneDrive\\Desktop\\WhileOperator.txt",
-	// "C:\\Users\\loban\\OneDrive\\Desktop\\write.txt",
-	// "C:\\Users\\loban\\OneDrive\\Desktop\\read.txt"
-	 "C:\\Users\\loban\\OneDrive\\Desktop\\13.txt"
+	"C:\\Users\\loban\\OneDrive\\Desktop\\declaratoion.txt",
+	"C:\\Users\\loban\\OneDrive\\Desktop\\DoWhileOperator.txt",
+	"C:\\Users\\loban\\OneDrive\\Desktop\\ForOperator.txt",
+	"C:\\Users\\loban\\OneDrive\\Desktop\\Foreach.txt",
+	"C:\\Users\\loban\\OneDrive\\Desktop\\Assigment.txt",
+	"C:\\Users\\loban\\OneDrive\\Desktop\\if.txt",
+	"C:\\Users\\loban\\OneDrive\\Desktop\\IfElse.txt",
+	"C:\\Users\\loban\\OneDrive\\Desktop\\IfElseIf.txt",
+	"C:\\Users\\loban\\OneDrive\\Desktop\\WhileOperator.txt",
+	"C:\\Users\\loban\\OneDrive\\Desktop\\write.txt",
+	"C:\\Users\\loban\\OneDrive\\Desktop\\read.txt"
+	 //"C:\\Users\\loban\\OneDrive\\Desktop\\13.txt"
 	};
 	
 	for(const string &a : path)

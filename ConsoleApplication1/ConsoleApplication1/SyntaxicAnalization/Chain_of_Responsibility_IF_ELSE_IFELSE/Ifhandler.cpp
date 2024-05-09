@@ -13,7 +13,6 @@ bool Ifhandler::Handle()
         else
         {
             create_erorrs->CreateSyntaxError();
-            if_status=false;
             return false;
 
         }
@@ -35,7 +34,6 @@ bool Ifhandler::Handle()
                     else
                     {
                         create_erorrs->CreateSyntaxError();
-                        if_status=false;
                         return false;
                     }
             }
@@ -54,19 +52,16 @@ bool Ifhandler::Handle()
         else
         {
             create_erorrs->CreateSyntaxError();
-            if_status=false;
             return false;
         }
         
         if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==5)
         {
-            if_status=true;
           return true;
         }
         else
         {
             create_erorrs->CreateSyntaxError();
-            if_status=false;
             return false;
         }
     }

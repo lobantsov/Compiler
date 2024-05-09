@@ -29,4 +29,5 @@ public:
 	Lex GetLex(vector<Lex>* tmp, const string& word);
 	void CheckConst();
 	int checkNumberType(const std::string& s);
+	void groupQuotedLexemes();
 };

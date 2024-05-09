@@ -134,6 +134,7 @@ vector<Lex>* LexAnalizator::readCode(string path)
         remove15BeforeAndAfterID(49);
         remove15BeforeAndAfterID(50);
         remove15BeforeAndAfterID(51);
+        groupQuotedLexemes();
         CheckConst();
         return &FinalLexConfig;
     }
@@ -386,4 +387,37 @@ int LexAnalizator::checkNumberType(const std::string &s) {
     strtol(s.c_str(), &p, 10);
 
     return (*p == 0) ? 351 : 361;
+}
+
+void LexAnalizator::groupQuotedLexemes() {
+    vector<Lex> processedLexemes;
+    bool inQuotes = false;
+    string accumulatedLexeme;
+    Lex tempLex;
+
+    for (auto& lex : FinalLexConfig) {
+        if ((lex.value == "\"" || lex.value == "'") && !inQuotes) {
+            processedLexemes.push_back(lex);
+            inQuotes = true;
+            accumulatedLexeme.clear();
+            tempLex.lexLine = lex.lexLine;  
+            continue;
+        }
+
+        if (inQuotes) {
+            if (lex.value == "\"" || lex.value == "'") {
+                tempLex.value = accumulatedLexeme;
+                tempLex.lexID = SingleLexConfig.size() + MultiplyLexConfig.size() + 2; 
+                processedLexemes.push_back(tempLex);
+                processedLexemes.push_back(lex);
+                inQuotes = false;
+                accumulatedLexeme.clear();
+            } else {
+                accumulatedLexeme += lex.value;
+            }
+        } else {
+            processedLexemes.push_back(lex); 
+        }
+    }
+    FinalLexConfig = processedLexemes;
 }

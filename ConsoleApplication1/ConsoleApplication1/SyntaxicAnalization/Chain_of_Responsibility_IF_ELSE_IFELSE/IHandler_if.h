@@ -12,7 +12,6 @@ protected:
 public:
     virtual IHandler_if *SetNext(IHandler_if *handler) = 0;
     virtual bool Handle() = 0;
-    static bool if_status;
     ClassForCreateErorrs *create_erorrs = ClassForCreateErorrs::GetInstance();
     DeclareredVariables *declarered_variables_ = DeclareredVariables::GetInstance();
     CheckVarConst_Client*check_var_const_client=new CheckVarConst_Client();
