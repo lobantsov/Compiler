@@ -24,6 +24,7 @@ using namespace std;
         Client_If_Declaratoin *client_if_declaratoin_;
         DeclareredVariables *declarered_variables_ = DeclareredVariables::GetInstance();
         MainClientAssigment *client_assigment_;
+        stack<bool> callStack;
     public:
         
         SynAnalizator();
@@ -37,4 +38,5 @@ using namespace std;
         bool WhileCheck();
         bool Do_whileCheck();
         void Print();
+        bool innerStatus = false;
     };
