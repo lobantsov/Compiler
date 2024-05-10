@@ -35,7 +35,13 @@ bool SynAnalizator::OperatorCheck(bool innerCheckStatus)
     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==21)
     {
         if(WhileCheck())
-            singletone_currentposition->currentPosition++;
+        {
+            if(!callStack.top())
+            {
+                singletone_currentposition->currentPosition++;
+            }
+            callStack.pop();
+        }
         if(create_erorrs->error_status)
             return false;
     }
@@ -253,7 +259,7 @@ bool SynAnalizator::WhileCheck()
         
         while (true)
         {
-            if(OperatorCheck(true))
+            if(OperatorCheck(false))
             {
                 return true;
             }
@@ -575,6 +581,7 @@ bool SynAnalizator::Assignment(bool endSigntStatus)
              }
              else
              {
+                 create_erorrs->CreateSyntaxError();
                  return false;
              }
         }

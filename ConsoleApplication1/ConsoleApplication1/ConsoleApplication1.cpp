@@ -30,8 +30,8 @@ int main()
 	// "C:\\Users\\loban\\OneDrive\\Desktop\\IfElse.txt",
 	// "C:\\Users\\loban\\OneDrive\\Desktop\\WhileOperator.txt",
 	// "C:\\Users\\loban\\OneDrive\\Desktop\\write.txt",
-	// "C:\\Users\\loban\\OneDrive\\Desktop\\read.txt"
-	 "C:\\Users\\loban\\OneDrive\\Desktop\\13.txt"
+	// "C:\\Users\\loban\\OneDrive\\Desktop\\read.txt",
+	  "C:\\Users\\loban\\OneDrive\\Desktop\\13.txt"
 	};
 	
 	for(const string &a : path)
