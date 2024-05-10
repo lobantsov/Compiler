@@ -11,6 +11,7 @@ SynAnalizator::SynAnalizator()
 
 bool SynAnalizator::OperatorCheck(bool innerCheckStatus)
 {
+    callStack.push(innerCheckStatus);
     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID == 15)
     {
         singletone_currentposition->currentPosition++;
@@ -19,7 +20,13 @@ bool SynAnalizator::OperatorCheck(bool innerCheckStatus)
     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID == 19)
     {
         if(ForCheck())
-            singletone_currentposition->currentPosition++;
+        {
+            if(!callStack.top())
+            {
+                singletone_currentposition->currentPosition++;
+            }
+            callStack.pop();
+        }
         if(create_erorrs->error_status)
             return false;
     }
@@ -37,7 +44,12 @@ bool SynAnalizator::OperatorCheck(bool innerCheckStatus)
     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==22)
     {
         if(Do_whileCheck())
-            singletone_currentposition->currentPosition++;
+            if(!callStack.top())
+            {
+                singletone_currentposition->currentPosition++;
+            }
+        callStack.pop();
+        
         if(create_erorrs->error_status)
             return false;
     }
@@ -50,7 +62,7 @@ bool SynAnalizator::OperatorCheck(bool innerCheckStatus)
             singletone_currentposition->currentPosition++;
             while (true)
             {
-                if(OperatorCheck(false))
+                if(OperatorCheck(true))
                 {
                     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==15)
                     {
@@ -74,7 +86,7 @@ bool SynAnalizator::OperatorCheck(bool innerCheckStatus)
                 }
                 while (true)
                 {
-                    if(OperatorCheck(false))
+                    if(OperatorCheck(true))
                     {
                         //singletone_currentposition->currentPosition++;
                         if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==15)
@@ -100,11 +112,15 @@ bool SynAnalizator::OperatorCheck(bool innerCheckStatus)
     if(DataTypeCheck())
     {
         singletone_currentposition->currentPosition++;
+        if(!callStack.empty())
+        callStack.pop();
     }
 
     if(Assignment(true))
     {
         singletone_currentposition->currentPosition++;
+        if(!callStack.empty())
+        callStack.pop();
     }
 
     //write
@@ -114,6 +130,8 @@ bool SynAnalizator::OperatorCheck(bool innerCheckStatus)
         if(Write())
         {
             singletone_currentposition->currentPosition++;
+            if(!callStack.empty())
+            callStack.pop();
         }
         else
         {
@@ -129,6 +147,8 @@ bool SynAnalizator::OperatorCheck(bool innerCheckStatus)
         if(Read())
         {
             singletone_currentposition->currentPosition++;
+            if(!callStack.empty())
+            callStack.pop();
         }
         else
         {
@@ -140,7 +160,7 @@ bool SynAnalizator::OperatorCheck(bool innerCheckStatus)
     //error out of range
     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==6)
     {
-        if(!innerCheckStatus)
+        if(innerCheckStatus)
         {
             singletone_currentposition->currentPosition++;
             // if(LexAnalizator::FinalLexConfig.size()-1<=singletone_currentposition->currentPosition)
@@ -256,7 +276,7 @@ bool SynAnalizator::Do_whileCheck()
     }
     while (true)
     {
-        if(OperatorCheck(false))
+        if(OperatorCheck(true))
         {
             if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==21)
             {
@@ -287,6 +307,7 @@ bool SynAnalizator::Do_whileCheck()
             }
             if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==0)
             {
+                singletone_currentposition->currentPosition++;
                 return true;
             }
             else
@@ -434,7 +455,7 @@ bool SynAnalizator::ForCheck()
             singletone_currentposition->currentPosition++;
             while (true)
             {
-                if(OperatorCheck(false))
+                if(OperatorCheck(true))
                 {
                     return true;
                 }
