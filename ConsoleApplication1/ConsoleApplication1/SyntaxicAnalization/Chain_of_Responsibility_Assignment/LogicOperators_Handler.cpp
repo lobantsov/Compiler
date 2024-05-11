@@ -22,7 +22,8 @@ bool LogicOperators_Handler::Handle(Lex Type)
     if(Type.dataTypeID>=34&&Type.dataTypeID<=39)
     {
         //
-        if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==13)
+        if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==13||
+            LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==51)
         {
             singletone_currentposition->currentPosition++;
             if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==13)

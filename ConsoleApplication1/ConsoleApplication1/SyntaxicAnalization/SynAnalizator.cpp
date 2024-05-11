@@ -21,11 +21,14 @@ bool SynAnalizator::OperatorCheck(bool innerCheckStatus)
     {
         if(ForCheck())
         {
-            if(!callStack.top())
+            if(!callStack.empty())
             {
-                singletone_currentposition->currentPosition++;
+                if(!callStack.top())
+                {
+                    singletone_currentposition->currentPosition++;
+                }
+                callStack.pop();
             }
-            callStack.pop();
         }
         if(create_erorrs->error_status)
             return false;
@@ -36,11 +39,14 @@ bool SynAnalizator::OperatorCheck(bool innerCheckStatus)
     {
         if(WhileCheck())
         {
-            if(!callStack.top())
+            if(!callStack.empty())
             {
-                singletone_currentposition->currentPosition++;
+                if(!callStack.top())
+                {
+                    singletone_currentposition->currentPosition++;
+                }
+                callStack.pop();
             }
-            callStack.pop();
         }
         if(create_erorrs->error_status)
             return false;
@@ -50,11 +56,14 @@ bool SynAnalizator::OperatorCheck(bool innerCheckStatus)
     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==22)
     {
         if(Do_whileCheck())
-            if(!callStack.top())
+            if(!callStack.empty())
             {
-                singletone_currentposition->currentPosition++;
+                if(!callStack.top())
+                {
+                    singletone_currentposition->currentPosition++;
+                }
+                callStack.pop();
             }
-        callStack.pop();
         
         if(create_erorrs->error_status)
             return false;
@@ -137,7 +146,13 @@ bool SynAnalizator::OperatorCheck(bool innerCheckStatus)
         {
             singletone_currentposition->currentPosition++;
             if(!callStack.empty())
-            callStack.pop();
+            {
+                if(!callStack.top())
+                {
+                    singletone_currentposition->currentPosition++;
+                }
+                callStack.pop();
+            }
         }
         else
         {
@@ -154,7 +169,13 @@ bool SynAnalizator::OperatorCheck(bool innerCheckStatus)
         {
             singletone_currentposition->currentPosition++;
             if(!callStack.empty())
-            callStack.pop();
+            {
+                if(!callStack.top())
+                {
+                    singletone_currentposition->currentPosition++;
+                }
+                callStack.pop();
+            }
         }
         else
         {
@@ -169,11 +190,11 @@ bool SynAnalizator::OperatorCheck(bool innerCheckStatus)
         if(innerCheckStatus)
         {
             singletone_currentposition->currentPosition++;
-            // if(LexAnalizator::FinalLexConfig.size()-1<=singletone_currentposition->currentPosition)
-            // {
-            //     singletone_currentposition->currentPosition--;
-            // }
         }
+        // if(LexAnalizator::FinalLexConfig.size()-1!=singletone_currentposition->currentPosition)
+        // {
+        //     
+        // }
         return true;
     }
     return false;
@@ -259,7 +280,7 @@ bool SynAnalizator::WhileCheck()
         
         while (true)
         {
-            if(OperatorCheck(false))
+            if(OperatorCheck(true))
             {
                 return true;
             }
@@ -572,9 +593,9 @@ bool SynAnalizator::Assignment(bool endSigntStatus)
             singletone_currentposition->currentPosition++;
             if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==4)
             {
-                singletone_currentposition->currentPosition--;
                 return true;
             }
+            
              if(client_assigment_->CheckAssigment(tmp, endSigntStatus))
              {
                  return true;
@@ -612,12 +633,14 @@ bool SynAnalizator::Write()
         return false;
     }
     //var
+    singletone_currentposition->isLogicOperator=true;
     if(Assignment(false))
     {
-        singletone_currentposition->currentPosition++;
+        //singletone_currentposition->currentPosition++;
     }
     else if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==14)
     {
+        singletone_currentposition->isLogicOperator=false;
         singletone_currentposition->currentPosition++;
         if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==55)
         {
