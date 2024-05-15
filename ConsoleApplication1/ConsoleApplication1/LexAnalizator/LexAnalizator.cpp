@@ -9,7 +9,7 @@ std::vector<std::string> LexAnalizator::SingleLexConfig=
 std::vector<std::string> LexAnalizator::MultiplyLexConfig= { "for","or","while","do","of","if","else","switch","case",
                                         "default","break","function","return","write","read", "bool", "int", "float", "double",
                                         "string", "char", "let", "main","++","--","**","+=","-=","*=","/=","<=",">=","!","new",
-                                                /*"&&","||"*/};
+                                                "=="};
 
 vector<Lex>* LexAnalizator::readCode(string path)
 {

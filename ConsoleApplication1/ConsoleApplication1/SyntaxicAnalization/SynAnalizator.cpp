@@ -642,7 +642,8 @@ bool SynAnalizator::Write()
     {
         singletone_currentposition->isLogicOperator=false;
         singletone_currentposition->currentPosition++;
-        if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==55)
+        if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==LexAnalizator::SingleLexConfig.size()+
+            LexAnalizator::MultiplyLexConfig.size()+2)
         {
             singletone_currentposition->currentPosition++;
         }

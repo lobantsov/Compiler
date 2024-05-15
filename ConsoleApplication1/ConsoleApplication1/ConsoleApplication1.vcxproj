@@ -131,6 +131,8 @@
     <ClCompile Include="ICommand\ExitCommand.cpp" />
     <ClCompile Include="ICommand\Invoker.cpp" />
     <ClCompile Include="ICommand\PrintCommand.cpp" />
+    <ClCompile Include="Interpritator\Polish_Inverse_Writing.cpp" />
+    <ClCompile Include="Interpritator\Strainer.cpp" />
     <ClCompile Include="LexAnalizator\LexAnalizator.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -464,6 +466,8 @@
     <ClInclude Include="ICommand\Invoker.h" />
     <ClInclude Include="ICommand\PrintCommand.h" />
     <ClInclude Include="ICommand\ICommand.h" />
+    <ClInclude Include="Interpritator\Polish_Inverse_Writing.h" />
+    <ClInclude Include="Interpritator\Strainer.h" />
     <ClInclude Include="LexAnalizator\Lex.h" />
     <ClInclude Include="LexAnalizator\LexAnalizator.h" />
     <ClInclude Include="Singletone\SingletoneCurrentposition.h" />

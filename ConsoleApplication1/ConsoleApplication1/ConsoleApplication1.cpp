@@ -3,6 +3,8 @@
 #include "ICommand/ExitCommand.h"
 #include "ICommand/Invoker.h"
 #include "ICommand/PrintCommand.h"
+#include "Interpritator/Polish_Inverse_Writing.h"
+#include "Interpritator/Strainer.h"
 #include "SyntaxicAnalization/SynAnalizator.h"
 using namespace std;
 int main()
@@ -12,9 +14,10 @@ int main()
 	PrintCommand print_command;
 	ExitCommand exit_command;
 	ClassForCreateErorrs *create_erorrs = ClassForCreateErorrs::GetInstance();
-	
 	SingletoneCurrentposition *aa = SingletoneCurrentposition::GetInstance();
 	DeclareredVariables *declarered_variables_ = DeclareredVariables::GetInstance();
+	Polish_Inverse_Writing *inverse_writing = new Polish_Inverse_Writing();
+	Strainer *strainer = new Strainer();
 
 	invoker.AddCommand(make_unique<PrintCommand>(print_command));
 	invoker.AddCommand(make_unique<ExitCommand>(exit_command));
@@ -31,11 +34,11 @@ int main()
 	// "C:\\Users\\loban\\OneDrive\\Desktop\\WhileOperator.txt",
 	// "C:\\Users\\loban\\OneDrive\\Desktop\\write.txt",
 	// "C:\\Users\\loban\\OneDrive\\Desktop\\read.txt",
-	//   "C:\\Users\\loban\\OneDrive\\Desktop\\13.txt"
-	  "C:\\Users\\loban\\OneDrive\\Desktop\\Test1.txt",
-	  "C:\\Users\\loban\\OneDrive\\Desktop\\Test2.txt",
-	  "C:\\Users\\loban\\OneDrive\\Desktop\\Test3.txt",
-	  "C:\\Users\\loban\\OneDrive\\Desktop\\Test4.txt"
+	// "C:\\Users\\loban\\OneDrive\\Desktop\\13.txt"
+	  "C:\\Users\\loban\\OneDrive\\Desktop\\Test1.txt"
+	  // "C:\\Users\\loban\\OneDrive\\Desktop\\Test2.txt",
+	  // "C:\\Users\\loban\\OneDrive\\Desktop\\Test3.txt",
+	  // "C:\\Users\\loban\\OneDrive\\Desktop\\Test4.txt"
 	};
 	
 	for(const string &a : path)
@@ -51,7 +54,8 @@ int main()
 			{
 				if(syn_analizator->OperatorCheck(false))
 				{
-					//analizator->Print();
+					strainer->groupQuotedLexemes();
+					inverse_writing->FormingSourceLine();
 					cout<<a<<"- checked"<<endl;
 					break;
 				}

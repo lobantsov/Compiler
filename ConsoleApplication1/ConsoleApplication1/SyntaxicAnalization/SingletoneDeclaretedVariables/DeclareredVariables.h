@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <vector>
-#include "..//..//LexAnalizator/Lex.h"
 
+#include "../../LexAnalizator/Lex.h"
 using namespace std;
 class DeclareredVariables
 {
