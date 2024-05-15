@@ -12,8 +12,7 @@ bool Equal_Handler::Handle(Lex Type)
         singletone_currentposition->currentPosition++;
         return true;
     }
-    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==13&&
-        LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition+1].lexID!=13)
+    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==13)
     {
         singletone_currentposition->currentPosition++;
         return true;

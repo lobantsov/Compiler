@@ -8,8 +8,8 @@ std::vector<std::string> LexAnalizator::SingleLexConfig=
     { ";",":","'","(",")","{","}","<",">","+","-","*","/" ,"=","\""," ",",","[","]" };
 std::vector<std::string> LexAnalizator::MultiplyLexConfig= { "for","or","while","do","of","if","else","switch","case",
                                         "default","break","function","return","write","read", "bool", "int", "float", "double",
-                                        "string", "char", "let", "main","++","--","**","+=","-=","*=","/=","<=",">=","!","new",
-                                                "=="};
+                                        "string", "char", "let", "main","++","--","**","+=","-=","*=","/=","<=",">=","!=","new",
+                                         "=="};
 
 vector<Lex>* LexAnalizator::readCode(string path)
 {
@@ -108,6 +108,10 @@ vector<Lex>* LexAnalizator::readCode(string path)
                 ++it;
             }
         }
+         groupQuotedLexemes();
+                groupQuotedLexemes2();
+                CheckConst();
+                
         //removeElementAfter15(0);
         remove15BeforeAndAfterID(0);
         remove15BeforeAndAfterID(3);
@@ -134,8 +138,8 @@ vector<Lex>* LexAnalizator::readCode(string path)
         remove15BeforeAndAfterID(49);
         remove15BeforeAndAfterID(50);
         remove15BeforeAndAfterID(51);
-        groupQuotedLexemes();
-        CheckConst();
+        remove15BeforeAndAfterID(53);
+       
         return &FinalLexConfig;
     }
     return {};
@@ -183,20 +187,20 @@ void LexAnalizator::remove15BeforeAndAfterID(int ID)
 
 void LexAnalizator::Print()
 {
-    for (int i = 0; i < FinalLexConfig.size(); i++)
-    {
-        cout << "ID: " << FinalLexConfig[i].lexID << endl;
-        cout << "LineN: " << FinalLexConfig[i].lexLine << endl;
-        cout << "ValueL: " << FinalLexConfig[i].value << endl;
-        cout << "----------------------------------------------" << endl;
-    }
-
-    // for (int i = 0; i < a.size(); i++)
+    // for (int i = 0; i < FinalLexConfig.size(); i++)
     // {
-    //     cout << "ID: " << i << endl;
-    //     cout << "ValueL: " << a[i] << endl;
+    //     cout << "ID: " << FinalLexConfig[i].lexID << endl;
+    //     cout << "LineN: " << FinalLexConfig[i].lexLine << endl;
+    //     cout << "ValueL: " << FinalLexConfig[i].value << endl;
     //     cout << "----------------------------------------------" << endl;
     // }
+
+    for (int i = 0; i < a.size(); i++)
+    {
+        cout << "ID: " << i << endl;
+        cout << "ValueL: " << a[i] << endl;
+        cout << "----------------------------------------------" << endl;
+    }
 }
 
 void LexAnalizator::processLexeme(const string& word, int line, const string& orLine)
@@ -420,4 +424,57 @@ void LexAnalizator::groupQuotedLexemes() {
         }
     }
     FinalLexConfig = processedLexemes;
+}
+
+void LexAnalizator::groupQuotedLexemes2() {
+    vector<Lex> processedLexemes;
+    string accumulatedLexeme;
+    Lex tempLex;
+    bool isSpecialOperator = false;
+
+    for (size_t i = 0; i < FinalLexConfig.size(); ++i) {
+        Lex& lex = FinalLexConfig[i];
+
+        if (lex.value == "<" || lex.value == ">" || lex.value == "=" || lex.value == "!") {
+            isSpecialOperator = true;
+            tempLex = lex; 
+            accumulatedLexeme = lex.value;
+            
+            if (i + 1 < FinalLexConfig.size() && FinalLexConfig[i + 1].value == "=") {
+                accumulatedLexeme += "=";
+                tempLex.value = accumulatedLexeme;
+                tempLex.lexLine = lex.lexLine; 
+
+                if (accumulatedLexeme == "<=") {
+                    tempLex.lexID = 49;
+                } else if (accumulatedLexeme == ">=") {
+                    tempLex.lexID = 50;
+                } else if (accumulatedLexeme == "==") {
+                    tempLex.lexID = 53;
+                } else if (accumulatedLexeme == "!=") {
+                    tempLex.lexID = 51;
+                }
+
+                processedLexemes.push_back(tempLex); 
+                i++;  
+                isSpecialOperator = false;
+                continue;
+            }
+            else
+            {
+                isSpecialOperator = false;
+            }
+        }
+        
+        if (!isSpecialOperator) {
+            processedLexemes.push_back(lex);
+        } else {
+            isSpecialOperator = false;
+        }
+    }
+    FinalLexConfig = processedLexemes;
+}
+
+bool LexAnalizator::isOperation(const string& op) {
+    return op == "+" || op == "*" || op == "/" || op == "<=" || op == ">=" || op == "==" || op == "!=";
 }

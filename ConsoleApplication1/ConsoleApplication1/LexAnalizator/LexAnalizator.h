@@ -10,9 +10,11 @@ public:
 
 	static vector<string> MultiplyLexConfig; 
 
-	// vector<string> a = {";",":",".","(",")","{","}","<",">","+","-","*","/" ,"=","\""," ",",","[","]","for","or","while","do","of","if","else","switch","case",
-	// 									"default","break","function","return","write","read", "bool", "int", "float", "double",
-	// 									"string", "char", "let", "main","++","--","**","+=","-=","*=","/=","<=",">=","==","new"};
+	vector<string> a = {";",":","'","(",")","{","}","<",">","+","-","*","/" ,"=","\""," ",",","[","]","for","or",
+											"while","do","of","if","else","switch","case",
+										"default","break","function","return","write","read", "bool", "int", "float", "double",
+										"string", "char", "let", "main","++","--","**","+=","-=","*=","/=","<=",">=","!=","new",
+										 "=="};
 	
 	static vector<Lex> FinalLexConfig;
 	vector<Lex> VariablesTable;
@@ -30,4 +32,7 @@ public:
 	void CheckConst();
 	int checkNumberType(const std::string& s);
 	void groupQuotedLexemes();
+	void groupQuotedLexemes2();
+	bool isOperation(const string& op);
+	bool isDigitOrVariable(const string& value);
 };
