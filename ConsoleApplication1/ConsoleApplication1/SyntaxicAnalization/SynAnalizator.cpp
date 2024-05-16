@@ -34,8 +34,9 @@ bool SynAnalizator::OperatorCheck(bool innerCheckStatus)
             return false;
     }
 
-    //while
-    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==21)
+    //while and do_while
+    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==21||
+        LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID == 22)
     {
         if(WhileCheck())
         {
@@ -43,6 +44,7 @@ bool SynAnalizator::OperatorCheck(bool innerCheckStatus)
             {
                 if(!callStack.top())
                 {
+                    //зайвий ++ на рівні do_while()
                     singletone_currentposition->currentPosition++;
                 }
                 callStack.pop();
@@ -53,21 +55,21 @@ bool SynAnalizator::OperatorCheck(bool innerCheckStatus)
     }
 
     //do_while
-    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==22)
-    {
-        if(Do_whileCheck())
-            if(!callStack.empty())
-            {
-                if(!callStack.top())
-                {
-                    singletone_currentposition->currentPosition++;
-                }
-                callStack.pop();
-            }
-        
-        if(create_erorrs->error_status)
-            return false;
-    }
+    // if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==22)
+    // {
+    //     if(Do_whileCheck())
+    //         if(!callStack.empty())
+    //         {
+    //             if(!callStack.top())
+    //             {
+    //                 singletone_currentposition->currentPosition++;
+    //             }
+    //             callStack.pop();
+    //         }
+    //     
+    //     if(create_erorrs->error_status)
+    //         return false;
+    // }
 
     //if
     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==24)
@@ -290,62 +292,62 @@ bool SynAnalizator::WhileCheck()
     }
 }
 
-bool SynAnalizator::Do_whileCheck()
-{
-    singletone_currentposition->currentPosition++;
-    if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==15)
-    {
-        singletone_currentposition->currentPosition++;
-    }
-    if((LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==5))
-    {
-        singletone_currentposition->currentPosition++;
-    }
-    while (true)
-    {
-        if(OperatorCheck(true))
-        {
-            if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==21)
-            {
-                singletone_currentposition->currentPosition++;
-            }
-            else
-            {
-                return false;
-            }
-
-            if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==3)
-            {
-                singletone_currentposition->currentPosition++;
-            }
-            else
-            {
-                create_erorrs->CreateSyntaxError();
-                return false;
-            }
-            if(Assignment(false))
-            {
-                singletone_currentposition->currentPosition++;
-            }
-            else
-            {
-                create_erorrs->CreateSyntaxError();
-                return false;
-            }
-            if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==0)
-            {
-                singletone_currentposition->currentPosition++;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        if(create_erorrs->error_status)
-            return false;
-    }
-}
+// bool SynAnalizator::Do_whileCheck()
+// {
+//     singletone_currentposition->currentPosition++;
+//     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==15)
+//     {
+//         singletone_currentposition->currentPosition++;
+//     }
+//     if((LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==5))
+//     {
+//         singletone_currentposition->currentPosition++;
+//     }
+//     while (true)
+//     {
+//         if(OperatorCheck(true))
+//         {
+//             if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==21)
+//             {
+//                 singletone_currentposition->currentPosition++;
+//             }
+//             else
+//             {
+//                 return false;
+//             }
+//
+//             if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==3)
+//             {
+//                 singletone_currentposition->currentPosition++;
+//             }
+//             else
+//             {
+//                 create_erorrs->CreateSyntaxError();
+//                 return false;
+//             }
+//             if(Assignment(false))
+//             {
+//                 singletone_currentposition->currentPosition++;
+//             }
+//             else
+//             {
+//                 create_erorrs->CreateSyntaxError();
+//                 return false;
+//             }
+//             if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==0)
+//             {
+//                 singletone_currentposition->currentPosition++;
+//                 return true;
+//             }
+//             else
+//             {
+//                 return false;
+//             }
+//         }
+//         if(create_erorrs->error_status)
+//             return false;
+//     }
+// }
 
 bool SynAnalizator::ForCheck()
 {
@@ -755,12 +757,12 @@ bool SynAnalizator::Read()
 }
 
 void SynAnalizator::Print()
+{
+    for (int i = 0; i < LexAnalizator::FinalLexConfig.size(); i++)
     {
-        for (int i = 0; i < LexAnalizator::FinalLexConfig.size(); i++)
-        {
-            cout << "ID: " << LexAnalizator::FinalLexConfig[i].lexID << '\n';
-            cout << "LineN: " << LexAnalizator::FinalLexConfig[i].lexLine << '\n';
-            cout << "ValueL: " << LexAnalizator::FinalLexConfig[i].value << '\n';
-            cout << "----------------------------------------------" <<'\n';
-        }
+        cout << "ID: " << LexAnalizator::FinalLexConfig[i].lexID << '\n';
+        cout << "LineN: " << LexAnalizator::FinalLexConfig[i].lexLine << '\n';
+        cout << "ValueL: " << LexAnalizator::FinalLexConfig[i].value << '\n';
+        cout << "----------------------------------------------" <<'\n';
     }
+}

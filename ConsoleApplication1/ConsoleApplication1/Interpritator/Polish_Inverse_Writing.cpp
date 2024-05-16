@@ -5,7 +5,7 @@
 
 void Polish_Inverse_Writing::FormingSourceLine()
 {
-    while (iterator < LexAnalizator::FinalLexConfig.size())
+    while (iterator < LexAnalizator::FinalLexConfig.size()-1)
     {
         Lex& lex = LexAnalizator::FinalLexConfig[iterator];
         int constantID = LexAnalizator::SingleLexConfig.size() + LexAnalizator::MultiplyLexConfig.size() + 1;
@@ -13,16 +13,31 @@ void Polish_Inverse_Writing::FormingSourceLine()
 
         bool isOperatorBefore = (iterator > 0) && isOperation(LexAnalizator::FinalLexConfig[iterator - 1].value);
         bool isOperatorAfter = (iterator + 1 < LexAnalizator::FinalLexConfig.size()) && (isOperation(LexAnalizator::FinalLexConfig[iterator + 1].value)||
-                                                                                            LexAnalizator::FinalLexConfig[iterator+1].value==")");
+                                        LexAnalizator::FinalLexConfig[iterator+1].value==")");
         
-        if (lex.value == "}") {
-            if (!stack_tmp.empty())
+        if (lex.value == "}") 
+        {
+            if(!callBack.empty() and callBack.top() != "do_while")
             {
-                stack_tmp.pop();
+                if (!stack_tmp.empty())
+                {
+                    stack_tmp.pop();
+                }
+                if (!stack_tmp.empty() && iterator + 1 < LexAnalizator::FinalLexConfig.size())
+                {
+                    stack_tmp.pop();
+                    callBack.pop();
+                }
             }
-            if (!stack_tmp.empty() && iterator + 1 < LexAnalizator::FinalLexConfig.size())
+            else
             {
+                Lex command;
+                command.lexID = 200;
+                command.value = "Command_if";
+                source_string_stack.push_back(command);
                 stack_tmp.pop();
+                stack_tmp.pop();
+                callBack.pop();
             }
         }
         if ((lex.lexID == constantID || lex.lexID == variableID) && (isOperatorBefore || isOperatorAfter))
@@ -31,27 +46,8 @@ void Polish_Inverse_Writing::FormingSourceLine()
         }
         else if (isOperation(lex.value))
         {
-            // if(lex.value == "write")
-            // {
-            //     Lex write;
-            //     write.value="Command_write";
-            //     write.lexID=100;
-            //     stack_tmp.push(write);
-            //     //callBack.push(write.value);
-            // }
-            // else if(lex.value == "read")
-            // {
-            //     Lex read;
-            //     read.value="Command_read";
-            //     read.lexID=101;
-            //     stack_tmp.push(read);
-            //     //callBack.push(read.value);
-            // }
-            // if(lex.value == "while" and callBack.top() == "do")
-            // {
-            //     
-            // }
-            if(lex.value =="for" or lex.value=="while" or lex.value=="do")
+            if(lex.value =="for" or lex.value=="while" or lex.value=="do_while" or
+                lex.value == "write" or lex.value == "read")
             {
                 callBack.push(lex.value);
             }
@@ -73,23 +69,27 @@ void Polish_Inverse_Writing::FormingSourceLine()
                 source_string_stack.push_back(stack_tmp.top());
                 stack_tmp.pop();
             }
-            if (!stack_tmp.empty())
+            stack_tmp.pop();
+            if(!stack_tmp.empty())
             {
-                stack_tmp.pop();
-                if(stack_tmp.top().value == "write" or stack_tmp.top().value == "read")
+                if(callBack.top() == "while" or callBack.top() == "if" or callBack.top() == "for")
                 {
+                    Lex command;
+                    command.lexID = 200;
+                    command.value = "Command_if";
+                    source_string_stack.push_back(command);
+                }
+                else if(callBack.top()!="do_while")
+                {
+                    //тут захолить через do_while це фігня
                     source_string_stack.push_back(stack_tmp.top());
                     stack_tmp.pop();
+                    callBack.pop();
+                    iterator++;
                 }
             }
-            if(!stack_tmp.empty() and (callBack.top() == "while" or callBack.top() == "do" or callBack.top() == "if"))
-            {
-                Lex command;
-                command.lexID = 200;
-                command.value = "Command_if";
-                source_string_stack.push_back(command);
-            }
         }
+       
         else if (lex.value == ";")
         {
             if (!stack_tmp.empty())
@@ -141,7 +141,7 @@ bool Polish_Inverse_Writing::isOperation(const string& op)
            op == "=" || op == "+=" || op == "-=" || op == "*=" || op == "/=" ||
            op == "++" || op == "--" || op == "**" ||
            op == "<" || op == ">" || op == "<=" || op == ">=" || op == "=="||
-           op == "for" || op == "do" || op == "while" || op == "if" || op == "else"||
+           op == "for" || op == "do_while" || op == "while" || op == "if" || op == "else"||
            op == "write" || op == "read";
 }
 
