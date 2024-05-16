@@ -36,7 +36,7 @@ using namespace std;
         bool ForCheck();
         bool OperatorCheck(bool innerCheckStatus);
         bool WhileCheck();
-        bool Do_whileCheck();
+        //bool Do_whileCheck();
         void Print();
         bool innerStatus = false;
     };

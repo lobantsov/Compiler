@@ -47,7 +47,7 @@ void Polish_Inverse_Writing::FormingSourceLine()
         else if (isOperation(lex.value))
         {
             if(lex.value =="for" or lex.value=="while" or lex.value=="do_while" or
-                lex.value == "write" or lex.value == "read")
+                lex.value == "write" or lex.value == "read" or lex.value == "if" or lex.value =="else")
             {
                 callBack.push(lex.value);
             }
@@ -81,7 +81,6 @@ void Polish_Inverse_Writing::FormingSourceLine()
                 }
                 else if(callBack.top()!="do_while")
                 {
-                    //тут захолить через do_while це фігня
                     source_string_stack.push_back(stack_tmp.top());
                     stack_tmp.pop();
                     callBack.pop();
