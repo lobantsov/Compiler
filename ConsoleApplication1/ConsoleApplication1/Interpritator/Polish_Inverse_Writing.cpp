@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "Polish_Inverse_Writing.h"
+#include <iostream>
 #include "../LexAnalizator/LexAnalizator.h"
 
 void Polish_Inverse_Writing::FormingSourceLine()
@@ -13,52 +14,103 @@ void Polish_Inverse_Writing::FormingSourceLine()
         bool isOperatorBefore = (iterator > 0) && isOperation(LexAnalizator::FinalLexConfig[iterator - 1].value);
         bool isOperatorAfter = (iterator + 1 < LexAnalizator::FinalLexConfig.size()) && (isOperation(LexAnalizator::FinalLexConfig[iterator + 1].value)||
                                                                                             LexAnalizator::FinalLexConfig[iterator+1].value==")");
-
+        
+        if (lex.value == "}") {
+            if (!stack_tmp.empty())
+            {
+                stack_tmp.pop();
+            }
+            if (!stack_tmp.empty() && iterator + 1 < LexAnalizator::FinalLexConfig.size())
+            {
+                stack_tmp.pop();
+            }
+        }
         if ((lex.lexID == constantID || lex.lexID == variableID) && (isOperatorBefore || isOperatorAfter))
         {
-            source_string_stack.push(lex);
+            source_string_stack.push_back(lex);
         }
         else if (isOperation(lex.value))
         {
-            while (!stack_tmp.empty() && getPriority(stack_tmp.top().value) >= getPriority(lex.value))
+            if(lex.value == "write")
             {
-                source_string_stack.push(stack_tmp.top());
-                stack_tmp.pop();
+                Lex write;
+                write.value="Command_write";
+                write.lexID=100;
+                stack_tmp.push(write);
             }
-            stack_tmp.push(lex);
+            else if(lex.value == "read")
+            {
+                Lex write;
+                write.value="Command_read";
+                write.lexID=101;
+                stack_tmp.push(write);
+            }
+            else if(lex.value =="for" or lex.value=="while" or lex.value=="do")
+            {
+                callBack.push(lex.value);
+            }
+            else
+            {
+                while (!stack_tmp.empty() && getPriority(stack_tmp.top().value) >= getPriority(lex.value))
+                {
+                    source_string_stack.push_back(stack_tmp.top());
+                    stack_tmp.pop();
+                }
+                stack_tmp.push(lex);
+            }
         }
         else if (lex.value == "(" || lex.value == "{")
         {
             stack_tmp.push(lex);
         }
-        else if (lex.value == ")" || lex.value == "}")
+        else if (lex.value == ")")
         {
-            while (!stack_tmp.empty() && (stack_tmp.top().value != "(" && stack_tmp.top().value != "{"))
+            while (!stack_tmp.empty() && (stack_tmp.top().value != "("))
             {
-                source_string_stack.push(stack_tmp.top());
+                source_string_stack.push_back(stack_tmp.top());
                 stack_tmp.pop();
             }
-            if (!stack_tmp.empty()) stack_tmp.pop(); // Remove the opening bracket from the stack
+            if (!stack_tmp.empty())
+                stack_tmp.pop();
+            if(!stack_tmp.empty() and (callBack.top() == "while" or callBack.top() == "do" or callBack.top() == "if"))
+            {
+                Lex command;
+                command.lexID = 200;
+                command.value = "Command_if";
+                source_string_stack.push_back(command);
+            }
         }
         else if (lex.value == ";")
         {
             if (!stack_tmp.empty())
             {
-                source_string_stack.push(stack_tmp.top());
+                source_string_stack.push_back(stack_tmp.top());
+                if(!callBack.empty() and callBack.top() == "for")
+                {
+                    if(stack_tmp.top().value == "<" or stack_tmp.top().value == "<=" or stack_tmp.top().value == ">"
+                        or stack_tmp.top().value == ">=" or stack_tmp.top().value == "==" or stack_tmp.top().value == "!=")
+                    {
+                        Lex command;
+                        command.lexID = 200;
+                        command.value = "Command_if";
+                        source_string_stack.push_back(command);
+                    }
+                }
                 stack_tmp.pop();
             }
         }
         iterator++;
     }
-
     
     while (!stack_tmp.empty())
     {
-        source_string_stack.push(stack_tmp.top());
+        source_string_stack.push_back(stack_tmp.top());
         stack_tmp.pop();
     }
 }
-int Polish_Inverse_Writing::getPriority(const string& op) {
+
+int Polish_Inverse_Writing::getPriority(const string& op)
+{
     if (op == "=") return 1;
     if (op == "+" || op == "-") return 2;
     if (op == "*" || op == "/") return 3;
@@ -66,11 +118,20 @@ int Polish_Inverse_Writing::getPriority(const string& op) {
     if (op == "(" || op == "{" || op == ")" || op == "}") return -1;
     return 0;
 }
-bool Polish_Inverse_Writing::isOperation(const string& op) {
+
+bool Polish_Inverse_Writing::isOperation(const string& op)
+{
     return op == "+" || op == "-" || op == "*" || op == "/" || 
            op == "=" || op == "+=" || op == "-=" || op == "*=" || op == "/=" ||
            op == "++" || op == "--" || op == "**" ||
            op == "<" || op == ">" || op == "<=" || op == ">=" || op == "=="||
            op == "for" || op == "do" || op == "while" || op == "if" || op == "else"||
            op == "write" || op == "read";
+}
+
+string Polish_Inverse_Writing::ExecuteStringSyntaxic(const std::string& lexValue)
+{
+    std::string result = lexValue;
+    result.erase(std::remove(result.begin(), result.end(), '\"'), result.end());
+    return result;
 }

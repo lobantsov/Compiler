@@ -6,7 +6,7 @@ using namespace std;
     public:
         string value;
         int lexID=-1;
-        int lexLine;
+        int lexLine=-1;
         int dataTypeID=-1;
         int array=-1;//-1 - is not array     0 - is array without new       1 - is array was init
         string data;
