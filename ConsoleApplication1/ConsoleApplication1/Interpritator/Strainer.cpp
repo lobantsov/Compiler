@@ -25,6 +25,8 @@ void Strainer::groupQuotedLexemes() {
                 {
                 tempLex.value = accumulatedLexeme;
                 tempLex.lexID = LexAnalizator::SingleLexConfig.size()+LexAnalizator::MultiplyLexConfig.size()+2;
+                if(lex.value=="\"") tempLex.dataTypeID = 381;
+                else if(lex.value == "'") tempLex.dataTypeID = 391;
                 // Закриття кавичок
                 inQuotes = false;
                 processedLexemes.push_back(tempLex);

@@ -16,134 +16,156 @@ void Polish_Inverse_Writing::FormingSourceLine()
         bool isOperatorBefore = (iterator > 0) && isOperation(LexAnalizator::FinalLexConfig[iterator - 1].value);
         bool isOperatorAfter = (iterator + 1 < LexAnalizator::FinalLexConfig.size()) && (isOperation(LexAnalizator::FinalLexConfig[iterator + 1].value)||
                                         LexAnalizator::FinalLexConfig[iterator+1].value==")");
-        
-        if (lex.value == "}") 
+
+        if ((lex.lexID == constantID || lex.lexID == variableID) && (isOperatorBefore || isOperatorAfter))
         {
-            if(!callBack.empty() and callBack.top() != "do_while")
+            if(!callBack.empty() and callBack.top() == "for" and IsLogicOperator(source_string_stack[source_string_stack.size()-2]))
             {
-                if (!stack_tmp.empty())
-                {
-                    stack_tmp.pop();
-                }
-                if (!stack_tmp.empty() && iterator + 1 < LexAnalizator::FinalLexConfig.size())
-                {
-                    stack_tmp.pop();
-                    callBack.pop();
-                }
+                tmpVectorForMovingSomeOperators.push(CreateNewComand("Move"));
+                tmpVectorForMovingSomeOperators.push(lex);
+                addingIntoTmpIncrementaStack++;
             }
             else
             {
-                Lex command;
-                command.lexID = 200;
-                command.value = "Command_if";
-                source_string_stack.push_back(command);
-                stack_tmp.pop();
-                stack_tmp.pop();
-                callBack.pop();
+                source_string_stack.push_back(lex);
             }
         }
-        if ((lex.lexID == constantID || lex.lexID == variableID) && (isOperatorBefore || isOperatorAfter))
-        {
-            source_string_stack.push_back(lex);
-        }
-        else if (isOperation(lex.value))
-        {
-            if(lex.value =="for" or lex.value=="while" or lex.value=="do_while" or
-                lex.value == "write" or lex.value == "read" or lex.value == "if" or lex.value =="else")
-            {
-                callBack.push(lex.value);
-            }
-                while (!stack_tmp.empty() && getPriority(stack_tmp.top().value) >= getPriority(lex.value))
-                {
-                    source_string_stack.push_back(stack_tmp.top());
-                    stack_tmp.pop();
-                }
-                stack_tmp.push(lex);
-        }
-        else if (lex.value == "(" || lex.value == "{")
+        else if(lex.value == "(" or lex.value == "{")
         {
             stack_tmp.push(lex);
         }
-        else if (lex.value == ")")
+        //operators
+        else if(isOperation(lex.value))
         {
-            while (!stack_tmp.empty() && (stack_tmp.top().value != "("))
+            //math and logic operators
+            if (IsLogicOperator(lex) or IsMathOperator(lex) or lex.value == "=")
+            {
+                set_right_place_into_source_line_for_math_operators(lex);
+            }
+            //check write operator
+            else if(lex.value == "write")
+            {
+                //skip ( and write
+                iterator++;
+                iterator++;
+                //string or char data type
+                if(LexAnalizator::FinalLexConfig[iterator].dataTypeID==381 or LexAnalizator::FinalLexConfig[iterator].dataTypeID == 391)
+                {
+                    //create new lex without " "
+                   Lex tmp;
+                    tmp.value = ExecuteStringSyntaxic(LexAnalizator::FinalLexConfig[iterator].value);
+                    tmp.lexLine = LexAnalizator::FinalLexConfig[iterator].lexLine;
+                    tmp.dataTypeID = LexAnalizator::FinalLexConfig[iterator].dataTypeID;
+                    source_string_stack.push_back(tmp);
+                    source_string_stack.push_back(lex);
+
+                    //skip )
+                    iterator++;
+                }
+                else
+                {
+                    source_string_stack.push_back(LexAnalizator::FinalLexConfig[iterator]);
+                    source_string_stack.push_back(lex);
+
+                    //skip )
+                    iterator++;
+                }
+            }
+            //check read
+            else if(lex.value=="read")
+            {
+                //skip ( and write
+                iterator++;
+                iterator++;
+                
+                source_string_stack.push_back(LexAnalizator::FinalLexConfig[iterator]);
+                source_string_stack.push_back(lex);
+
+                //skip )
+                iterator++;
+            }
+            //loop
+            else if(lex.value=="for" or lex.value=="while")
+            {
+                callBack.push(lex.value);
+                stack_tmp.push(lex);
+            }
+        }
+        else if(lex.value==")")
+        {
+            while (stack_tmp.top().value!="(")
             {
                 source_string_stack.push_back(stack_tmp.top());
                 stack_tmp.pop();
             }
             stack_tmp.pop();
-            if(!stack_tmp.empty())
+        }
+        else if(lex.value=="}")
+        {
+            while (stack_tmp.top().value!="{")
             {
-                if(callBack.top() == "while" or callBack.top() == "if" or callBack.top() == "for")
-                {
-                    Lex command;
-                    command.lexID = 200;
-                    command.value = "Command_if";
-                    source_string_stack.push_back(command);
-                }
-                else if(callBack.top()!="do_while")
+                stack_tmp.pop();
+            }
+            stack_tmp.pop();
+
+            while (addingIntoTmpIncrementaStack!=0)
+            {
+                source_string_stack.push_back(tmpVectorForMovingSomeOperators.top());
+                tmpVectorForMovingSomeOperators.pop();
+                addingIntoTmpIncrementaStack--;
+            }
+            
+            callBack.pop();
+        }
+        else if(lex.value==";")
+        {
+            //check math singt
+            if(mathOperatorPushBack > 0)
+            {
+                while (mathOperatorPushBack!=0)
                 {
                     source_string_stack.push_back(stack_tmp.top());
                     stack_tmp.pop();
-                    callBack.pop();
-                    iterator++;
+                    mathOperatorPushBack--;
                 }
             }
-        }
-       
-        else if (lex.value == ";")
-        {
-            if (!stack_tmp.empty())
+            //check callBack
+            if(!callBack.empty())
             {
-                if(stack_tmp.top().value == "write" or stack_tmp.top().value == "read")
+                if(callBack.top()=="for")
                 {
-                    stack_tmp.pop();
-                }
-                source_string_stack.push_back(stack_tmp.top());
-                if(!callBack.empty() and callBack.top() == "for")
-                {
-                    if(stack_tmp.top().value == "<" or stack_tmp.top().value == "<=" or stack_tmp.top().value == ">"
-                        or stack_tmp.top().value == ">=" or stack_tmp.top().value == "==" or stack_tmp.top().value == "!=")
+                    //check i<10
+                    if(IsLogicOperator(source_string_stack[source_string_stack.size()-1]))
                     {
-                        Lex command;
-                        command.lexID = 200;
-                        command.value = "Command_if";
-                        source_string_stack.push_back(command);
+                        source_string_stack.push_back(CreateNewComand("Condition"));
                     }
-                    else if(stack_tmp.top().value == "++" or stack_tmp.top().value == "--" or
-                        stack_tmp.top().value == "**" or stack_tmp.top().value == "+=" or
-                        stack_tmp.top().value == "-=" or stack_tmp.top().value == "/=" or
-                        stack_tmp.top().value == "*=")
+                    //check and add to tmp stack i++
+                    else if(IsMathOperator(source_string_stack[source_string_stack.size()-1]))
                     {
-                        Lex command;
-                        command.lexID = 200;
-                        command.value = "Command_move";
-                        source_string_stack.push_back(command);
+                        Lex tmp = tmpVectorForMovingSomeOperators.top();
+                        tmpVectorForMovingSomeOperators.pop();
+                        tmpVectorForMovingSomeOperators.push(source_string_stack[source_string_stack.size()-1]);
+                        source_string_stack.pop_back();
+                        tmpVectorForMovingSomeOperators.push(tmp);
+                        addingIntoTmpIncrementaStack++;
+                        addingIntoTmpIncrementaStack++;
                     }
                 }
-                stack_tmp.pop();
             }
         }
         iterator++;
-    }
-    
-    while (!stack_tmp.empty())
-    {
-        source_string_stack.push_back(stack_tmp.top());
-        stack_tmp.pop();
     }
 }
 
 int Polish_Inverse_Writing::getPriority(const string& op)
 {
-    if (op == "=") return 1;
-    if (op == "+" || op == "-") return 2;
-    if (op == "++" || op == "--" || op == "**") return 2;
-    if (op == "write" || op == "read") return 2;
-    if (op == "*" || op == "/") return 3;
-    if (op == "<" || op == ">" || op == "<=" || op == ">=" || op == "==" ||  op == "!=") return 4;
-    if (op == "(" || op == "{" || op == ")" || op == "}") return -1;
-    return 0;
+    if (op == "=" || op == "+=" || op == "-=" || op == "*=" || op == "/=") return 1; // Присвоєння
+    if (op == "<" || op == ">" || op == "<=" || op == ">=" || op == "==" || op == "!=") return 4; // Порівняння
+    if (op == "+" || op == "-") return 5; // Додавання та віднімання
+    if (op == "*" || op == "/") return 6; // Множення та ділення
+    if (op == "++" || op == "--" || op == "**") return 7; // Інкремент, декремент, степінь
+    if (op == "(" || op == "{" || op == ")" || op == "}") return -1; // Дужки
+    return 0; // За замовчуванням
 }
 
 bool Polish_Inverse_Writing::isOperation(const string& op)
@@ -161,4 +183,50 @@ string Polish_Inverse_Writing::ExecuteStringSyntaxic(const std::string& lexValue
     std::string result = lexValue;
     result.erase(std::remove(result.begin(), result.end(), '\"'), result.end());
     return result;
+}
+
+void Polish_Inverse_Writing::set_right_place_into_source_line_for_math_operators(const Lex& op)
+{
+    int priority = getPriority(op.value);
+
+    while (!stack_tmp.empty() && getPriority(stack_tmp.top().value) >= priority)
+    {
+        source_string_stack.push_back(stack_tmp.top());
+        stack_tmp.pop();
+        mathOperatorPushBack--;
+    }
+    stack_tmp.push(op);
+    mathOperatorPushBack++;
+}
+
+bool Polish_Inverse_Writing::IsLogicOperator(const Lex& lex)
+{
+    if (lex.value == "==" || lex.value == "<=" || lex.value == "<" || lex.value == ">=" || lex.value == ">" || lex.value == "!=")
+    return true;
+    return false;
+}
+
+bool Polish_Inverse_Writing::IsMathOperator(const Lex& lex)
+{
+    if (lex.value == "+" || lex.value == "-" || lex.value == "*" || lex.value == "/"
+                    || lex.value == "++" || lex.value == "--" || lex.value == "**" ||
+                lex.value == "+=" || lex.value == "-=" || lex.value == "/=" || lex.value == "*=")
+    return true;
+    return false;
+}
+
+Lex Polish_Inverse_Writing::CreateNewComand(const string& typeComand)
+{
+    Lex tmp;
+    if (typeComand == "Condition")
+    {
+        tmp.value = "Command_if";
+        tmp.lexID = 200;
+    }
+    else if(typeComand == "Move")
+    {
+        tmp.value = "Command_move";
+        tmp.lexID = 201;
+    }
+    return tmp;
 }
