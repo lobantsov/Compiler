@@ -1,6 +1,8 @@
 ﻿#pragma once
 #include "Polish_Inverse_Writing.h"
 #include <iostream>
+#include <iso646.h>
+
 #include "../LexAnalizator/LexAnalizator.h"
 
 void Polish_Inverse_Writing::FormingSourceLine()
@@ -108,6 +110,16 @@ void Polish_Inverse_Writing::FormingSourceLine()
                         command.value = "Command_if";
                         source_string_stack.push_back(command);
                     }
+                    else if(stack_tmp.top().value == "++" or stack_tmp.top().value == "--" or
+                        stack_tmp.top().value == "**" or stack_tmp.top().value == "+=" or
+                        stack_tmp.top().value == "-=" or stack_tmp.top().value == "/=" or
+                        stack_tmp.top().value == "*=")
+                    {
+                        Lex command;
+                        command.lexID = 200;
+                        command.value = "Command_move";
+                        source_string_stack.push_back(command);
+                    }
                 }
                 stack_tmp.pop();
             }
@@ -129,7 +141,7 @@ int Polish_Inverse_Writing::getPriority(const string& op)
     if (op == "++" || op == "--" || op == "**") return 2;
     if (op == "write" || op == "read") return 2;
     if (op == "*" || op == "/") return 3;
-    if (op == "<" || op == ">" || op == "<=" || op == ">=" || op == "==") return 4;
+    if (op == "<" || op == ">" || op == "<=" || op == ">=" || op == "==" ||  op == "!=") return 4;
     if (op == "(" || op == "{" || op == ")" || op == "}") return -1;
     return 0;
 }
@@ -139,7 +151,7 @@ bool Polish_Inverse_Writing::isOperation(const string& op)
     return op == "+" || op == "-" || op == "*" || op == "/" || 
            op == "=" || op == "+=" || op == "-=" || op == "*=" || op == "/=" ||
            op == "++" || op == "--" || op == "**" ||
-           op == "<" || op == ">" || op == "<=" || op == ">=" || op == "=="||
+           op == "<" || op == ">" || op == "<=" || op == ">=" || op == "=="||  op == "!=" ||
            op == "for" || op == "do_while" || op == "while" || op == "if" || op == "else"||
            op == "write" || op == "read";
 }

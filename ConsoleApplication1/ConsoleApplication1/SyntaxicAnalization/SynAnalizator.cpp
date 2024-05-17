@@ -351,6 +351,7 @@ bool SynAnalizator::WhileCheck()
 
 bool SynAnalizator::ForCheck()
 {
+    int currentPos = singletone_currentposition->currentPosition;
     //add checking data  type in foreach
     int typeLex=-1;
     singletone_currentposition->currentPosition++;
@@ -374,6 +375,7 @@ bool SynAnalizator::ForCheck()
     //foreach
     if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==23)
     {
+        LexAnalizator::FinalLexConfig[currentPos].data="foreach";
         //colection
         singletone_currentposition->currentPosition++;
         if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==15)
@@ -445,6 +447,7 @@ bool SynAnalizator::ForCheck()
     //for
     else if(LexAnalizator::FinalLexConfig[singletone_currentposition->currentPosition].lexID==0)
     {
+        LexAnalizator::FinalLexConfig[currentPos].data="for";
         singletone_currentposition->currentPosition++;
         // singletone_currentposition->currentPosition++;
         //cond check
