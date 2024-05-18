@@ -23,4 +23,5 @@ public:
     int mathOperatorPushBack=0;
     int addingIntoTmpIncrementaStack=0;
     int iterator=6;
+    bool forOperator=true;
 };

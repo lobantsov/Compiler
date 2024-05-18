@@ -19,11 +19,13 @@ void Polish_Inverse_Writing::FormingSourceLine()
 
         if ((lex.lexID == constantID || lex.lexID == variableID) && (isOperatorBefore || isOperatorAfter))
         {
-            if(!callBack.empty() and callBack.top() == "for" and IsLogicOperator(source_string_stack[source_string_stack.size()-2]))
+            if(!callBack.empty() and callBack.top() == "for" and (source_string_stack.size()>2 and IsLogicOperator(source_string_stack[source_string_stack.size()-2]))
+                and forOperator)
             {
                 tmpVectorForMovingSomeOperators.push(CreateNewComand("Move"));
                 tmpVectorForMovingSomeOperators.push(lex);
                 addingIntoTmpIncrementaStack++;
+                forOperator = false;
             }
             else
             {
@@ -85,10 +87,16 @@ void Polish_Inverse_Writing::FormingSourceLine()
                 iterator++;
             }
             //loop
-            else if(lex.value=="for" or lex.value=="while")
+            else if(lex.value=="for" or lex.value=="while" or lex.value == "do_while")
             {
                 callBack.push(lex.value);
                 stack_tmp.push(lex);
+                if(lex.value=="for") forOperator=true; 
+            }
+            else if(lex.value=="if" or lex.value=="else")
+            {
+                stack_tmp.push(lex);
+                callBack.push(lex.value);
             }
         }
         else if(lex.value==")")
@@ -97,6 +105,20 @@ void Polish_Inverse_Writing::FormingSourceLine()
             {
                 source_string_stack.push_back(stack_tmp.top());
                 stack_tmp.pop();
+            }
+            if(mathOperatorPushBack!=0 and IsLogicOperator(source_string_stack[source_string_stack.size()-1])) mathOperatorPushBack=0;
+            if(callBack.top()=="while")
+            {
+                source_string_stack.push_back(CreateNewComand("Condition"));
+            }
+            else if(callBack.top()=="do_while")
+            {
+                tmpVectorForMovingSomeOperators.push(CreateNewComand("Condition"));
+            }
+            else if(callBack.top()=="if")
+            {
+                source_string_stack.push_back(CreateNewComand("Condition"));
+                source_string_stack.push_back(CreateNewComand("Move"));
             }
             stack_tmp.pop();
         }
@@ -108,13 +130,33 @@ void Polish_Inverse_Writing::FormingSourceLine()
             }
             stack_tmp.pop();
 
-            while (addingIntoTmpIncrementaStack!=0)
+            //for while
+            if(!callBack.empty() and callBack.top()=="while")
+            {
+                source_string_stack.push_back(CreateNewComand("Move"));
+            }
+            else if(!callBack.empty() and callBack.top()=="do_while")
             {
                 source_string_stack.push_back(tmpVectorForMovingSomeOperators.top());
                 tmpVectorForMovingSomeOperators.pop();
-                addingIntoTmpIncrementaStack--;
+                source_string_stack.push_back(CreateNewComand("Move"));
             }
-            
+            else if(!callBack.empty() and callBack.top() == "if")
+            {
+                if(LexAnalizator::FinalLexConfig[iterator+1].value=="else")
+                source_string_stack.push_back(CreateNewComand("Move"));
+            }
+            else if(callBack.top()=="for")
+            {
+                //for for
+                while (addingIntoTmpIncrementaStack!=0)
+                {
+                    source_string_stack.push_back(tmpVectorForMovingSomeOperators.top());
+                    tmpVectorForMovingSomeOperators.pop();
+                    addingIntoTmpIncrementaStack--;
+                }
+            }
+            stack_tmp.pop();
             callBack.pop();
         }
         else if(lex.value==";")
